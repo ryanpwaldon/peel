@@ -9,7 +9,7 @@
     "db-generate": "turbo db-generate",
     "db-push": "turbo db-push",
     "dev": "turbo dev --parallel",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md,js,mjs,cjs,json}\"",
     "lint": "turbo lint && manypkg check",
     "type-check": "turbo type-check"
   },
