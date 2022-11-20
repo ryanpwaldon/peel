@@ -1,4 +1,9 @@
 // @ts-check
+
+// Import environment variables
+import dotenv from 'dotenv'
+dotenv.config({ path: '../../.env' })
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
