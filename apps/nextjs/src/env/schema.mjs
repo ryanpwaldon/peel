@@ -6,7 +6,14 @@ import { z } from 'zod'
  * This way you can ensure the app isn't built with invalid env vars.
  */
 export const serverSchema = z.object({
+  DATABASE_URL: z.string().url(),
   NODE_ENV: z.enum(['development', 'test', 'production']),
+  NEXTAUTH_SECRET: z.string(),
+  // NextAuth automatically uses the VERCEL_URL if present. VERCEL_URL doesnt include `https` so it cant be validated as a URL.
+  NEXTAUTH_URL: z.preprocess((str) => process.env.VERCEL_URL ?? str, process.env.VERCEL ? z.string() : z.string().url()),
+  POSTMARK_EMAIL_FROM_NAME: z.string(),
+  POSTMARK_EMAIL_FROM_ADDRESS: z.string().email(),
+  POSTMARK_SECRET: z.string(),
 })
 
 /**
@@ -14,9 +21,7 @@ export const serverSchema = z.object({
  * This way you can ensure the app isn't built with invalid env vars.
  * To expose them to the client, prefix them with `NEXT_PUBLIC_`.
  */
-export const clientSchema = z.object({
-  // NEXT_PUBLIC_BAR: z.string(),
-})
+export const clientSchema = z.object({})
 
 /**
  * You can't destruct `process.env` as a regular object, so you have to do
@@ -24,6 +29,4 @@ export const clientSchema = z.object({
  * and only used environment variables are included in the build.
  * @type {{ [k in keyof z.infer<typeof clientSchema>]: z.infer<typeof clientSchema>[k] | undefined }}
  */
-export const clientEnv = {
-  // NEXT_PUBLIC_BAR: process.env.NEXT_PUBLIC_BAR,
-}
+export const clientEnv = {}
