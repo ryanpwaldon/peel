@@ -11,15 +11,19 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@next/font": "13.0.2",
     "@peel/api": "*",
     "@peel/auth": "*",
     "@peel/db": "*",
+    "@peel/native": "*",
     "@peel/tailwind-config": "*",
     "@tanstack/react-query": "^4.16.1",
     "@trpc/client": "10.0.0-rc.4",
     "@trpc/next": "10.0.0-rc.4",
     "@trpc/react-query": "10.0.0-rc.4",
     "@trpc/server": "10.0.0-rc.4",
+    "framer-motion": "^7.6.7",
+    "mapbox-gl": "^2.11.0",
     "next": "13.0.4",
     "next-auth": "^4.17.0",
     "react": "18.2.0",
@@ -27,6 +31,7 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@types/mapbox-gl": "^2.7.8",
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",

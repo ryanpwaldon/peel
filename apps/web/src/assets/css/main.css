@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  @apply antialiased;
+  @apply text-gray-800;
+  @apply bg-gray-100;
+}
+
+body {
+  @apply fixed; /* Prevent scrolling on IOS PWA */
+  @apply touch-pan-y; /* Prevent zooming on IOS PWA */
+  @apply select-none;
+  @apply overflow-hidden;
+  @apply text-sm;
+}
+
+html,
+body,
+#__next,
+#app {
+  @apply w-full;
+  @apply h-full;
+}
+
+#app {
+  @apply font-sans;
+}
+
+/* Apply tailwind weight styles to symbols */
+@layer utilities {
+  /* Set default weight for symbols */
+  .font-symbols {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-thin,
+  .font-symbols .font-thin {
+    font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-extralight,
+  .font-symbols .font-extralight {
+    font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-light,
+  .font-symbols .font-light {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-normal,
+  .font-symbols .font-normal {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-medium,
+  .font-symbols .font-medium {
+    font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-semibold,
+  .font-symbols .font-semibold {
+    font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-bold,
+  .font-symbols .font-bold {
+    font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-extrabold,
+  .font-symbols .font-extrabold {
+    font-variation-settings: 'FILL' 0, 'wght' 800, 'GRAD' 0, 'opsz' 48;
+  }
+  .font-symbols.font-black,
+  .font-symbols .font-black {
+    font-variation-settings: 'FILL' 0, 'wght' 900, 'GRAD' 0, 'opsz' 48;
+  }
+}
