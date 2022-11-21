@@ -22,6 +22,9 @@ const config = {
   eslint: {
     ignoreDuringBuilds: !!process.env.CI,
   },
+  devIndicators: {
+    buildActivity: false,
+  },
 }
 
 export default config
