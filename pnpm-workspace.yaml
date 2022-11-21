@@ -1,5 +1,6 @@
 packages:
   - apps/web
+  - apps/native
   - packages/api
   - packages/auth
   - packages/db
