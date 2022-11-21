@@ -45,7 +45,7 @@ importers:
 
   apps/web:
     specifiers:
-      '@next/font': 13.0.2
+      '@next/font': ^13.0.4
       '@peel/api': '*'
       '@peel/auth': '*'
       '@peel/db': '*'
@@ -61,6 +61,7 @@ importers:
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
       autoprefixer: ^10.4.13
+      dotenv: ^16.0.3
       eslint: ^8.28.0
       eslint-config-next: 13.0.4
       framer-motion: ^7.6.7
@@ -74,7 +75,7 @@ importers:
       typescript: ^4.9.3
       zod: ^3.18.0
     dependencies:
-      '@next/font': 13.0.2
+      '@next/font': 13.0.4
       '@peel/api': link:../../packages/api
       '@peel/auth': link:../../packages/auth
       '@peel/db': link:../../packages/db
@@ -85,6 +86,7 @@ importers:
       '@trpc/next': 10.0.0-rc.4_gwgbznueivyfriw7hyv4mzwnni
       '@trpc/react-query': 10.0.0-rc.4_q2ykz5ry7uzzhix6pf4rsmetbu
       '@trpc/server': 10.0.0-rc.4
+      dotenv: 16.0.3
       framer-motion: 7.6.7_biqbaboplfbrettd7655fr4n2y
       mapbox-gl: 2.11.0
       next: 13.0.4_biqbaboplfbrettd7655fr4n2y
@@ -637,8 +639,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /@next/font/13.0.2:
-    resolution: {integrity: sha512-tLbyZCA1uF8HjbUEN5c4zB453yEzt5aT9VDhXPw1/eJhX4U0Q4lD3s3Bs+gpCjuLrEgILd56jQuzxgrMnWHH8A==}
+  /@next/font/13.0.4:
+    resolution: {integrity: sha512-csZhVqe870p7XE03WfbDLzjVwdBAWxe6/lWGQosfqY/XN5tsmfDLpj442veicfCiiuF7/ydSnAAJxH8PQVBVWQ==}
     dev: false
 
   /@next/swc-android-arm-eabi/13.0.4:
@@ -2202,7 +2204,6 @@ packages:
   /dotenv/16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
-    dev: true
 
   /duplexer3/0.1.5:
     resolution: {integrity: sha512-1A8za6ws41LQgv9HrE/66jyC5yuSjQ3L/KOpFtoBilsAK2iA2wuS5rTt1OCzIvtS2V7nVmedsUU+DGRcjBmOYA==}
