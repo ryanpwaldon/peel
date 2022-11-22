@@ -1,9 +1,9 @@
 import { z } from 'zod'
 import { router, protectedProcedure } from '../../trpc'
-import { geonames, GeonamesTimezone } from '../../services/geonames'
+import { geonames, GeonamesCountrySubdivision, GeonamesTimezone } from '../../services/geonames'
 
 export const geocodeRouter = router({
-  timezone: protectedProcedure
+  info: protectedProcedure
     .input(
       z.object({
         lng: z.number(),
@@ -11,7 +11,13 @@ export const geocodeRouter = router({
       }),
     )
     .query(async ({ input }) => {
-      const { timezoneId }: GeonamesTimezone = await geonames.timezone({ lng: input.lng, lat: input.lat })
-      return timezoneId
+      const timezoneResponse: GeonamesTimezone = await geonames.timezone({ lng: input.lng, lat: input.lat })
+      const countrySubdivisionResponse: GeonamesCountrySubdivision = await geonames.countrySubdivision({ lng: input.lng, lat: input.lat })
+      return {
+        countryCode: countrySubdivisionResponse.countryCode,
+        countryName: countrySubdivisionResponse.countryName,
+        region: countrySubdivisionResponse.adminName1,
+        timezoneId: timezoneResponse.timezoneId,
+      }
     }),
 })

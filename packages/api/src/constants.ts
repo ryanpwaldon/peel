@@ -1,0 +1,1 @@
+export const FORECAST_HEX_RESOLUTION = 5
