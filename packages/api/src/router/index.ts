@@ -1,7 +1,7 @@
-import { router } from '@/trpc'
-import { authRouter } from '@/router/auth'
-import { waveRouter } from '@/router/wave'
-import { geocodeRouter } from '@/router/geocode'
+import { router } from '../trpc'
+import { authRouter } from './auth'
+import { waveRouter } from './wave'
+import { geocodeRouter } from './geocode'
 
 export const appRouter = router({
   auth: authRouter,

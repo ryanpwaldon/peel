@@ -1,7 +1,4 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src", "index.ts", "transformer.ts", "node_modules/@peel/auth/next-auth.d.ts"],
-  "compilerOptions": {
-    "paths": { "@/*": ["./src/*"] }
-  }
+  "include": ["src", "index.ts", "transformer.ts", "node_modules/@peel/auth/next-auth.d.ts"]
 }

@@ -1,5 +1,5 @@
-export { appRouter } from '@/router'
-export type { AppRouter } from '@/router'
+export { appRouter } from './src/router'
+export type { AppRouter } from './src/router'
 
-export { createContext } from '@/context'
-export type { Context } from '@/context'
+export { createContext } from './src/context'
+export type { Context } from './src/context'

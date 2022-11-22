@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { geonames, GeonamesTimezone } from '@/services/geonames'
-import { router, protectedProcedure } from '@/trpc'
+import { router, protectedProcedure } from '../../trpc'
+import { geonames, GeonamesTimezone } from '../../services/geonames'
 
 export const geocodeRouter = router({
   timezone: protectedProcedure
