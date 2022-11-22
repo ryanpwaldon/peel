@@ -14,6 +14,7 @@ export const serverSchema = z.object({
   POSTMARK_EMAIL_FROM_NAME: z.string(),
   POSTMARK_EMAIL_FROM_ADDRESS: z.string().email(),
   POSTMARK_SECRET: z.string(),
+  GEONAMES_USERNAME: z.string(),
 })
 
 /**
