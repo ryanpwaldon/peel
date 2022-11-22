@@ -1,6 +1,6 @@
-import { getServerSession, type Session } from '@peel/auth'
 import { prisma } from '@peel/db'
 import { type inferAsyncReturnType } from '@trpc/server'
+import { getServerSession, type Session } from '@peel/auth'
 import { type CreateNextContextOptions } from '@trpc/server/adapters/next'
 
 /**
