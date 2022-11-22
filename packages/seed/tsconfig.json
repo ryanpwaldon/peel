@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["index.ts", "src"],
+  "include": ["index.ts", "src", "../auth/next-auth.d.ts"],
   "compilerOptions": {
     "module": "NodeNext"
   }

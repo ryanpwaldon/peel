@@ -1,4 +1,14 @@
-export const waves = [
+import { WaveRideDirection } from '@peel/db'
+
+interface CreateWaveInput {
+  name: string
+  lat: number
+  lng: number
+  rideDirection: WaveRideDirection
+  offshoreWindDirection: number
+}
+
+export const waves: CreateWaveInput[] = [
   {
     name: 'Reef',
     rideDirection: 'LEFT',
