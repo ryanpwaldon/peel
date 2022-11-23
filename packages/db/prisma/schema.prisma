@@ -144,17 +144,17 @@ model Location {
 // ============================================================================================
 
 model Forecast {
-    id        String    @id @default(cuid())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    hex       String    @unique
-    weather   Weather[]
-    tide      Tide[]
-    solar     Solar[]
-    points    Point[]   @relation(name: "pointsToForecast")
+    id            String         @id @default(cuid())
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+    hex           String         @unique
+    weatherEvents WeatherEvent[]
+    tideEvents    TideEvent[]
+    solarEvents   SolarEvent[]
+    points        Point[]        @relation(name: "pointsToForecast")
 }
 
-model Weather {
+model WeatherEvent {
     id                      String   @id @default(cuid())
     createdAt               DateTime @default(now())
     updatedAt               DateTime @updatedAt
@@ -184,32 +184,32 @@ model Weather {
     secondarySwellDirection Float
 }
 
-model Tide {
-    id         String   @id @default(cuid())
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    forecast   Forecast @relation(fields: [forecastId], references: [id])
+model TideEvent {
+    id         String        @id @default(cuid())
+    createdAt  DateTime      @default(now())
+    updatedAt  DateTime      @updatedAt
+    forecast   Forecast      @relation(fields: [forecastId], references: [id])
     forecastId String
     time       DateTime
-    type       TideType
+    type       TideEventType
 }
 
-enum TideType {
+enum TideEventType {
     LOW
     HIGH
 }
 
-model Solar {
-    id         String    @id @default(cuid())
-    createdAt  DateTime  @default(now())
-    updatedAt  DateTime  @updatedAt
-    forecast   Forecast  @relation(fields: [forecastId], references: [id])
+model SolarEvent {
+    id         String         @id @default(cuid())
+    createdAt  DateTime       @default(now())
+    updatedAt  DateTime       @updatedAt
+    forecast   Forecast       @relation(fields: [forecastId], references: [id])
     forecastId String
     time       DateTime
-    type       SolarType
+    type       SolarEventType
 }
 
-enum SolarType {
+enum SolarEventType {
     SUNRISE
     SUNSET
 }
