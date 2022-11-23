@@ -122,23 +122,21 @@ model Point {
     wave       Wave?
     forecast   Forecast @relation(name: "pointsToForecast", fields: [forecastId], references: [id])
     forecastId String
+    location   Location @relation(fields: [locationId], references: [id])
+    locationId String
 }
 
-model Country {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    name      String   @unique
-    regions   Region[]
-}
+model Location {
+    id          String   @id @default(cuid())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    country     String
+    countryCode String
+    region      String
+    regionCode  String
+    points      Point[]
 
-model Region {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    name      String
-    country   Country  @relation(fields: [countryId], references: [id])
-    countryId String
+    @@unique([countryCode, regionCode])
 }
 
 // ============================================================================================

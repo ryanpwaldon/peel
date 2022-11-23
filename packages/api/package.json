@@ -10,6 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.14.0",
     "@peel/auth": "*",
     "@peel/db": "*",
     "@trpc/client": "10.0.0-rc.4",
@@ -20,6 +21,7 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@types/mapbox__mapbox-sdk": "^0.13.4",
     "eslint": "^8.28.0",
     "typescript": "^4.9.3"
   }

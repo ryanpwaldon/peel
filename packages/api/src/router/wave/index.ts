@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { latLngToCell } from 'h3-js'
-import { geocodeRouter } from '../geocode'
+import { locationRouter } from '../location'
 import { FORECAST_HEX_RESOLUTION } from '../../constants'
 import { router, publicProcedure, protectedProcedure } from '../../trpc'
 
@@ -22,8 +22,7 @@ export const waveRouter = router({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const geocoder = geocodeRouter.createCaller(ctx)
-      const location = await geocoder.info({ lat: input.lat, lng: input.lng })
+      const locationInfo = await locationRouter.createCaller(ctx).info({ lat: input.lat, lng: input.lng })
       const hex = latLngToCell(input.lat, input.lng, FORECAST_HEX_RESOLUTION)
       const result = ctx.prisma.wave.create({
         data: {
@@ -35,11 +34,27 @@ export const waveRouter = router({
             create: {
               lat: input.lat,
               lng: input.lng,
-              timezone: location.timezoneId,
+              timezone: locationInfo.timezoneId,
               forecast: {
                 connectOrCreate: {
                   create: { hex },
                   where: { hex },
+                },
+              },
+              location: {
+                connectOrCreate: {
+                  create: {
+                    country: locationInfo.countryName,
+                    countryCode: locationInfo.countryCode,
+                    region: locationInfo.regionName,
+                    regionCode: locationInfo.regionCode,
+                  },
+                  where: {
+                    countryCode_regionCode: {
+                      countryCode: locationInfo.countryCode,
+                      regionCode: locationInfo.regionCode,
+                    },
+                  },
                 },
               },
             },
