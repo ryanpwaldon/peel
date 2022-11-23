@@ -1,10 +1,8 @@
 import { z } from 'zod'
-import { publicProcedure, router } from '../../trpc'
-
-// TODO: Protect this route (restrict to server side calls only)
+import { router, serverProcedure } from '../../trpc'
 
 export const userRouter = router({
-  create: publicProcedure
+  create: serverProcedure
     .input(
       z.object({
         email: z.string(),

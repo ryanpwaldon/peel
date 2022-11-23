@@ -8,6 +8,7 @@ import { type CreateNextContextOptions } from '@trpc/server/adapters/next'
  */
 type CreateContextOptions = {
   session: Session | null
+  isServer: boolean
 }
 
 /** Use this helper for:
@@ -15,10 +16,11 @@ type CreateContextOptions = {
  *  - trpc's `createSSGHelpers` where we don't have req/res
  * @see https://beta.create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
-export const createContextInner = async (opts: CreateContextOptions) => {
+export const createContextInner = (opts: CreateContextOptions) => {
   return {
-    session: opts.session,
     prisma,
+    session: opts.session,
+    isServer: opts.isServer,
   }
 }
 
@@ -29,8 +31,9 @@ export const createContextInner = async (opts: CreateContextOptions) => {
 export const createContext = async (opts: CreateNextContextOptions) => {
   const session = await getServerSession(opts)
 
-  return await createContextInner({
+  return createContextInner({
     session,
+    isServer: false,
   })
 }
 
