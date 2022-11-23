@@ -15,7 +15,8 @@ export const serverSchema = z.object({
   POSTMARK_EMAIL_FROM_ADDRESS: z.string().email(),
   POSTMARK_SECRET: z.string(),
   GEONAMES_USERNAME: z.string(),
-  MAPBOX_PUBLIC_KEY: z.string(),
+  STORMGLASS_ENDPOINT: z.string().url(),
+  STORMGLASS_TOKEN: z.string(),
 })
 
 /**
@@ -23,7 +24,10 @@ export const serverSchema = z.object({
  * This way you can ensure the app isn't built with invalid env vars.
  * To expose them to the client, prefix them with `NEXT_PUBLIC_`.
  */
-export const clientSchema = z.object({})
+export const clientSchema = z.object({
+  NEXT_PUBLIC_MAPBOX_STYLE: z.string().url(),
+  NEXT_PUBLIC_MAPBOX_TOKEN: z.string(),
+})
 
 /**
  * You can't destruct `process.env` as a regular object, so you have to do
@@ -31,4 +35,7 @@ export const clientSchema = z.object({})
  * and only used environment variables are included in the build.
  * @type {{ [k in keyof z.infer<typeof clientSchema>]: z.infer<typeof clientSchema>[k] | undefined }}
  */
-export const clientEnv = {}
+export const clientEnv = {
+  NEXT_PUBLIC_MAPBOX_STYLE: process.env.NEXT_PUBLIC_MAPBOX_STYLE,
+  NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
+}

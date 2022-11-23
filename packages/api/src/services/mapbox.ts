@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server'
 import CreateGeocoder from '@mapbox/mapbox-sdk/services/geocoding'
 
-const geocoder = CreateGeocoder({ accessToken: process.env.MAPBOX_PUBLIC_KEY as string })
+const geocoder = CreateGeocoder({ accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string })
 
 interface RegionFeature {
   id: string
