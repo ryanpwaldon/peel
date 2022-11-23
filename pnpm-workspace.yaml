@@ -1,6 +1,7 @@
 packages:
   - apps/web
   - apps/native
+  - apps/forecast
   - packages/api
   - packages/auth
   - packages/db
