@@ -161,27 +161,27 @@ model WeatherEvent {
     forecast                Forecast @relation(fields: [forecastId], references: [id])
     forecastId              String
     time                    DateTime
-    airTemperature          Float
-    waterTemperature        Float
-    cloudCover              Float
-    visibility              Float
-    humidity                Float
-    precipitation           Float
-    windSpeed               Float
-    windDirection           Float
-    gust                    Float
-    waveHeight              Float
-    wavePeriod              Float
-    waveDirection           Float
-    windWaveHeight          Float
-    windWavePeriod          Float
-    windWaveDirection       Float
-    swellHeight             Float
-    swellPeriod             Float
-    swellDirection          Float
-    secondarySwellHeight    Float
-    secondarySwellPeriod    Float
-    secondarySwellDirection Float
+    airTemperature          Float?
+    waterTemperature        Float?
+    cloudCover              Float?
+    visibility              Float?
+    humidity                Float?
+    precipitation           Float?
+    windSpeed               Float?
+    windDirection           Float?
+    gust                    Float?
+    waveHeight              Float?
+    wavePeriod              Float?
+    waveDirection           Float?
+    windWaveHeight          Float?
+    windWavePeriod          Float?
+    windWaveDirection       Float?
+    swellHeight             Float?
+    swellPeriod             Float?
+    swellDirection          Float?
+    secondarySwellHeight    Float?
+    secondarySwellPeriod    Float?
+    secondarySwellDirection Float?
 }
 
 model TideEvent {

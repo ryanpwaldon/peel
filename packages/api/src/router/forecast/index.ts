@@ -1,4 +1,7 @@
 import { z } from 'zod'
+import { tideResponse } from '../stormglass/tide'
+import { solarResponse } from '../stormglass/solar'
+import { weatherResponse } from '../stormglass/weather'
 import { publicProcedure, router, serverProcedure } from '../../trpc'
 
 export const forecastRouter = router({
@@ -11,16 +14,11 @@ export const forecastRouter = router({
       },
     })
   }),
-  createTideEventsById: serverProcedure
+  updateTideEvents: serverProcedure
     .input(
       z.object({
         id: z.string(),
-        tideEvents: z.array(
-          z.object({
-            time: z.date(),
-            type: z.enum(['HIGH', 'LOW']),
-          }),
-        ),
+        tideEvents: tideResponse,
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -35,16 +33,11 @@ export const forecastRouter = router({
         },
       })
     }),
-  createSolarEventsById: serverProcedure
+  updateSolarEvents: serverProcedure
     .input(
       z.object({
         id: z.string(),
-        solarEvents: z.array(
-          z.object({
-            time: z.date(),
-            type: z.enum(['SUNRISE', 'SUNSET']),
-          }),
-        ),
+        solarEvents: solarResponse,
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -59,36 +52,11 @@ export const forecastRouter = router({
         },
       })
     }),
-  createWeatherEventsById: serverProcedure
+  updateWeatherEvents: serverProcedure
     .input(
       z.object({
         id: z.string(),
-        weatherEvents: z.array(
-          z.object({
-            time: z.date(),
-            airTemperature: z.number(),
-            waterTemperature: z.number(),
-            cloudCover: z.number(),
-            visibility: z.number(),
-            humidity: z.number(),
-            precipitation: z.number(),
-            windSpeed: z.number(),
-            windDirection: z.number(),
-            gust: z.number(),
-            waveHeight: z.number(),
-            wavePeriod: z.number(),
-            waveDirection: z.number(),
-            windWaveHeight: z.number(),
-            windWavePeriod: z.number(),
-            windWaveDirection: z.number(),
-            swellHeight: z.number(),
-            swellPeriod: z.number(),
-            swellDirection: z.number(),
-            secondarySwellHeight: z.number(),
-            secondarySwellPeriod: z.number(),
-            secondarySwellDirection: z.number(),
-          }),
-        ),
+        weatherEvents: weatherResponse,
       }),
     )
     .mutation(({ ctx, input }) => {

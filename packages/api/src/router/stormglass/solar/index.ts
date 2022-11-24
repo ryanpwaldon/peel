@@ -5,7 +5,7 @@ import { stormglassClient } from '../../../services/stormglass'
 import { handleAxiosError } from '../../../utils/handleAxiosError'
 
 // prettier-ignore
-const solarResponse = z.object({
+export const solarResponse = z.object({
   data: z
     .array(
       z.object({

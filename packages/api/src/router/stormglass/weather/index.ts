@@ -9,7 +9,7 @@ const weatherModels = z
   .transform((val) => val.sg)
 
 // prettier-ignore
-const weatherResponse = z.object({
+export const weatherResponse = z.object({
   hours: z.array(
     z.object({
       time: z.string().transform((val) => new Date(val)),
