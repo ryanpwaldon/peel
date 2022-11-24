@@ -1,1 +1,2 @@
 export const FORECAST_HEX_RESOLUTION = 5
+export const STORMGLASS_TIDAL_DATUM = 'MLLW'
