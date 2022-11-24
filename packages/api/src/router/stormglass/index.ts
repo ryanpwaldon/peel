@@ -8,7 +8,7 @@ const tideResponse = z.object({
   data: z.array(
     z.object({
       time: z.string(),
-      height: z.string(),
+      height: z.number(),
       type: z.enum(['low', 'high']),
     }),
   ),
