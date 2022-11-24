@@ -182,6 +182,8 @@ model WeatherEvent {
     secondarySwellHeight    Float?
     secondarySwellPeriod    Float?
     secondarySwellDirection Float?
+
+    @@unique([forecastId, time])
 }
 
 model TideEvent {

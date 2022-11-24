@@ -64,9 +64,16 @@ export const forecastRouter = router({
         where: { id: input.id },
         data: {
           weatherEvents: {
-            createMany: {
-              data: input.weatherEvents,
-            },
+            upsert: input.weatherEvents.map((weatherEvent) => ({
+              create: weatherEvent,
+              update: weatherEvent,
+              where: {
+                forecastId_time: {
+                  forecastId: input.id,
+                  time: weatherEvent.time,
+                },
+              },
+            })),
           },
         },
       })
