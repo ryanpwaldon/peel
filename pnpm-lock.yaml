@@ -215,6 +215,7 @@ importers:
   packages/seed:
     specifiers:
       '@peel/api': '*'
+      '@peel/db': workspace:*
       '@types/node': ^18.0.0
       dotenv-cli: ^6.0.0
       eslint: ^8.28.0
@@ -223,6 +224,7 @@ importers:
     dependencies:
       '@peel/api': link:../api
     devDependencies:
+      '@peel/db': link:../db
       '@types/node': 18.11.9
       dotenv-cli: 6.0.0
       eslint: 8.28.0
