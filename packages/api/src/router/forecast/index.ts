@@ -3,7 +3,13 @@ import { publicProcedure, router, serverProcedure } from '../../trpc'
 
 export const forecastRouter = router({
   all: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.forecast.findMany()
+    return ctx.prisma.forecast.findMany({
+      include: {
+        points: {
+          take: 1,
+        },
+      },
+    })
   }),
   createTideEventsById: serverProcedure
     .input(
