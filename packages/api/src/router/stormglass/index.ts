@@ -111,7 +111,7 @@ export const stormglassRouter = router({
     .query(async ({ input }) => {
       const response = await stormglassClient({
         method: 'get',
-        url: '/astronomy/point',
+        url: '/weather/point',
         params: { ...input, params: weatherAttributes, source: weatherModels },
       }).catch(handleAxiosError)
       return response.data
