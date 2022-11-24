@@ -12,7 +12,7 @@ const main = async () => {
   if (!keyPoint) throw new Error('Forecast has no points.')
   const start = getTzStartOfDay(keyPoint.timezone, new Date())
   const end = sub(add(start, { days: 7 }), { seconds: 1 })
-  const weatherEvents = await serverCaller.stormglass.getWeatherEvents({ start, end, lng: keyPoint.lng, lat: keyPoint.lat })
+  const weatherEvents = await serverCaller.stormglass.tide.findMany({ start, end, lng: keyPoint.lng, lat: keyPoint.lat })
   console.log(weatherEvents)
 }
 
