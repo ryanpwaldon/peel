@@ -1,7 +1,4 @@
 import { z } from 'zod'
-import { tideResponse } from '../stormglass/tide'
-import { solarResponse } from '../stormglass/solar'
-import { weatherResponse } from '../stormglass/weather'
 import { publicProcedure, router, serverProcedure } from '../../trpc'
 
 export const forecastRouter = router({
@@ -18,7 +15,12 @@ export const forecastRouter = router({
     .input(
       z.object({
         id: z.string(),
-        tideEvents: tideResponse,
+        tideEvents: z.array(
+          z.object({
+            time: z.date(),
+            type: z.enum(['LOW', 'HIGH']),
+          }),
+        ),
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -37,7 +39,12 @@ export const forecastRouter = router({
     .input(
       z.object({
         id: z.string(),
-        solarEvents: solarResponse,
+        solarEvents: z.array(
+          z.object({
+            time: z.date(),
+            type: z.enum(['SUNRISE', 'SUNSET']),
+          }),
+        ),
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -56,7 +63,32 @@ export const forecastRouter = router({
     .input(
       z.object({
         id: z.string(),
-        weatherEvents: weatherResponse,
+        weatherEvents: z.array(
+          z.object({
+            time: z.date(),
+            airTemperature: z.number().nullish(),
+            waterTemperature: z.number().nullish(),
+            cloudCover: z.number().nullish(),
+            visibility: z.number().nullish(),
+            humidity: z.number().nullish(),
+            precipitation: z.number().nullish(),
+            windSpeed: z.number().nullish(),
+            windDirection: z.number().nullish(),
+            gust: z.number().nullish(),
+            waveHeight: z.number().nullish(),
+            wavePeriod: z.number().nullish(),
+            waveDirection: z.number().nullish(),
+            windWaveHeight: z.number().nullish(),
+            windWavePeriod: z.number().nullish(),
+            windWaveDirection: z.number().nullish(),
+            swellHeight: z.number().nullish(),
+            swellPeriod: z.number().nullish(),
+            swellDirection: z.number().nullish(),
+            secondarySwellHeight: z.number().nullish(),
+            secondarySwellPeriod: z.number().nullish(),
+            secondarySwellDirection: z.number().nullish(),
+          }),
+        ),
       }),
     )
     .mutation(({ ctx, input }) => {

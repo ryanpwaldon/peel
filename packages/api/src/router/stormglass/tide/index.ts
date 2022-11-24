@@ -5,7 +5,7 @@ import { stormglassClient } from '../../../services/stormglass'
 import { handleAxiosError } from '../../../utils/handleAxiosError'
 
 // prettier-ignore
-export const tideResponse = z.object({
+const tideResponse = z.object({
   data: z.array(
     z.object({
       time: z.string().transform((val) => new Date(val)),
