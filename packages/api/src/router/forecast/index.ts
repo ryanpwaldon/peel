@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { publicProcedure, router, serverProcedure } from '../../trpc'
 
-export const authRouter = router({
+export const forecastRouter = router({
   all: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.forecast.findMany()
   }),
