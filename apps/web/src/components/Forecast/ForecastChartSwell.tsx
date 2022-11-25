@@ -11,7 +11,7 @@ interface ForecastChartSwellProps {
 
 const SWELL_HEIGHT_UPPER_LIMIT = 5
 
-export default function ForecastChartSwell({ weatherEvents, className }: ForecastChartSwellProps) {
+export default function ForecastChartSwell({ className, weatherEvents }: ForecastChartSwellProps) {
   return (
     <ForecastChartBase
       className={className}
