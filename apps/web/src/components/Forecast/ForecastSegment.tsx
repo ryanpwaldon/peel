@@ -12,7 +12,7 @@ interface ForecastSegment {
 }
 
 export default function ForecastSegment({ title, ticks, tickMax, tickLabel, className }: ForecastSegment) {
-  const tickHeight = (val: number | null) => {
+  const getTickHeight = (val: number | null) => {
     if (!val) return 0
     if (val > tickMax) return 100
     return (val / tickMax) * 100
@@ -25,7 +25,7 @@ export default function ForecastSegment({ title, ticks, tickMax, tickLabel, clas
         {ticks.map((tick, index) => (
           <div key={index} className="min-w-0">
             <div className="flex h-8 items-end">
-              <div className="w-full rounded bg-gray-200" style={{ height: `${tickHeight(tick.windSpeed)}%` }} />
+              <div className="w-full rounded bg-gray-200" style={{ height: `${getTickHeight(tick.windSpeed)}%` }} />
             </div>
             <div className={`mt-1 ${index % 6 !== 0 && 'hidden'}`}>{tickLabel(tick)}</div>
           </div>
