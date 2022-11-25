@@ -70,6 +70,7 @@ importers:
       '@peel/db': '*'
       '@peel/native': '*'
       '@peel/tailwind-config': '*'
+      '@peel/utils': '*'
       '@tanstack/react-query': ^4.16.1
       '@trpc/client': 10.0.0-rc.4
       '@trpc/next': 10.0.0-rc.4
@@ -100,6 +101,7 @@ importers:
       '@peel/db': link:../../packages/db
       '@peel/native': link:../native
       '@peel/tailwind-config': link:../../packages/config/tailwind
+      '@peel/utils': link:../../packages/utils
       '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 10.0.0-rc.4_@trpc+server@10.0.0-rc.4
       '@trpc/next': 10.0.0-rc.4_gwgbznueivyfriw7hyv4mzwnni

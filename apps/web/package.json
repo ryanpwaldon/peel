@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@next/font": "^13.0.4",
+    "@peel/utils": "*",
     "@peel/api": "*",
     "@peel/auth": "*",
     "@peel/db": "*",
