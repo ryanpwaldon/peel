@@ -1,6 +1,9 @@
 interface Tick {
   windSpeed: number | null
   windDirection: number | null
+  windSpeedConverted: number
+  windCardinalDirection: string | null | undefined
+  windRelativeCardinalDirection: string | null
 }
 
 interface ForecastSegment {

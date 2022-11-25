@@ -19,16 +19,24 @@ const WindForecastTitle = (
 export default function Wave() {
   const router = useRouter()
   const wave = trpc.wave.findById.useQuery(router.query.id as string, { enabled: !!router.query.id })
-  const ticks = wave.data?.point.forecast.weatherEvents.map((weatherEvent) => ({ windSpeed: weatherEvent.windSpeed, windDirection: weatherEvent.windDirection })) || [] // prettier-ignore
+
+  const ticks =
+    wave.data?.point.forecast.weatherEvents.map((weatherEvent) => ({
+      windSpeed: weatherEvent.windSpeed,
+      windDirection: weatherEvent.windDirection,
+      windSpeedConverted: mpsToKmh(weatherEvent.windSpeed),
+      windCardinalDirection: degreesToCardinal(weatherEvent.windDirection),
+      windRelativeCardinalDirection: degreesToRelativeCardinal(wave.data.offshoreWindDirection, weatherEvent.windDirection),
+    })) || []
 
   const tickLabel = (tick: typeof ticks[number]) => (
     <div className="flex flex-col whitespace-nowrap font-medium">
       <ArrowDown className="w-full" rotate={tick.windDirection} />
       <div>
-        <span className="text-xs">{mpsToKmh(tick.windSpeed)}</span>
-        <span className="text-2xs">kmh, {degreesToCardinal(tick.windDirection) || ''}</span>
+        <span className="text-xs">{tick.windSpeedConverted}</span>
+        <span className="text-2xs">kmh, {tick.windCardinalDirection}</span>
       </div>
-      <div className="text-2xs text-gray-500">{wave.data && degreesToRelativeCardinal(wave.data.offshoreWindDirection, tick.windDirection)}</div>
+      <div className="text-2xs text-gray-500">{tick.windRelativeCardinalDirection}</div>
     </div>
   )
 
