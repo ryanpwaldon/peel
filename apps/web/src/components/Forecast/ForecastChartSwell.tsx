@@ -19,7 +19,7 @@ export default function ForecastChartSwell({ className, weatherEvents }: Forecas
         <div className="flex text-xs text-gray-500">
           <span>Swell</span>
           <span>&nbsp;</span>
-          <Symbol symbol="air" />
+          <Symbol symbol="waves" />
         </div>
       }
       ticks={
