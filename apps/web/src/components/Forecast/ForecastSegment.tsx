@@ -3,7 +3,7 @@ interface Tick {
   windDirection: number | null
   windSpeedConverted: number
   windCardinalDirection: string | null | undefined
-  windRelativeCardinalDirection: string | null
+  windRelativeCardinalDirection: 'Offshore' | 'Onshore' | 'Crosswind' | null
 }
 
 interface ForecastSegment {
@@ -11,10 +11,11 @@ interface ForecastSegment {
   ticks: Tick[]
   tickMax: number
   tickLabel: (tick: Tick) => React.ReactNode
+  tickColor: (tick: Tick) => string
   className?: string
 }
 
-export default function ForecastSegment({ title, ticks, tickMax, tickLabel, className }: ForecastSegment) {
+export default function ForecastSegment({ title, ticks, tickMax, tickLabel, className, tickColor }: ForecastSegment) {
   const getTickHeight = (val: number | null) => {
     if (!val) return 0
     if (val > tickMax) return 100
@@ -28,7 +29,7 @@ export default function ForecastSegment({ title, ticks, tickMax, tickLabel, clas
         {ticks.map((tick, index) => (
           <div key={index}>
             <div className="flex h-8 items-end">
-              <div className="w-full rounded bg-gray-200" style={{ height: `${getTickHeight(tick.windSpeed)}%` }} />
+              <div className={`w-full rounded ${tickColor(tick)}`} style={{ height: `${getTickHeight(tick.windSpeed)}%` }} />
             </div>
             <div className={`mt-1 ${index % 6 !== 0 && 'hidden'}`}>{tickLabel(tick)}</div>
           </div>

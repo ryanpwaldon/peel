@@ -29,6 +29,12 @@ export default function Wave() {
       windRelativeCardinalDirection: degreesToRelativeCardinal(wave.data.offshoreWindDirection, weatherEvent.windDirection),
     })) || []
 
+  const tickColor = (tick: typeof ticks[number]) => {
+    if (tick.windRelativeCardinalDirection === 'Onshore') return 'bg-red-300'
+    if (tick.windRelativeCardinalDirection === 'Offshore') return 'bg-green-300'
+    else return 'bg-yellow-300'
+  }
+
   const tickLabel = (tick: typeof ticks[number]) => (
     <div className="flex flex-col whitespace-nowrap font-medium">
       <ArrowDown className="w-full" rotate={tick.windDirection} />
@@ -44,7 +50,7 @@ export default function Wave() {
     <Page header={<Header right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
       <div className="pb-content-bottom">
         <PageTitle title="Wave" className="px-5" />
-        {wave.data && <ForecastSegment title={WindForecastTitle} ticks={ticks} tickMax={8} className="mt-5" tickLabel={tickLabel} />}
+        {wave.data && <ForecastSegment title={WindForecastTitle} ticks={ticks} tickMax={8} className="mt-5" tickLabel={tickLabel} tickColor={tickColor} />}
       </div>
     </Page>
   )
