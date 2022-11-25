@@ -12,9 +12,10 @@ interface ForecastChartWindProps {
 
 const WIND_SPEED_UPPER_LIMIT = 8
 
-export default function ForecastChartWind({ weatherEvents, offshoreWindDirection }: ForecastChartWindProps) {
+export default function ForecastChartWind({ weatherEvents, offshoreWindDirection, className }: ForecastChartWindProps) {
   return (
     <ForecastChartBase
+      className={className}
       title={
         <div className="flex text-xs text-gray-500">
           <span>Wind</span>
