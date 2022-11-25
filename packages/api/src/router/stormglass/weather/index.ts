@@ -5,7 +5,7 @@ import { handleAxiosError } from '../../../utils/handleAxiosError'
 
 // prettier-ignore
 const weatherModels = z
-  .object({ sg: z.number().optional().nullable() })
+  .object({ sg: z.number().nullish() })
   .transform((val) => val.sg)
 
 // prettier-ignore
