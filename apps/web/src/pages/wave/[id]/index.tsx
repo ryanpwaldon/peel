@@ -34,9 +34,9 @@ export default function Wave() {
 
   return (
     <Page header={<Header right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
-      <div className="px-5 pb-content-bottom">
-        <PageTitle title="Wave" />
-        {wave.data && <ForecastSegment title={WindForecastTitle} ticks={ticks} tickMax={10} className="mt-5" tickLabel={tickLabel} />}
+      <div className="pb-content-bottom">
+        <PageTitle title="Wave" className="px-5" />
+        {wave.data && <ForecastSegment title={WindForecastTitle} ticks={ticks} tickMax={8} className="mt-5" tickLabel={tickLabel} />}
       </div>
     </Page>
   )
