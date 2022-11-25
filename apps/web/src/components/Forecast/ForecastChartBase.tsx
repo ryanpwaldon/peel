@@ -10,7 +10,7 @@ interface ForecastSegment {
   className?: string
 }
 
-export default function ForecastSegment({ title, ticks, className }: ForecastSegment) {
+export default function ForecastChartBase({ title, ticks, className }: ForecastSegment) {
   return (
     <div className={`flex w-full flex-col border-y-hairline border-gray-200 bg-white px-5 py-3 ${className}`}>
       <div>{title}</div>
