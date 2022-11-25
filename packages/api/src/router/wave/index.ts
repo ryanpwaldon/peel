@@ -8,8 +8,22 @@ export const waveRouter = router({
   findMany: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.wave.findMany({ take: 20, include: { point: { include: { location: true } } } })
   }),
-  byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
-    return ctx.prisma.wave.findFirst({ where: { id: input } })
+  findById: publicProcedure.input(z.string()).query(({ ctx, input }) => {
+    return ctx.prisma.wave.findUnique({
+      where: { id: input },
+      include: {
+        point: {
+          include: {
+            location: true,
+            forecast: {
+              include: {
+                weatherEvents: true,
+              },
+            },
+          },
+        },
+      },
+    })
   }),
   create: protectedProcedure
     .input(
