@@ -1,13 +1,34 @@
-export const swellPeriodToCardinalText = (period: number | null) => {
+const swellPeriodToCardinal = (period: number | null) => {
   if (period === null) return null
-  if (period < 8) return 'Short'
-  if (period < 14) return 'Moderate'
-  return 'Long'
+  if (period < 8) return 'SHORT' as const
+  if (period < 14) return 'MODERATE' as const
+  return 'LONG' as const
+}
+
+export const swellPeriodToCardinalText = (period: number | null) => {
+  const cardinal = swellPeriodToCardinal(period)
+  switch (cardinal) {
+    case 'SHORT':
+      return 'Short'
+    case 'MODERATE':
+      return 'Moderate'
+    case 'LONG':
+      return 'Long'
+    case null:
+      return null
+  }
 }
 
 export const swellPeriodToCardinalColor = (period: number | null) => {
-  if (period === null) return '#e5e5e5'
-  if (period < 8) return '#bfdbfe'
-  if (period < 14) return '#60a5fa'
-  return '#2563eb'
+  const cardinal = swellPeriodToCardinal(period)
+  switch (cardinal) {
+    case 'SHORT':
+      return '#bfdbfe'
+    case 'MODERATE':
+      return '#60a5fa'
+    case 'LONG':
+      return '#2563eb'
+    case null:
+      return '#e5e5e5'
+  }
 }
