@@ -23,7 +23,7 @@ export default function ForecastSegment({ title, ticks, tickMax, tickLabel, clas
       <div>{title}</div>
       <div className="mt-2 grid w-full auto-cols-fr grid-flow-col gap-1">
         {ticks.map((tick, index) => (
-          <div key={index} className="min-w-0">
+          <div key={index}>
             <div className="flex h-8 items-end">
               <div className="w-full rounded bg-gray-200" style={{ height: `${getTickHeight(tick.windSpeed)}%` }} />
             </div>
@@ -31,7 +31,6 @@ export default function ForecastSegment({ title, ticks, tickMax, tickLabel, clas
           </div>
         ))}
       </div>
-      <div></div>
     </div>
   )
 }
