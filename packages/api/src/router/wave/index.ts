@@ -5,8 +5,8 @@ import { FORECAST_HEX_RESOLUTION } from '../../constants'
 import { router, publicProcedure, protectedProcedure } from '../../trpc'
 
 export const waveRouter = router({
-  all: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.wave.findMany()
+  findMany: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.wave.findMany({ take: 20, include: { point: { include: { location: true } } } })
   }),
   byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
     return ctx.prisma.wave.findFirst({ where: { id: input } })
