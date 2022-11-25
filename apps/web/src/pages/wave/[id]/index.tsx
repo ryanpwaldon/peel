@@ -22,7 +22,7 @@ export default function Wave() {
     <Page header={<Header right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
       <div className="px-5 pb-content-bottom">
         <PageTitle title="Wave" />
-        {wave.data && <ForecastSegment title={WindForecastTitle} ticks={ticks} max={100} />}
+        {wave.data && <ForecastSegment title={WindForecastTitle} ticks={ticks} max={10} className="mt-5" />}
       </div>
     </Page>
   )

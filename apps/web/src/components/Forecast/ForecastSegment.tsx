@@ -11,9 +11,10 @@ interface ForecastSegment {
   tickColor?: () => string | string
   tickLabel?: (tick: number) => string
   max: number
+  className?: string
 }
 
-export default function ForecastSegment({ title, ticks, max }: ForecastSegment) {
+export default function ForecastSegment({ title, ticks, max, className }: ForecastSegment) {
   const tickHeight = (val: number | null) => {
     if (!val) return 0
     if (val > max) return 100
@@ -21,11 +22,13 @@ export default function ForecastSegment({ title, ticks, max }: ForecastSegment) 
   }
 
   return (
-    <div className="flex w-full flex-col">
+    <div className={`flex w-full flex-col ${className}`}>
       <div>{title}</div>
-      <div className="grid w-full grid-flow-col gap-1">
+      <div className="mt-2 grid w-full grid-flow-col gap-1">
         {ticks.map((tick, index) => (
-          <div className="h-8 w-full rounded bg-gray-200" style={{ height: `${tickHeight(tick.windSpeed)}%` }} key={index} />
+          <div className="flex h-8 w-full items-end" key={index}>
+            <div className="w-full rounded bg-gray-200" style={{ height: `${tickHeight(tick.windSpeed)}%` }} />
+          </div>
         ))}
       </div>
       <div></div>
