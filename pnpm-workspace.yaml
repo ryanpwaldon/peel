@@ -6,4 +6,5 @@ packages:
   - packages/auth
   - packages/db
   - packages/seed
+  - packages/utils
   - packages/config/*

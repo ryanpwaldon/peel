@@ -1,6 +1,6 @@
 import { add, sub } from 'date-fns'
 import { appRouter } from '@peel/api'
-import { getTzStartOfDay } from './utils/getTzStartOfDay'
+import { getTzStartOfDay } from '@peel/utils'
 import { createContextInner } from '@peel/api/src/context'
 
 const getServerCaller = () => {

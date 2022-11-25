@@ -9,9 +9,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@peel/api": "*",
-    "date-fns": "^2.29.3",
-    "date-fns-tz": "^1.3.7"
+    "@peel/utils": "*",
+    "@peel/api": "*"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
