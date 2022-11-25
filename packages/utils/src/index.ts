@@ -1,4 +1,7 @@
 export { mpsToKmh } from './utils/mpsToKmh'
+export { metersToFeet } from './utils/metersToFeet'
 export { getTzStartOfDay } from './utils/getTzStartOfDay'
 export { degreesToCardinal } from './utils/degreesToCardinal'
+export { swellHeightToCardinal } from './utils/swellHeightToCardinal'
 export { degreesToRelativeCardinal } from './utils/degreesToRelativeCardinal'
+export { swellPeriodToCardinalText, swellPeriodToCardinalColor } from './utils/swellPeriodToCardinal'

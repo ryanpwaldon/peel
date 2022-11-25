@@ -5,6 +5,7 @@ import Page from '@/components/Scaffolding/Page'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
 import ForecastChartWind from '@/components/Forecast/ForecastChartWind'
+import ForecastChartSwell from '@/components/Forecast/ForecastChartSwell'
 
 export default function Wave() {
   const router = useRouter()
@@ -15,7 +16,14 @@ export default function Wave() {
       <div className="pb-content-bottom">
         <PageTitle title="Wave" className="px-5" />
         {wave.data && (
-          <ForecastChartWind offshoreWindDirection={wave.data.offshoreWindDirection} weatherEvents={wave.data.point.forecast.weatherEvents} className="mt-5" />
+          <>
+            <ForecastChartWind
+              className="mt-5"
+              offshoreWindDirection={wave.data.offshoreWindDirection}
+              weatherEvents={wave.data.point.forecast.weatherEvents}
+            />
+            <ForecastChartSwell weatherEvents={wave.data.point.forecast.weatherEvents} />
+          </>
         )}
       </div>
     </Page>
