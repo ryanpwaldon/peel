@@ -92,22 +92,15 @@ export const forecastRouter = router({
       }),
     )
     .mutation(({ ctx, input }) => {
-      return ctx.prisma.forecast.update({
-        where: { id: input.id },
-        data: {
-          weatherEvents: {
-            upsert: input.weatherEvents.map((weatherEvent) => ({
-              create: weatherEvent,
-              update: weatherEvent,
-              where: {
-                forecastId_time: {
-                  forecastId: input.id,
-                  time: weatherEvent.time,
-                },
-              },
-            })),
-          },
+      const deleteWeatherEvents = ctx.prisma.weatherEvent.deleteMany({
+        where: {
+          forecastId: input.id,
+          time: { in: input.weatherEvents.map((event) => event.time) },
         },
       })
+      const createWeatherEvents = ctx.prisma.weatherEvent.createMany({
+        data: input.weatherEvents.map((weatherEvent) => ({ ...weatherEvent, forecastId: input.id })),
+      })
+      return ctx.prisma.$transaction([deleteWeatherEvents, createWeatherEvents])
     }),
 })
