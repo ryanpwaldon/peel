@@ -1,11 +1,11 @@
 import { trpc } from '@/utils/trpc'
-import { mpsToKmh } from '@peel/utils'
 import { useRouter } from 'next/router'
 import Symbol from '@/components/Symbol/Symbol'
 import Page from '@/components/Scaffolding/Page'
 import ArrowDown from '@/components/Icon/ArrowDown'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
+import { degreesToCardinal, mpsToKmh } from '@peel/utils'
 import ForecastSegment from '@/components/Forecast/ForecastSegment'
 
 const WindForecastTitle = (
@@ -26,7 +26,7 @@ export default function Wave() {
       <ArrowDown className="w-full" rotate={tick.windDirection} />
       <div>
         <span className="text-xs">{mpsToKmh(tick.windSpeed)}</span>
-        <span className="text-2xs">kmh, NNW</span>
+        <span className="text-2xs">kmh, {degreesToCardinal(tick.windDirection) || ''}</span>
       </div>
       <div className="text-2xs text-gray-500">Crosswind</div>
     </div>
