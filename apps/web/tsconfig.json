@@ -1,7 +1,15 @@
 {
   "extends": "../../tsconfig.json",
   "exclude": [],
-  "include": ["next-env.d.ts", "node_modules/@peel/auth/next-auth.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
+  "include": [
+    "next-env.d.ts",
+    "node_modules/@peel/auth/next-auth.d.ts",
+    "node_modules/@peel/api/node_modules/@types/mapbox__mapbox-sdk",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs"
+  ],
   "compilerOptions": {
     "paths": { "@/*": ["./src/*"] }
   }
