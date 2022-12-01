@@ -47,6 +47,7 @@ importers:
       '@capacitor/assets': ^2.0.4
       '@capacitor/cli': ^4.5.0
       '@capacitor/core': ^4.5.0
+      '@capacitor/haptics': ^4.1.0
       '@capacitor/ios': ^4.5.0
       '@capacitor/splash-screen': ^4.1.2
       '@types/node': ^18.0.0
@@ -54,6 +55,7 @@ importers:
     dependencies:
       '@capacitor/app': 4.1.1_@capacitor+core@4.5.0
       '@capacitor/core': 4.5.0
+      '@capacitor/haptics': 4.1.0_@capacitor+core@4.5.0
       '@capacitor/ios': 4.5.0_@capacitor+core@4.5.0
       '@capacitor/splash-screen': 4.1.2_@capacitor+core@4.5.0
     devDependencies:
@@ -366,6 +368,14 @@ packages:
     resolution: {integrity: sha512-afx+hvQIrPcHbTdsBIryE96JlfSt1Rw8cWhb1J34v6Exje6zQZQa3fQZ6gcgkON+zkDIK8u3yRcIps0xMUdsMQ==}
     dependencies:
       tslib: 2.4.1
+    dev: false
+
+  /@capacitor/haptics/4.1.0_@capacitor+core@4.5.0:
+    resolution: {integrity: sha512-gAIFy50e1VZPdokRFLkl8Y+yZYB3e4brd5yu9DRShbWbheruwU34TxtG5C1NANvq4mbXd3tMXzBi59Q5JFyTHA==}
+    peerDependencies:
+      '@capacitor/core': ^4.0.0
+    dependencies:
+      '@capacitor/core': 4.5.0
     dev: false
 
   /@capacitor/ios/4.5.0_@capacitor+core@4.5.0:

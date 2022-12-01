@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { vibrate } from '@/utils/vibrate'
 import Symbol from '@/components/Symbol/Symbol'
 
 export interface NavigationLinkProps {
@@ -12,8 +13,8 @@ export default function NavigationLink({ symbol, path }: NavigationLinkProps) {
   const isActive = path === router.pathname
 
   return (
-    <Link href={path} className={`flex justify-center items-center py-4 w-1/5 ${isActive ? 'text-gray-800' : 'text-gray-400'}`}>
-      <Symbol symbol={symbol} className="text-[28px] leading-8 pb-device-bar-bottom block font-medium" />
+    <Link onClick={vibrate} href={path} className={`flex w-1/5 items-center justify-center py-4 ${isActive ? 'text-gray-800' : 'text-gray-400'}`}>
+      <Symbol symbol={symbol} className="block pb-device-bar-bottom text-[28px] font-medium leading-8" />
     </Link>
   )
 }
