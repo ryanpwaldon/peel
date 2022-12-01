@@ -14,7 +14,6 @@ const weatherResponse = z.object({
     z.object({
       time: z.string().transform((val) => new Date(val)),
       airTemperature: weatherModels,
-      seaLevel: weatherModels,
       waterTemperature: weatherModels,
       cloudCover: weatherModels,
       visibility: weatherModels,
