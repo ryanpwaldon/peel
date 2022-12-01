@@ -32,8 +32,8 @@ export default function ForecastChartSwell({ className, timezone, weatherEvents 
           const swellPeriodCardinalColor = swellPeriodToCardinalColor(swellPeriodRounded)
           const swellCardinalDirection = degreesToCardinal(swellDirection)
           const tickHeight = `${(swellHeight && Math.min((swellHeight / SWELL_HEIGHT_UPPER_LIMIT) * 100, 100)) || 0}%`
-          const tickLabel = (
-            <div className="flex flex-col whitespace-nowrap text-xs font-medium">
+          const tickLabel = (alignment: 'right' | 'left') => (
+            <div className={`flex flex-col whitespace-nowrap text-xs font-medium ${alignment === 'left' ? 'items-start' : 'items-end'}`}>
               <div className="w-3" style={{ color: swellPeriodCardinalColor }}>
                 <ArrowDown className="w-full" rotate={swellDirection} />
               </div>

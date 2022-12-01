@@ -6,7 +6,7 @@ interface Tick {
   time: Date
   color: string
   height: string
-  label: React.ReactNode
+  label: (alignment: 'right' | 'left') => React.ReactNode
 }
 
 interface ForecastSegment {
@@ -30,12 +30,16 @@ const getIsToday = (ticks: Tick[], timezone: string) => {
   return isEqual(firstTick.time, localStartOfDay)
 }
 
-const getTickOpacity = (isToday: boolean, tickIndex: number, liveTickIndex: number) => {
-  return isToday && tickIndex < liveTickIndex ? 'opacity-20' : 'opacity-100'
+const getTickOpacity = (isToday: boolean, currentTickIndex: number, liveTickIndex: number) => {
+  return isToday && currentTickIndex < liveTickIndex ? 'opacity-20' : 'opacity-100'
 }
 
-const getTickLabelVisibility = (isToday: boolean, tickIndex: number, liveTickIndex: number) => {
-  return isToday ? (tickIndex !== liveTickIndex ? 'hidden' : '') : tickIndex % 6 !== 0 ? 'hidden' : ''
+const getTickLabelVisibility = (isToday: boolean, currentTickIndex: number, liveTickIndex: number) => {
+  return isToday ? (currentTickIndex !== liveTickIndex ? 'hidden' : '') : currentTickIndex % 6 !== 0 ? 'hidden' : ''
+}
+
+const getTickLabelAlignment = (currentTickIndex: number) => {
+  return currentTickIndex < 12 ? 'left' : 'right'
 }
 
 export default function ForecastChartBase({ title, ticks, timezone, className }: ForecastSegment) {
@@ -54,15 +58,16 @@ export default function ForecastChartBase({ title, ticks, timezone, className }:
     <div className={`flex w-full flex-col overflow-hidden bg-white px-5 py-3 ${className}`}>
       <div>{title}</div>
       <div className="mt-2 grid w-full auto-cols-fr grid-flow-col gap-1">
-        {ticks.map((tick, index) => {
-          const tickOpacity = getTickOpacity(isToday, index, liveTickIndex)
-          const tickLabelVisibility = getTickLabelVisibility(isToday, index, liveTickIndex)
+        {ticks.map((tick, currentTickIndex) => {
+          const tickOpacity = getTickOpacity(isToday, currentTickIndex, liveTickIndex)
+          const tickLabelVisibility = getTickLabelVisibility(isToday, currentTickIndex, liveTickIndex)
+          const tickLabelAlignment = getTickLabelAlignment(currentTickIndex)
           return (
-            <div key={index} className={tickOpacity}>
+            <div key={currentTickIndex} className={tickOpacity}>
               <div className="flex h-8 items-end">
                 <div className="w-full rounded" style={{ height: tick.height, backgroundColor: tick.color }} />
               </div>
-              <div className={`mt-1 ${tickLabelVisibility}`}>{tick.label}</div>
+              <div className={`mt-1 ${tickLabelVisibility}`}>{tick.label(tickLabelAlignment)}</div>
             </div>
           )
         })}

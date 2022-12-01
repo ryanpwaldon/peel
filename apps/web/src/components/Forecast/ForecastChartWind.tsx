@@ -32,8 +32,8 @@ export default function ForecastChartWind({ className, timezone, weatherEvents, 
           const windRelativeCardinalDirectionText = degreesToRelativeCardinalText(offshoreWindDirection, windDirection)
           const windRelativeCardinalDirectionColor = degreesToRelativeCardinalColor(offshoreWindDirection, windDirection)
           const tickHeight = `${(windSpeed && Math.min((windSpeed / WIND_SPEED_UPPER_LIMIT) * 100, 100)) || 0}%`
-          const tickLabel = (
-            <div className="flex flex-col whitespace-nowrap font-medium">
+          const tickLabel = (alignment: 'right' | 'left') => (
+            <div className={`flex flex-col whitespace-nowrap font-medium ${alignment === 'left' ? 'items-start' : 'items-end'}`}>
               <div className="w-3" style={{ color: windRelativeCardinalDirectionColor }}>
                 <ArrowDown className="w-full" rotate={windDirection} />
               </div>
