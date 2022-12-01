@@ -6,13 +6,14 @@ import { degreesToCardinal, degreesToRelativeCardinalText, degreesToRelativeCard
 
 interface ForecastChartWindProps {
   className?: string
+  timezone: string
   offshoreWindDirection: RouterOutputs['wave']['findById']['offshoreWindDirection']
   weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
 }
 
 const WIND_SPEED_UPPER_LIMIT = 4
 
-export default function ForecastChartWind({ className, weatherEvents, offshoreWindDirection }: ForecastChartWindProps) {
+export default function ForecastChartWind({ className, timezone, weatherEvents, offshoreWindDirection }: ForecastChartWindProps) {
   return (
     <ForecastChartBase
       className={className}
@@ -23,8 +24,9 @@ export default function ForecastChartWind({ className, weatherEvents, offshoreWi
           <Symbol symbol="air" />
         </div>
       }
+      timezone={timezone}
       ticks={
-        weatherEvents.map(({ windSpeed, windDirection }) => {
+        weatherEvents.map(({ time, windSpeed, windDirection }) => {
           const windSpeedConverted = mpsToKmh(windSpeed)
           const windCardinalDirection = degreesToCardinal(windDirection)
           const windRelativeCardinalDirectionText = degreesToRelativeCardinalText(offshoreWindDirection, windDirection)
@@ -32,7 +34,7 @@ export default function ForecastChartWind({ className, weatherEvents, offshoreWi
           const tickHeight = `${(windSpeed && Math.min((windSpeed / WIND_SPEED_UPPER_LIMIT) * 100, 100)) || 0}%`
           const tickLabel = (
             <div className="flex flex-col whitespace-nowrap font-medium">
-              <div style={{ color: windRelativeCardinalDirectionColor }}>
+              <div className="w-3" style={{ color: windRelativeCardinalDirectionColor }}>
                 <ArrowDown className="w-full" rotate={windDirection} />
               </div>
               <div>
@@ -43,6 +45,7 @@ export default function ForecastChartWind({ className, weatherEvents, offshoreWi
             </div>
           )
           return {
+            time,
             label: tickLabel,
             height: tickHeight,
             color: windRelativeCardinalDirectionColor,

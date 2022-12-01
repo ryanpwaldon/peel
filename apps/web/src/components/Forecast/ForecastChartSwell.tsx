@@ -6,12 +6,13 @@ import { degreesToCardinal, metersToFeet, swellPeriodToCardinalColor, swellPerio
 
 interface ForecastChartSwellProps {
   className?: string
+  timezone: string
   weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
 }
 
 const SWELL_HEIGHT_UPPER_LIMIT = 3
 
-export default function ForecastChartSwell({ className, weatherEvents }: ForecastChartSwellProps) {
+export default function ForecastChartSwell({ className, timezone, weatherEvents }: ForecastChartSwellProps) {
   return (
     <ForecastChartBase
       className={className}
@@ -22,8 +23,9 @@ export default function ForecastChartSwell({ className, weatherEvents }: Forecas
           <Symbol symbol="waves" />
         </div>
       }
+      timezone={timezone}
       ticks={
-        weatherEvents.map(({ swellHeight, swellDirection, swellPeriod }) => {
+        weatherEvents.map(({ time, swellHeight, swellDirection, swellPeriod }) => {
           const swellHeightConverted = metersToFeet(swellHeight)
           const swellPeriodRounded = Math.round(swellPeriod || 0)
           const swellPeriodCardinalText = swellPeriodToCardinalText(swellPeriodRounded)
@@ -32,7 +34,7 @@ export default function ForecastChartSwell({ className, weatherEvents }: Forecas
           const tickHeight = `${(swellHeight && Math.min((swellHeight / SWELL_HEIGHT_UPPER_LIMIT) * 100, 100)) || 0}%`
           const tickLabel = (
             <div className="flex flex-col whitespace-nowrap text-xs font-medium">
-              <div style={{ color: swellPeriodCardinalColor }}>
+              <div className="w-3" style={{ color: swellPeriodCardinalColor }}>
                 <ArrowDown className="w-full" rotate={swellDirection} />
               </div>
               <div>
@@ -50,6 +52,7 @@ export default function ForecastChartSwell({ className, weatherEvents }: Forecas
             </div>
           )
           return {
+            time,
             label: tickLabel,
             height: tickHeight,
             color: swellPeriodCardinalColor,

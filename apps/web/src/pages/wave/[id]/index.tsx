@@ -25,8 +25,12 @@ const Content = () => {
       <div className="pb-content-bottom">
         <PageTitle title="Wave" className="px-5" />
         <div className="mt-5 divide-y-hairline divide-gray-200 border-y-hairline border-gray-200">
-          <ForecastChartWind offshoreWindDirection={wave.offshoreWindDirection} weatherEvents={wave.point.forecast.weatherEvents} />
-          <ForecastChartSwell weatherEvents={wave.point.forecast.weatherEvents} />
+          <ForecastChartWind
+            timezone={wave.point.timezone}
+            offshoreWindDirection={wave.offshoreWindDirection}
+            weatherEvents={wave.point.forecast.weatherEvents}
+          />
+          <ForecastChartSwell timezone={wave.point.timezone} weatherEvents={wave.point.forecast.weatherEvents} />
         </div>
       </div>
     </Page>
