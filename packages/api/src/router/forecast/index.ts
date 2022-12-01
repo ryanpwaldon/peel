@@ -67,6 +67,7 @@ export const forecastRouter = router({
           z.object({
             time: z.date(),
             airTemperature: z.number().nullish(),
+            seaLevel: z.number().nullish(),
             waterTemperature: z.number().nullish(),
             cloudCover: z.number().nullish(),
             visibility: z.number().nullish(),

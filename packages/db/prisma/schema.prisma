@@ -162,6 +162,7 @@ model WeatherEvent {
     forecastId              String
     time                    DateTime
     airTemperature          Float?
+    seaLevel                Float?
     waterTemperature        Float?
     cloudCover              Float?
     visibility              Float?
