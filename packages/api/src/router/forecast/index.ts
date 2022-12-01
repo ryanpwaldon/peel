@@ -66,6 +66,7 @@ export const forecastRouter = router({
         weatherEvents: z.array(
           z.object({
             time: z.date(),
+            seaLevel: z.number().nullish(),
             airTemperature: z.number().nullish(),
             waterTemperature: z.number().nullish(),
             cloudCover: z.number().nullish(),

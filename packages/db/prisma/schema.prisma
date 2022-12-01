@@ -161,6 +161,7 @@ model WeatherEvent {
     forecast                Forecast @relation(fields: [forecastId], references: [id])
     forecastId              String
     time                    DateTime
+    seaLevel                Float?
     airTemperature          Float?
     waterTemperature        Float?
     cloudCover              Float?
