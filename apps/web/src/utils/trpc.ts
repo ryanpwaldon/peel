@@ -1,9 +1,10 @@
 // src/utils/trpc.ts
+import { NextPageContext } from 'next'
+import type { AppRouter } from '@peel/api'
 import { createTRPCNext } from '@trpc/next'
+import { transformer } from '@peel/api/transformer'
 import { httpBatchLink, loggerLink } from '@trpc/client'
 import { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
-import type { AppRouter } from '@peel/api'
-import { transformer } from '@peel/api/transformer'
 
 const getBaseUrl = () => {
   if (typeof window !== 'undefined') return '' // browser should use relative url
@@ -12,7 +13,7 @@ const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}` // dev SSR should use localhost
 }
 
-export const trpc = createTRPCNext<AppRouter>({
+export const trpc = createTRPCNext<AppRouter, NextPageContext, 'ExperimentalSuspense'>({
   config() {
     return {
       transformer,
