@@ -12,7 +12,7 @@ interface ForecastSegment {
 
 export default function ForecastChartBase({ title, ticks, className }: ForecastSegment) {
   return (
-    <div className={`flex w-full flex-col border-y-hairline border-gray-200 bg-white px-5 py-3 ${className}`}>
+    <div className={`flex w-full flex-col bg-white px-5 py-3 ${className}`}>
       <div>{title}</div>
       <div className="mt-2 grid w-full auto-cols-fr grid-flow-col gap-1">
         {ticks.map((tick, index) => (

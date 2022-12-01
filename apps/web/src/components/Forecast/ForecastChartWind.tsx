@@ -10,7 +10,7 @@ interface ForecastChartWindProps {
   weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
 }
 
-const WIND_SPEED_UPPER_LIMIT = 8
+const WIND_SPEED_UPPER_LIMIT = 4
 
 export default function ForecastChartWind({ className, weatherEvents, offshoreWindDirection }: ForecastChartWindProps) {
   return (

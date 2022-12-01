@@ -24,8 +24,10 @@ const Content = () => {
     <Page header={<Header right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
       <div className="pb-content-bottom">
         <PageTitle title="Wave" className="px-5" />
-        <ForecastChartWind className="mt-5" offshoreWindDirection={wave.offshoreWindDirection} weatherEvents={wave.point.forecast.weatherEvents} />
-        <ForecastChartSwell weatherEvents={wave.point.forecast.weatherEvents} />
+        <div className="mt-5 divide-y-hairline divide-gray-200 border-y-hairline border-gray-200">
+          <ForecastChartWind offshoreWindDirection={wave.offshoreWindDirection} weatherEvents={wave.point.forecast.weatherEvents} />
+          <ForecastChartSwell weatherEvents={wave.point.forecast.weatherEvents} />
+        </div>
       </div>
     </Page>
   )
