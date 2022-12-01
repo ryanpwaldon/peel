@@ -30,30 +30,42 @@ const getIsToday = (ticks: Tick[], timezone: string) => {
   return isEqual(firstTick.time, localStartOfDay)
 }
 
+const getTickOpacity = (isToday: boolean, tickIndex: number, liveTickIndex: number) => {
+  return isToday && tickIndex < liveTickIndex ? 'opacity-20' : 'opacity-100'
+}
+
+const getTickLabelVisibility = (isToday: boolean, tickIndex: number, liveTickIndex: number) => {
+  return isToday ? (tickIndex !== liveTickIndex ? 'hidden' : '') : tickIndex % 6 !== 0 ? 'hidden' : ''
+}
+
 export default function ForecastChartBase({ title, ticks, timezone, className }: ForecastSegment) {
   const [isToday, setIsToday] = useState(getIsToday(ticks, timezone))
-  const [liveTick, setLiveTick] = useState(getLiveTick(ticks))
+  const [liveTickIndex, setLiveTickIndex] = useState(getLiveTick(ticks))
 
   useMemo(() => {
     const timer = setTimeout(() => {
       setIsToday(getIsToday(ticks, timezone))
-      setLiveTick(getLiveTick(ticks))
+      setLiveTickIndex(getLiveTick(ticks))
     }, 1000)
     return () => clearTimeout(timer)
   }, [ticks, timezone])
 
   return (
-    <div className={`flex w-full flex-col bg-white px-5 py-3 ${className}`}>
+    <div className={`flex w-full flex-col overflow-hidden bg-white px-5 py-3 ${className}`}>
       <div>{title}</div>
       <div className="mt-2 grid w-full auto-cols-fr grid-flow-col gap-1">
-        {ticks.map((tick, index) => (
-          <div key={index} className={isToday && index < liveTick ? 'opacity-20' : ''}>
-            <div className="flex h-8 items-end">
-              <div className="w-full rounded" style={{ height: tick.height, backgroundColor: tick.color }} />
+        {ticks.map((tick, index) => {
+          const tickOpacity = getTickOpacity(isToday, index, liveTickIndex)
+          const tickLabelVisibility = getTickLabelVisibility(isToday, index, liveTickIndex)
+          return (
+            <div key={index} className={tickOpacity}>
+              <div className="flex h-8 items-end">
+                <div className="w-full rounded" style={{ height: tick.height, backgroundColor: tick.color }} />
+              </div>
+              <div className={`mt-1 ${tickLabelVisibility}`}>{tick.label}</div>
             </div>
-            <div className={`mt-1 ${isToday ? index !== liveTick && 'hidden' : index % 6 !== 0 && 'hidden'}`}>{tick.label}</div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
