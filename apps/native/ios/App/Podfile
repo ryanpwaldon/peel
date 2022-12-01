@@ -12,6 +12,7 @@ def capacitor_pods
   pod 'Capacitor', :path => '../../../../node_modules/.pnpm/@capacitor+ios@4.5.0_@capacitor+core@4.5.0/node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../../../node_modules/.pnpm/@capacitor+ios@4.5.0_@capacitor+core@4.5.0/node_modules/@capacitor/ios'
   pod 'CapacitorApp', :path => '../../../../node_modules/.pnpm/@capacitor+app@4.1.1_@capacitor+core@4.5.0/node_modules/@capacitor/app'
+  pod 'CapacitorHaptics', :path => '../../../../node_modules/.pnpm/@capacitor+haptics@4.1.0_@capacitor+core@4.5.0/node_modules/@capacitor/haptics'
   pod 'CapacitorSplashScreen', :path => '../../../../node_modules/.pnpm/@capacitor+splash-screen@4.1.2_@capacitor+core@4.5.0/node_modules/@capacitor/splash-screen'
 end
 
