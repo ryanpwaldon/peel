@@ -30,9 +30,10 @@ const Content = () => {
             timezone={wave.point.timezone}
             offshoreWindDirection={wave.offshoreWindDirection}
             weatherEvents={wave.point.forecast.weatherEvents}
+            solarEvents={wave.point.forecast.solarEvents}
           />
-          <ForecastChartSwell timezone={wave.point.timezone} weatherEvents={wave.point.forecast.weatherEvents} />
-          <ForecastChartTide timezone={wave.point.timezone} weatherEvents={wave.point.forecast.weatherEvents} />
+          <ForecastChartSwell timezone={wave.point.timezone} weatherEvents={wave.point.forecast.weatherEvents} solarEvents={wave.point.forecast.solarEvents} />
+          <ForecastChartTide timezone={wave.point.timezone} weatherEvents={wave.point.forecast.weatherEvents} solarEvents={wave.point.forecast.solarEvents} />
         </div>
       </div>
     </Page>

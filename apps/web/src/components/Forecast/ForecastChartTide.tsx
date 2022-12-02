@@ -6,14 +6,16 @@ interface ForecastChartTideProps {
   className?: string
   timezone: string
   weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
+  solarEvents: RouterOutputs['wave']['findById']['point']['forecast']['solarEvents']
 }
 
-export default function ForecastChartTide({ className, timezone, weatherEvents }: ForecastChartTideProps) {
+export default function ForecastChartTide({ className, timezone, weatherEvents, solarEvents }: ForecastChartTideProps) {
   const tideUpperLimit = weatherEvents.reduce((acc, { seaLevel }) => Math.max(acc, seaLevel || 0), 0)
 
   return (
     <ForecastChartBase
       className={className}
+      solarEvents={solarEvents}
       title={
         <div className="flex text-xs text-gray-500">
           <span>Tide</span>

@@ -9,14 +9,16 @@ interface ForecastChartWindProps {
   timezone: string
   offshoreWindDirection: RouterOutputs['wave']['findById']['offshoreWindDirection']
   weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
+  solarEvents: RouterOutputs['wave']['findById']['point']['forecast']['solarEvents']
 }
 
 const WIND_SPEED_UPPER_LIMIT = 4
 
-export default function ForecastChartWind({ className, timezone, weatherEvents, offshoreWindDirection }: ForecastChartWindProps) {
+export default function ForecastChartWind({ className, timezone, weatherEvents, offshoreWindDirection, solarEvents }: ForecastChartWindProps) {
   return (
     <ForecastChartBase
       className={className}
+      solarEvents={solarEvents}
       title={
         <div className="flex text-xs text-gray-500">
           <span>Wind</span>

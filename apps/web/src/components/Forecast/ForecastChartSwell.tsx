@@ -8,14 +8,16 @@ interface ForecastChartSwellProps {
   className?: string
   timezone: string
   weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
+  solarEvents: RouterOutputs['wave']['findById']['point']['forecast']['solarEvents']
 }
 
 const SWELL_HEIGHT_UPPER_LIMIT = 3
 
-export default function ForecastChartSwell({ className, timezone, weatherEvents }: ForecastChartSwellProps) {
+export default function ForecastChartSwell({ className, timezone, weatherEvents, solarEvents }: ForecastChartSwellProps) {
   return (
     <ForecastChartBase
       className={className}
+      solarEvents={solarEvents}
       title={
         <div className="flex text-xs text-gray-500">
           <span>Swell</span>

@@ -35,6 +35,14 @@ export const waveRouter = router({
             },
           },
         },
+        solarEvents: {
+          where: {
+            time: {
+              gte: localStartOfDay,
+              lt: add(localStartOfDay, { days: 1 }),
+            },
+          },
+        },
       },
     })
     if (!forecast) throw new TRPCError({ code: 'NOT_FOUND' })
