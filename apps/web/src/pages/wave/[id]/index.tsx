@@ -6,6 +6,7 @@ import Page from '@/components/Scaffolding/Page'
 import Spinner from '@/components/Spinner/Spinner'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
+import ForecastChartTide from '@/components/Forecast/ForecastChartTide'
 import ForecastChartWind from '@/components/Forecast/ForecastChartWind'
 import ForecastChartSwell from '@/components/Forecast/ForecastChartSwell'
 
@@ -31,6 +32,7 @@ const Content = () => {
             weatherEvents={wave.point.forecast.weatherEvents}
           />
           <ForecastChartSwell timezone={wave.point.timezone} weatherEvents={wave.point.forecast.weatherEvents} />
+          <ForecastChartTide timezone={wave.point.timezone} weatherEvents={wave.point.forecast.weatherEvents} />
         </div>
       </div>
     </Page>
