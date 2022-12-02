@@ -24,7 +24,7 @@ const Content = () => {
   return (
     <Page header={<Header right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
       <div className="pb-content-bottom">
-        <PageTitle title="Wave" className="px-5" />
+        <PageTitle title={wave.name} className="px-5" />
         <div className="mt-5 divide-y-hairline divide-gray-200 border-y-hairline border-gray-200">
           <ForecastChartWind
             timezone={wave.point.timezone}
