@@ -18,7 +18,7 @@ export default function ForecastChartTide({ className, timezone, weatherEvents }
         <div className="flex text-xs text-gray-500">
           <span>Tide</span>
           <span>&nbsp;</span>
-          <Symbol symbol="opacity" />
+          <Symbol symbol="height" />
         </div>
       }
       timezone={timezone}
@@ -40,7 +40,7 @@ export default function ForecastChartTide({ className, timezone, weatherEvents }
           const seaLevelRounded = Math.round((seaLevel || 0) * 100) / 100
           const tickHeight = `${(seaLevelRounded && Math.min((seaLevelRounded / tideUpperLimit) * 100, 100)) || 0}%`
           const tickLabel = (alignment: 'right' | 'left') => (
-            <div className={`flex flex-col whitespace-nowrap font-medium ${alignment === 'left' ? 'items-start' : 'items-end'}`}>
+            <div className={`flex flex-col whitespace-nowrap text-xs font-medium ${alignment === 'left' ? 'items-start' : 'items-end'}`}>
               <div>
                 <span>
                   {seaLevelRounded}
