@@ -44,7 +44,7 @@ const getTickLabelAlignment = (currentTickIndex: number) => {
   return currentTickIndex < 12 ? 'left' : 'right'
 }
 
-const getSunriseSunsetOffset = (ticks: Tick[], solarEvents: ForecastSegment['solarEvents']) => {
+const getSunriseSolarOffsets = (ticks: Tick[], solarEvents: ForecastSegment['solarEvents']) => {
   const startUnix = ticks[0]?.time.getTime() || 0
   const endUnix = ticks[ticks.length - 1]?.time.getTime() || 0
   const forecastDuration = endUnix - startUnix
@@ -61,7 +61,7 @@ const getSunriseSunsetOffset = (ticks: Tick[], solarEvents: ForecastSegment['sol
 export default function ForecastChartBase({ title, ticks, timezone, solarEvents, className }: ForecastSegment) {
   const [isToday, setIsToday] = useState(getIsToday(ticks, timezone))
   const [liveTickIndex, setLiveTickIndex] = useState(getLiveTick(ticks))
-  const { sunriseOffset, sunsetOffset } = getSunriseSunsetOffset(ticks, solarEvents)
+  const { sunriseOffset, sunsetOffset } = getSunriseSolarOffsets(ticks, solarEvents)
 
   useMemo(() => {
     const timer = setTimeout(() => {
