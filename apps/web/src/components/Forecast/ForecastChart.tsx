@@ -35,7 +35,7 @@ export default function ForecastChart({ title, symbol, ticks, timezone, classNam
     if (initialY === null) setInitialY(event.clientY)
     const element = document.elementFromPoint(event.clientX, initialY || event.clientY)
     const elementIndex = parseInt(element?.getAttribute('data-index') || '')
-    if (Number.isInteger(elementIndex)) {
+    if (Number.isInteger(elementIndex) && elementIndex !== hoveredTick) {
       setHoveredTick(elementIndex)
       vibrate()
     }
