@@ -1,6 +1,6 @@
-import { Suspense } from 'react'
 import { trpc } from '@/utils/trpc'
 import { useRouter } from 'next/router'
+import { Suspense, useState } from 'react'
 import Symbol from '@/components/Symbol/Symbol'
 import Page from '@/components/Scaffolding/Page'
 import Spinner from '@/components/Spinner/Spinner'
@@ -22,6 +22,7 @@ export default function Wave() {
 const Content = () => {
   const router = useRouter()
   const [wave] = trpc.wave.findById.useSuspenseQuery(router.query.id as string)
+  const [hoveredTick, setHoveredTick] = useState<number | null>(null)
   return (
     <Page header={<Header right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
       <div className="pb-content-bottom">
@@ -32,18 +33,24 @@ const Content = () => {
             symbol="air"
             timezone={wave.point.timezone}
             ticks={createWindTicks({ weatherEvents: wave.point.forecast.weatherEvents, offshoreWindDirection: wave.offshoreWindDirection })}
+            hoveredTick={hoveredTick}
+            setHoveredTick={setHoveredTick}
           />
           <ForecastChart
             title="Swell"
             symbol="waves"
             timezone={wave.point.timezone}
             ticks={createSwellTicks({ weatherEvents: wave.point.forecast.weatherEvents })}
+            hoveredTick={hoveredTick}
+            setHoveredTick={setHoveredTick}
           />
           <ForecastChart
             title="Tide"
             symbol="height"
             timezone={wave.point.timezone}
             ticks={createTideTicks({ weatherEvents: wave.point.forecast.weatherEvents })}
+            hoveredTick={hoveredTick}
+            setHoveredTick={setHoveredTick}
           />
         </div>
       </div>

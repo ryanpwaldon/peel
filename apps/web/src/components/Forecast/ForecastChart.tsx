@@ -11,6 +11,8 @@ interface ForecastChartProps {
   symbol: string
   ticks: Tick[]
   timezone: string
+  hoveredTick: number | null
+  setHoveredTick: (tick: number | null) => void
   className?: string
 }
 
@@ -21,7 +23,7 @@ interface Tick {
   label: React.ReactNode
 }
 
-export default function ForecastChart({ title, symbol, ticks, timezone, className }: ForecastChartProps) {
+export default function ForecastChart({ title, symbol, ticks, timezone, hoveredTick, setHoveredTick, className }: ForecastChartProps) {
   const isToday = ticks[0]?.time && isEqual(ticks[0]?.time, getTzStartOfDay(timezone))
   const liveTick = isToday ? closestIndexTo(new Date(), ticks.map((tick) => tick.time)) : null // prettier-ignore
 
@@ -29,7 +31,6 @@ export default function ForecastChart({ title, symbol, ticks, timezone, classNam
   const labelsToHighlight = liveTick ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
 
   const [initialY, setInitialY] = useState<number | null>(null)
-  const [hoveredTick, setHoveredTick] = useState<number | null>(null)
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (initialY === null) setInitialY(event.clientY)
