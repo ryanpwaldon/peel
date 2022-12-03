@@ -46,6 +46,8 @@ export default function ForecastChart({ title, symbol, ticks, timezone, classNam
               key={index}
               onHoverEnd={() => setHoveredTick(null)}
               onHoverStart={() => setHoveredTick(index)}
+              onTouchStart={() => setHoveredTick(index)}
+              onTouchEnd={() => setHoveredTick(null)}
               className={`relative w-full min-w-0 px-0.5 pb-3 pt-9 ${isFirst ? 'pl-5' : ''} ${isLast ? 'pr-5' : ''}`}
             >
               <div className="flex h-8 items-end">
