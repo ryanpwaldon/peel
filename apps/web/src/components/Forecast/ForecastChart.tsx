@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { isEqual } from 'date-fns'
 import { motion } from 'framer-motion'
+import { vibrate } from '@/utils/vibrate'
 import { closestIndexTo } from 'date-fns/esm'
 import { getTzStartOfDay } from '@peel/utils'
 import Symbol from '@/components/Symbol/Symbol'
@@ -45,7 +46,10 @@ export default function ForecastChart({ title, symbol, ticks, timezone, classNam
             <motion.div
               key={index}
               onPointerDown={(event) => event.currentTarget.releasePointerCapture(event.pointerId)}
-              onPointerEnter={() => setHoveredTick(index)}
+              onPointerEnter={() => {
+                setHoveredTick(index)
+                vibrate()
+              }}
               onPointerLeave={() => setHoveredTick(null)}
               className={`relative w-full min-w-0 px-0.5 pb-3 pt-9 ${isFirst ? 'pl-5' : ''} ${isLast ? 'pr-5' : ''}`}
             >
