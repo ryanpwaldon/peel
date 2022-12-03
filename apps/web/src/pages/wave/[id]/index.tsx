@@ -8,6 +8,8 @@ import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
 import ForecastChart from '@/components/Forecast/ForecastChart'
 import { createWindTicks } from '@/components/Forecast/utils/createWindTicks'
+import { createTideTicks } from '@/components/Forecast/utils/createTideTicks'
+import { createSwellTicks } from '@/components/Forecast/utils/createSwellTicks'
 
 export default function Wave() {
   return (
@@ -29,10 +31,19 @@ const Content = () => {
             title="Wind"
             symbol="air"
             timezone={wave.point.timezone}
-            ticks={createWindTicks({
-              weatherEvents: wave.point.forecast.weatherEvents,
-              offshoreWindDirection: wave.offshoreWindDirection,
-            })}
+            ticks={createWindTicks({ weatherEvents: wave.point.forecast.weatherEvents, offshoreWindDirection: wave.offshoreWindDirection })}
+          />
+          <ForecastChart
+            title="Swell"
+            symbol="waves"
+            timezone={wave.point.timezone}
+            ticks={createSwellTicks({ weatherEvents: wave.point.forecast.weatherEvents })}
+          />
+          <ForecastChart
+            title="Tide"
+            symbol="height"
+            timezone={wave.point.timezone}
+            ticks={createTideTicks({ weatherEvents: wave.point.forecast.weatherEvents })}
           />
         </div>
       </div>
