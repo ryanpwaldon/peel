@@ -25,20 +25,15 @@ export const createTideTicks = ({ weatherEvents }: CreateTideTicksProps) => {
       const tickHeight = `${(seaLevelRounded && Math.min((seaLevelRounded / tideUpperLimit) * 100, 100)) || 0}%`
       const tickLabel = (
         <>
-          <div>
-            <span>
-              {seaLevelRounded}
-              <span className="text-2xs">m</span>
-            </span>
-          </div>
-          <div className="text-2xs text-gray-500">{tideDirection}</div>
+          <span>{seaLevelRounded}<span className="text-2xs">m</span></span>
+          <span className="text-2xs text-gray-400">{tideDirection}</span>
         </>
-      )
+      ) // prettier-ignore
       return {
         time,
+        color: '#e5e5e5',
         label: tickLabel,
         height: tickHeight,
-        color: '#e5e5e5',
       }
     }) || []
   )

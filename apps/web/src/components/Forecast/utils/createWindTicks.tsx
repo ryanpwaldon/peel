@@ -19,21 +19,19 @@ export const createWindTicks = ({ weatherEvents, offshoreWindDirection }: Create
       const tickHeight = `${(windSpeed && Math.min((windSpeed / WIND_SPEED_UPPER_LIMIT) * 100, 100)) || 0}%`
       const tickLabel = (
         <>
-          <div className="w-3" style={{ color: tickColor }}>
-            <ArrowDown className="w-full" rotate={windDirection} />
-          </div>
-          <div>
-            <span className="text-xs">{windSpeedConverted}</span>
-            <span className="text-2xs">kmh, {windCardinalDirection}</span>
-          </div>
-          <div className="text-2xs text-gray-500">{windRelativeCardinalDirectionText}</div>
+          <div className="w-3" style={{ color: tickColor }}><ArrowDown className="w-full" rotate={windDirection} /></div>
+          <span>
+            <span>{windSpeedConverted}</span>
+            <span className="text-2xs">kmh</span>
+          </span>
+          <span className="text-2xs text-gray-400">{windRelativeCardinalDirectionText}, {windCardinalDirection}</span>
         </>
-      )
+      ) // prettier-ignore
       return {
         time,
+        color: tickColor,
         label: tickLabel,
         height: tickHeight,
-        color: tickColor,
       }
     }) || []
   )
