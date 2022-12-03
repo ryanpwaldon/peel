@@ -28,7 +28,23 @@ export default function ForecastChart({ title, symbol, ticks, timezone, classNam
   const barsToHighlight = ticks.reduce((acc, _, index) => ((liveTick || 0) <= index ? [...acc, index] : acc), [] as number[])
   const labelsToHighlight = liveTick ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
 
+  const [initialY, setInitialY] = useState<number | null>(null)
   const [hoveredTick, setHoveredTick] = useState<number | null>(null)
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (initialY === null) setInitialY(event.clientY)
+    const element = document.elementFromPoint(event.clientX, initialY || event.clientY)
+    const elementIndex = parseInt(element?.getAttribute('data-index') || '')
+    if (Number.isInteger(elementIndex)) {
+      setHoveredTick(elementIndex)
+      vibrate()
+    }
+  }
+
+  const onPointerOut = () => {
+    setInitialY(null)
+    setHoveredTick(null)
+  }
 
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
@@ -37,22 +53,13 @@ export default function ForecastChart({ title, symbol, ticks, timezone, classNam
         <span>&nbsp;</span>
         <Symbol symbol={symbol} />
       </div>
-      <div className="flex w-full">
+      <motion.div className="flex w-full touch-none" onPointerMove={onPointerMove} onPointerOut={onPointerOut}>
         {ticks.map((tick, index) => {
           const isFirst = index === 0
           const isLast = index === ticks.length - 1
           const alignLabel = index > ticks.length - ticks.length / 4 ? 'items-end' : ''
           return (
-            <motion.div
-              key={index}
-              onPointerDown={(event) => event.currentTarget.releasePointerCapture(event.pointerId)}
-              onPointerEnter={() => {
-                setHoveredTick(index)
-                vibrate()
-              }}
-              onPointerLeave={() => setHoveredTick(null)}
-              className={`relative w-full min-w-0 px-0.5 pb-3 pt-9 ${isFirst ? 'pl-5' : ''} ${isLast ? 'pr-5' : ''}`}
-            >
+            <div key={index} data-index={index} className={`relative w-full min-w-0 px-0.5 pb-3 pt-9 ${isFirst ? 'pl-5' : ''} ${isLast ? 'pr-5' : ''}`}>
               <div className="pointer-events-none flex h-8 items-end">
                 <motion.div
                   className="w-full rounded"
@@ -68,10 +75,10 @@ export default function ForecastChart({ title, symbol, ticks, timezone, classNam
               >
                 {tick.label}
               </motion.div>
-            </motion.div>
+            </div>
           )
         })}
-      </div>
+      </motion.div>
     </div>
   )
 }
