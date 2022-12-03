@@ -44,13 +44,12 @@ export default function ForecastChart({ title, symbol, ticks, timezone, classNam
           return (
             <motion.div
               key={index}
-              onHoverEnd={() => setHoveredTick(null)}
-              onHoverStart={() => setHoveredTick(index)}
-              onTouchStart={() => setHoveredTick(index)}
-              onTouchEnd={() => setHoveredTick(null)}
+              onPointerDown={(event) => event.currentTarget.releasePointerCapture(event.pointerId)}
+              onPointerEnter={() => setHoveredTick(index)}
+              onPointerLeave={() => setHoveredTick(null)}
               className={`relative w-full min-w-0 px-0.5 pb-3 pt-9 ${isFirst ? 'pl-5' : ''} ${isLast ? 'pr-5' : ''}`}
             >
-              <div className="flex h-8 items-end">
+              <div className="pointer-events-none flex h-8 items-end">
                 <motion.div
                   className="w-full rounded"
                   transition={{ duration: 0 }}
