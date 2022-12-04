@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { isBefore } from 'date-fns'
+import { isSameHour } from 'date-fns'
 import { motion } from 'framer-motion'
 import { vibrate } from '@/utils/vibrate'
 import { getTzStartOfDay } from '@peel/utils'
@@ -27,7 +27,7 @@ interface Tick {
 }
 
 export default function ForecastChart({ title, symbol, ticks, timezone, sunrise, sunset, hoveredTick, setHoveredTick, className }: ForecastChartProps) {
-  const liveTick = ticks.findIndex((tick) => isBefore(tick.time, new Date())) ?? null
+  const liveTick = ticks.findIndex((tick) => isSameHour(tick.time, new Date())) ?? null
 
   const barsToHighlight = ticks.reduce((acc, _, index) => ((liveTick || 0) <= index ? [...acc, index] : acc), [] as number[])
   const labelsToHighlight = liveTick !== null ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
