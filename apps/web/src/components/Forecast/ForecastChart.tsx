@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { isEqual } from 'date-fns'
+import { isBefore } from 'date-fns'
 import { motion } from 'framer-motion'
 import { vibrate } from '@/utils/vibrate'
-import { closestIndexTo } from 'date-fns/esm'
 import { getTzStartOfDay } from '@peel/utils'
 import Symbol from '@/components/Symbol/Symbol'
 
@@ -28,14 +27,12 @@ interface Tick {
 }
 
 export default function ForecastChart({ title, symbol, ticks, timezone, sunrise, sunset, hoveredTick, setHoveredTick, className }: ForecastChartProps) {
-  const localStartOfDay = getTzStartOfDay(timezone)
-
-  const isToday = ticks[0]?.time && isEqual(ticks[0]?.time, localStartOfDay)
-  const liveTick = isToday ? closestIndexTo(new Date(), ticks.map((tick) => tick.time)) : null // prettier-ignore
+  const liveTick = ticks.findIndex((tick) => isBefore(tick.time, new Date())) ?? null
 
   const barsToHighlight = ticks.reduce((acc, _, index) => ((liveTick || 0) <= index ? [...acc, index] : acc), [] as number[])
-  const labelsToHighlight = liveTick ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
+  const labelsToHighlight = liveTick !== null ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
 
+  const localStartOfDay = getTzStartOfDay(timezone)
   const sunriseOffset = sunrise ? ((sunrise.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
   const sunsetOffset = sunset ? ((sunset.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
 
