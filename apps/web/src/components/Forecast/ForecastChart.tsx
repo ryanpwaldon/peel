@@ -55,7 +55,7 @@ export default function ForecastChart({ title, symbol, ticks, timezone, sunrise,
 
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
-      <div className="pointer-events-none absolute top-3 left-5 flex text-xs text-gray-500">
+      <div className="pointer-events-none absolute top-3 left-5 z-10 flex text-xs text-gray-500">
         <span>{title}</span>
         <span>&nbsp;</span>
         <Symbol symbol={symbol} />
