@@ -1,5 +1,6 @@
 import { trpc } from '@/utils/trpc'
 import { useRouter } from 'next/router'
+import Back from '@/components/Back/Back'
 import { Suspense, useState } from 'react'
 import Symbol from '@/components/Symbol/Symbol'
 import Page from '@/components/Scaffolding/Page'
@@ -27,9 +28,10 @@ const Content = () => {
   const [hoveredTick, setHoveredTick] = useState<number | null>(null)
 
   return (
-    <Page header={<Header right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
-      <div className="pb-content-bottom">
+    <Page header={<Header left={<Back />} right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
+      <div className="pb-content-bottom pt-1">
         <PageTitle title={wave.name} className="px-5" />
+        <div className="px-5 text-base text-gray-500">{`${wave.point.location.region}, ${wave.point.location.country}`}</div>
         <div className="mt-5 divide-y-hairline divide-gray-200 border-y-hairline border-gray-200">
           <ForecastChart
             title="Wind"
