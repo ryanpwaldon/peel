@@ -22,7 +22,10 @@ export default function Wave() {
 const Content = () => {
   const router = useRouter()
   const [wave] = trpc.wave.findById.useSuspenseQuery(router.query.id as string)
+  const sunrise = wave.point.forecast.solarEvents.find((event) => event.type === 'SUNRISE')?.time || null
+  const sunset = wave.point.forecast.solarEvents.find((event) => event.type === 'SUNSET')?.time || null
   const [hoveredTick, setHoveredTick] = useState<number | null>(null)
+
   return (
     <Page header={<Header right={<Symbol symbol="more_horiz" className="text-[28px] font-medium leading-8 text-blue-600" />} />}>
       <div className="pb-content-bottom">
@@ -31,6 +34,8 @@ const Content = () => {
           <ForecastChart
             title="Wind"
             symbol="air"
+            sunrise={sunrise}
+            sunset={sunset}
             timezone={wave.point.timezone}
             ticks={createWindTicks({ weatherEvents: wave.point.forecast.weatherEvents, offshoreWindDirection: wave.offshoreWindDirection })}
             hoveredTick={hoveredTick}
@@ -39,6 +44,8 @@ const Content = () => {
           <ForecastChart
             title="Swell"
             symbol="waves"
+            sunrise={sunrise}
+            sunset={sunset}
             timezone={wave.point.timezone}
             ticks={createSwellTicks({ weatherEvents: wave.point.forecast.weatherEvents })}
             hoveredTick={hoveredTick}
@@ -47,6 +54,8 @@ const Content = () => {
           <ForecastChart
             title="Tide"
             symbol="height"
+            sunrise={sunrise}
+            sunset={sunset}
             timezone={wave.point.timezone}
             ticks={createTideTicks({ weatherEvents: wave.point.forecast.weatherEvents })}
             hoveredTick={hoveredTick}

@@ -6,11 +6,15 @@ import { closestIndexTo } from 'date-fns/esm'
 import { getTzStartOfDay } from '@peel/utils'
 import Symbol from '@/components/Symbol/Symbol'
 
+const MILLISECONDS_IN_DAY = 86400000
+
 interface ForecastChartProps {
   title: string
   symbol: string
-  ticks: Tick[]
+  sunrise: Date | null
+  sunset: Date | null
   timezone: string
+  ticks: Tick[]
   hoveredTick: number | null
   setHoveredTick: (tick: number | null) => void
   className?: string
@@ -23,12 +27,17 @@ interface Tick {
   label: React.ReactNode
 }
 
-export default function ForecastChart({ title, symbol, ticks, timezone, hoveredTick, setHoveredTick, className }: ForecastChartProps) {
-  const isToday = ticks[0]?.time && isEqual(ticks[0]?.time, getTzStartOfDay(timezone))
+export default function ForecastChart({ title, symbol, ticks, timezone, sunrise, sunset, hoveredTick, setHoveredTick, className }: ForecastChartProps) {
+  const localStartOfDay = getTzStartOfDay(timezone)
+
+  const isToday = ticks[0]?.time && isEqual(ticks[0]?.time, localStartOfDay)
   const liveTick = isToday ? closestIndexTo(new Date(), ticks.map((tick) => tick.time)) : null // prettier-ignore
 
   const barsToHighlight = ticks.reduce((acc, _, index) => ((liveTick || 0) <= index ? [...acc, index] : acc), [] as number[])
   const labelsToHighlight = liveTick ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
+
+  const sunriseOffset = sunrise ? ((sunrise.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
+  const sunsetOffset = sunset ? ((sunset.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
 
   const [initialY, setInitialY] = useState<number | null>(null)
 
@@ -54,7 +63,7 @@ export default function ForecastChart({ title, symbol, ticks, timezone, hoveredT
         <span>&nbsp;</span>
         <Symbol symbol={symbol} />
       </div>
-      <motion.div className="flex w-full touch-none" onPointerMove={onPointerMove} onPointerOut={onPointerOut}>
+      <motion.div className="relative z-10 flex w-full touch-none" onPointerMove={onPointerMove} onPointerOut={onPointerOut}>
         {ticks.map((tick, index) => {
           const isFirst = index === 0
           const isLast = index === ticks.length - 1
@@ -80,6 +89,16 @@ export default function ForecastChart({ title, symbol, ticks, timezone, hoveredT
           )
         })}
       </motion.div>
+      {sunriseOffset && sunsetOffset && (
+        <div className="pointer-events-none absolute left-0 top-0 z-0 h-full w-full px-5">
+          <div className="h-full w-full px-[calc(((100%_-_(4px_*_(24_-_1)))_/_24)_/_2)]">
+            <div className="relative z-10 h-full w-full" style={{ paddingLeft: sunriseOffset + '%', paddingRight: 100 - sunsetOffset + '%' }}>
+              <div className="h-full w-full border-x-hairline border-gray-200 bg-white" />
+            </div>
+          </div>
+          <div className="absolute top-0 left-0 z-0 h-full w-full bg-gray-50" />
+        </div>
+      )}
     </div>
   )
 }
