@@ -67,22 +67,28 @@ export default function ForecastChart({
 
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
-      <div className="pointer-events-none absolute top-3 left-5 z-10 flex text-xs text-gray-500">
-        {customTitle || (
-          <>
-            <span>{title}</span>
-            <span>&nbsp;</span>
-            <Symbol symbol={symbol} />
-          </>
-        )}
-      </div>
       <motion.div className="relative z-10 flex w-full touch-none" onPointerMove={onPointerMove} onPointerOut={onPointerOut}>
         {ticks.map((tick, index) => {
           const isFirst = index === 0
           const isLast = index === ticks.length - 1
           const alignLabel = index > ticks.length - ticks.length / 4 ? 'items-end' : ''
           return (
-            <div key={index} data-index={index} className={`relative w-full min-w-0 px-0.5 pb-3 pt-9 ${isFirst ? 'pl-5' : ''} ${isLast ? 'pr-5' : ''}`}>
+            <div
+              key={index}
+              data-index={index}
+              className={`relative flex w-full min-w-0 flex-col justify-end px-0.5 py-3 ${isFirst ? 'pl-5' : ''} ${isLast ? 'pr-5' : ''}`}
+            >
+              {index === 0 && (
+                <div className="pointer-events-none mb-2 flex text-xs text-gray-500">
+                  {customTitle || (
+                    <>
+                      <span>{title}</span>
+                      <span>&nbsp;</span>
+                      <Symbol symbol={symbol} />
+                    </>
+                  )}
+                </div>
+              )}
               <div className="pointer-events-none flex h-8 items-end">
                 <motion.div
                   className="w-full rounded"
