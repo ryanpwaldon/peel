@@ -8,8 +8,9 @@ import Symbol from '@/components/Symbol/Symbol'
 const MILLISECONDS_IN_DAY = 86400000
 
 interface ForecastChartProps {
-  title: string
-  symbol: string
+  title?: string
+  symbol?: string
+  customTitle?: React.ReactNode
   sunrise: Date | null
   sunset: Date | null
   timezone: string
@@ -26,7 +27,18 @@ interface Tick {
   label: React.ReactNode
 }
 
-export default function ForecastChart({ title, symbol, ticks, timezone, sunrise, sunset, hoveredTick, setHoveredTick, className }: ForecastChartProps) {
+export default function ForecastChart({
+  title = 'Forecast',
+  symbol = 'beach_access',
+  customTitle,
+  ticks,
+  timezone,
+  sunrise,
+  sunset,
+  hoveredTick,
+  setHoveredTick,
+  className,
+}: ForecastChartProps) {
   const liveTick = ticks.findIndex((tick) => isSameHour(tick.time, new Date()))
 
   const barsToHighlight = ticks.reduce((acc, _, index) => (liveTick <= index ? [...acc, index] : acc), [] as number[])
@@ -56,9 +68,13 @@ export default function ForecastChart({ title, symbol, ticks, timezone, sunrise,
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
       <div className="pointer-events-none absolute top-3 left-5 z-10 flex text-xs text-gray-500">
-        <span>{title}</span>
-        <span>&nbsp;</span>
-        <Symbol symbol={symbol} />
+        {customTitle || (
+          <>
+            <span>{title}</span>
+            <span>&nbsp;</span>
+            <Symbol symbol={symbol} />
+          </>
+        )}
       </div>
       <motion.div className="relative z-10 flex w-full touch-none" onPointerMove={onPointerMove} onPointerOut={onPointerOut}>
         {ticks.map((tick, index) => {
