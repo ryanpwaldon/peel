@@ -15,7 +15,7 @@ const updateWeatherEvents = async () => {
     const keyPoint = forecast.points[0]
     if (!keyPoint) throw new Error('Forecast has no points.')
     const start = getTzStartOfDay(keyPoint.timezone, new Date())
-    const end = sub(add(start, { days: 14 }), { seconds: 1 })
+    const end = sub(add(start, { days: 9 }), { seconds: 1 })
     const sgWeatherEvents = await serverCaller.stormglass.weather.findMany({ start, end, lng: keyPoint.lng, lat: keyPoint.lat })
     const sgSeaLevelEvents = await serverCaller.stormglass.seaLevel.findMany({ start, end, lng: keyPoint.lng, lat: keyPoint.lat })
     if (sgWeatherEvents.length !== sgSeaLevelEvents.length) throw new Error('Weather and sea level events are not the same length.')
