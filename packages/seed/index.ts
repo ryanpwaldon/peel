@@ -1,5 +1,5 @@
+import { waves } from './src/waves'
 import { appRouter } from '@peel/api'
-import { waves } from './src/wavesSmallSet'
 import { createContextInner } from '@peel/api/src/context'
 
 const main = async () => {
