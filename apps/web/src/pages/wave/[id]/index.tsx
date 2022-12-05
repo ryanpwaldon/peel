@@ -13,7 +13,7 @@ export default function Wave() {
   return (
     <Suspense
       fallback={
-        <Page>
+        <Page header={<Header left={<Back />} />}>
           <div className="flex h-full w-full items-center justify-center">
             <Spinner />
           </div>
