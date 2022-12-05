@@ -1,4 +1,7 @@
 import { z } from 'zod'
+import { add } from 'date-fns'
+import { TRPCError } from '@trpc/server'
+import { getTzStartOfDay } from '@peel/utils'
 import { publicProcedure, router, serverProcedure } from '../../trpc'
 
 export const forecastRouter = router({
@@ -11,6 +14,24 @@ export const forecastRouter = router({
       },
     })
   }),
+  findById: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        timezone: z.string(),
+        day: z.number().default(0),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const localStartOfDay = getTzStartOfDay(input.timezone, new Date())
+      const findEventsArgs = { where: { time: { gte: add(localStartOfDay, { days: input.day }), lt: add(localStartOfDay, { days: input.day + 1 }) } } }
+      const forecast = await ctx.prisma.forecast.findUnique({
+        where: { id: input.id },
+        include: { weatherEvents: findEventsArgs, solarEvents: findEventsArgs },
+      })
+      if (!forecast) throw new TRPCError({ code: 'NOT_FOUND' })
+      return forecast
+    }),
   updateTideEvents: serverProcedure
     .input(
       z.object({

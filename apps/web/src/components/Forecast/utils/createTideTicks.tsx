@@ -1,7 +1,7 @@
 import { RouterOutputs } from '@/utils/trpc'
 
 interface CreateTideTicksProps {
-  weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
+  weatherEvents: RouterOutputs['forecast']['findById']['weatherEvents']
 }
 
 export const createTideTicks = ({ weatherEvents }: CreateTideTicksProps) => {

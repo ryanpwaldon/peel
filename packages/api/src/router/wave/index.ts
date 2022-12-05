@@ -1,9 +1,7 @@
 import { z } from 'zod'
-import { add } from 'date-fns'
 import { latLngToCell } from 'h3-js'
 import { TRPCError } from '@trpc/server'
 import { locationRouter } from '../location'
-import { getTzStartOfDay } from '@peel/utils'
 import { FORECAST_HEX_RESOLUTION } from '../../constants'
 import { router, publicProcedure, protectedProcedure } from '../../trpc'
 
@@ -23,36 +21,7 @@ export const waveRouter = router({
       },
     })
     if (!wave) throw new TRPCError({ code: 'NOT_FOUND' })
-    const localStartOfDay = getTzStartOfDay(wave.point.timezone, new Date())
-    const forecast = await ctx.prisma.forecast.findUnique({
-      where: { id: wave.point.forecastId },
-      include: {
-        weatherEvents: {
-          where: {
-            time: {
-              gte: localStartOfDay,
-              lt: add(localStartOfDay, { days: 1 }),
-            },
-          },
-        },
-        solarEvents: {
-          where: {
-            time: {
-              gte: localStartOfDay,
-              lt: add(localStartOfDay, { days: 1 }),
-            },
-          },
-        },
-      },
-    })
-    if (!forecast) throw new TRPCError({ code: 'NOT_FOUND' })
-    return {
-      ...wave,
-      point: {
-        ...wave.point,
-        forecast,
-      },
-    }
+    return wave
   }),
   create: protectedProcedure
     .input(

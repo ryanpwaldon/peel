@@ -6,7 +6,7 @@ const WIND_SPEED_UPPER_LIMIT = 4
 
 interface CreateWindTicksProps {
   offshoreWindDirection: RouterOutputs['wave']['findById']['offshoreWindDirection']
-  weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
+  weatherEvents: RouterOutputs['forecast']['findById']['weatherEvents']
 }
 
 export const createWindTicks = ({ weatherEvents, offshoreWindDirection }: CreateWindTicksProps) => {

@@ -5,7 +5,7 @@ import { degreesToCardinal, metersToFeet, swellPeriodToCardinalColor, swellPerio
 const SWELL_HEIGHT_UPPER_LIMIT = 3
 
 interface CreateSwellTicksProps {
-  weatherEvents: RouterOutputs['wave']['findById']['point']['forecast']['weatherEvents']
+  weatherEvents: RouterOutputs['forecast']['findById']['weatherEvents']
 }
 
 export const createSwellTicks = ({ weatherEvents }: CreateSwellTicksProps) => {
