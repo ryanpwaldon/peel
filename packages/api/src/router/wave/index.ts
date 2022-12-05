@@ -20,6 +20,19 @@ export const waveRouter = router({
       },
     })
   }),
+  // Only used for testing
+  findByNames: publicProcedure.input(z.array(z.string())).query(async ({ ctx, input }) => {
+    return await ctx.prisma.wave.findMany({
+      where: { name: { in: input } },
+      include: {
+        point: {
+          include: {
+            location: true,
+          },
+        },
+      },
+    })
+  }),
   create: protectedProcedure
     .input(
       z.object({
