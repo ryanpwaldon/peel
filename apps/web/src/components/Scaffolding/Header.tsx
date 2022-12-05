@@ -6,10 +6,10 @@ interface HeaderProps {
 
 export default function Header({ left, center, right }: HeaderProps) {
   return (
-    <div className="grid h-12 w-full grid-cols-[1fr_max-content_1fr] items-center whitespace-nowrap flex-shrink-0 pt-device-bar-top box-content">
-      <div className="h-full flex items-center justify-start text-left pl-4">{left}</div>
-      <div className="h-full flex items-center justify-center text-center">{center}</div>
-      <div className="h-full flex items-center justify-end text-right pr-4">{right}</div>
+    <div className="mb-1 box-content grid h-12 w-full flex-shrink-0 grid-cols-[1fr_max-content_1fr] items-center whitespace-nowrap pt-device-bar-top">
+      <div className="flex h-full items-center justify-start pl-4 text-left">{left}</div>
+      <div className="flex h-full items-center justify-center text-center">{center}</div>
+      <div className="flex h-full items-center justify-end pr-4 text-right">{right}</div>
     </div>
   )
 }

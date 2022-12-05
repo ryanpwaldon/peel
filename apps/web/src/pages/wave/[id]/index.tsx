@@ -31,7 +31,7 @@ const Content = () => {
 
   return (
     <Page header={<Header left={<Back />} right={<Symbol symbol="more_horiz" className="text-2xl font-extrabold text-blue-600" />} />}>
-      <div className="pb-content-bottom pt-1">
+      <div className="pb-content-bottom">
         <PageTitle title={wave.name} className="px-5" />
         <div className="px-5 text-base text-gray-500">{`${wave.point.location.region}, ${wave.point.location.country}`}</div>
         <Forecast wave={wave} />
