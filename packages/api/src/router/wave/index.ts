@@ -37,7 +37,7 @@ export const waveRouter = router({
     .input(
       z.object({
         name: z.string(),
-        offshoreWindDirection: z.number(),
+        faceDirection: z.number(),
         rideDirection: z.enum(['LEFT', 'RIGHT', 'BOTH']),
         lng: z.number(),
         lat: z.number(),
@@ -50,7 +50,7 @@ export const waveRouter = router({
         data: {
           name: input.name,
           rideDirection: input.rideDirection,
-          offshoreWindDirection: input.offshoreWindDirection,
+          faceDirection: input.faceDirection,
           createdBy: { connect: { id: ctx.session.user.id } },
           point: {
             create: {

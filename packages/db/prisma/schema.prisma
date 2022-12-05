@@ -88,18 +88,18 @@ model Activity {
 // ============================================================================================
 
 model Wave {
-    id                    String            @id @default(cuid())
-    createdAt             DateTime          @default(now())
-    updatedAt             DateTime          @updatedAt
-    name                  String
-    rideDirection         WaveRideDirection
-    offshoreWindDirection Int
-    createdBy             User              @relation(name: "userWaveCreated", fields: [createdById], references: [id])
-    createdById           String
-    starredBy             User[]
-    activities            Activity[]
-    point                 Point             @relation(fields: [pointId], references: [id])
-    pointId               String            @unique
+    id            String            @id @default(cuid())
+    createdAt     DateTime          @default(now())
+    updatedAt     DateTime          @updatedAt
+    name          String
+    rideDirection WaveRideDirection
+    faceDirection Int
+    createdBy     User              @relation(name: "userWaveCreated", fields: [createdById], references: [id])
+    createdById   String
+    starredBy     User[]
+    activities    Activity[]
+    point         Point             @relation(fields: [pointId], references: [id])
+    pointId       String            @unique
 }
 
 enum WaveRideDirection {

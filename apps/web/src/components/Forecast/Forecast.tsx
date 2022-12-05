@@ -62,7 +62,7 @@ const Charts = ({ wave, day }: ChartsProps) => {
         sunrise={sunrise}
         sunset={sunset}
         timezone={wave.point.timezone}
-        ticks={createWindTicks({ weatherEvents: forecast.weatherEvents, offshoreWindDirection: wave.offshoreWindDirection })}
+        ticks={createWindTicks({ weatherEvents: forecast.weatherEvents, waveFaceDirection: wave.faceDirection })}
         hoveredTick={hoveredTick}
         setHoveredTick={setHoveredTick}
       />
