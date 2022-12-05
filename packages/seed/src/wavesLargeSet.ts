@@ -166,7 +166,7 @@ export const waves: CreateWaveInput[] = [
   {
     name: 'Soldiers Beach',
     rideDirection: 'BOTH',
-    offshoreWindDirection: 35,
+    offshoreWindDirection: 325,
     lng: 151.564602,
     lat: -33.291277,
   },
