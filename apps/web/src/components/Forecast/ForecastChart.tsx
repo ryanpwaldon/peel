@@ -27,12 +27,12 @@ interface Tick {
 }
 
 export default function ForecastChart({ title, symbol, ticks, timezone, sunrise, sunset, hoveredTick, setHoveredTick, className }: ForecastChartProps) {
-  const liveTick = ticks.findIndex((tick) => isSameHour(tick.time, new Date())) ?? null
+  const liveTick = ticks.findIndex((tick) => isSameHour(tick.time, new Date()))
 
-  const barsToHighlight = ticks.reduce((acc, _, index) => ((liveTick || 0) <= index ? [...acc, index] : acc), [] as number[])
-  const labelsToHighlight = liveTick !== null ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
+  const barsToHighlight = ticks.reduce((acc, _, index) => (liveTick <= index ? [...acc, index] : acc), [] as number[])
+  const labelsToHighlight = liveTick !== -1 ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
 
-  const localStartOfDay = getTzStartOfDay(timezone)
+  const localStartOfDay = getTzStartOfDay(timezone, ticks[0]?.time)
   const sunriseOffset = sunrise ? ((sunrise.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
   const sunsetOffset = sunset ? ((sunset.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
 
