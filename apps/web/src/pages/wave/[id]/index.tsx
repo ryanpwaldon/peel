@@ -3,6 +3,7 @@ import { trpc } from '@/utils/trpc'
 import { useRouter } from 'next/router'
 import Back from '@/components/Back/Back'
 import Symbol from '@/components/Symbol/Symbol'
+import Button from '@/components/Button/Button'
 import Page from '@/components/Scaffolding/Page'
 import Spinner from '@/components/Spinner/Spinner'
 import Header from '@/components/Scaffolding/Header'
@@ -34,6 +35,15 @@ const Content = () => {
       <div className="pb-content-bottom">
         <PageTitle title={wave.name} className="px-5" />
         <div className="px-5 text-base text-gray-500">{`${wave.point.location.region}, ${wave.point.location.country}`}</div>
+        <div className="mt-4 flex space-x-3 px-5">
+          <Button theme="white" className="h-11 w-full flex-1">
+            <Symbol symbol="play_arrow" className="text-2xl" />
+            <span>Start session</span>
+          </Button>
+          <Button theme="white" className="h-11 w-11">
+            <Symbol symbol="star" className="text-2xl" />
+          </Button>
+        </div>
         <Forecast wave={wave} />
       </div>
     </Page>
