@@ -1,6 +1,5 @@
 import { z } from 'zod'
 import { latLngToCell } from 'h3-js'
-import { TRPCError } from '@trpc/server'
 import { locationRouter } from '../location'
 import { FORECAST_HEX_RESOLUTION } from '../../constants'
 import { router, publicProcedure, protectedProcedure } from '../../trpc'
@@ -10,7 +9,7 @@ export const waveRouter = router({
     return ctx.prisma.wave.findMany({ take: 20, include: { point: { include: { location: true } } } })
   }),
   findById: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
-    const wave = await ctx.prisma.wave.findUnique({
+    return await ctx.prisma.wave.findUniqueOrThrow({
       where: { id: input },
       include: {
         point: {
@@ -20,8 +19,6 @@ export const waveRouter = router({
         },
       },
     })
-    if (!wave) throw new TRPCError({ code: 'NOT_FOUND' })
-    return wave
   }),
   create: protectedProcedure
     .input(
