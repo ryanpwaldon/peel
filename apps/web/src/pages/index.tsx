@@ -7,6 +7,7 @@ import Page from '@/components/Scaffolding/Page'
 import Spinner from '@/components/Spinner/Spinner'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
+import InputSearch from '@/components/Input/InputSearch'
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ const Content = () => {
     <Page header={<Header right={<ProfileSheet />} />}>
       <div className="pb-content-bottom">
         <PageTitle title="Home" className="px-5" />
+        <InputSearch prompt="Waves, places, people..." className="mt-3 px-5" />
         <List
           className="mt-5"
           items={waves.map((wave) => ({
