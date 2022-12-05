@@ -40,7 +40,7 @@ interface ChartsProps {
 }
 
 const Charts = ({ day }: ChartsProps) => {
-  const [waves] = trpc.wave.findByNames.useSuspenseQuery([`Soldiers Beach`, `Supertubos`])
+  const [waves] = trpc.wave.findByNames.useSuspenseQuery([`Soldiers Beach`, `Lakes Beach`, 'Pellows', 'Little Bommie', 'Rocky Point'])
   const [hoveredTick, setHoveredTick] = useState<number | null>(null)
 
   return (
