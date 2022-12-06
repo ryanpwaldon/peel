@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { vibrate } from '@/utils/vibrate'
 import { getTzStartOfDay } from '@peel/utils'
 import Symbol from '@/components/Symbol/Symbol'
+import { findIndexOrNull } from '@/utils/findIndexOrNull'
 
 const MILLISECONDS_IN_DAY = 86400000
 
@@ -39,10 +40,11 @@ export default function ForecastChart({
   setHoveredTick,
   className,
 }: ForecastChartProps) {
-  const liveTick = ticks.findIndex((tick) => isSameHour(tick.time, new Date()))
+  const liveTick = findIndexOrNull(ticks, (tick) => isSameHour(tick.time, new Date()))
+  const hasLiveTick = liveTick !== null
 
-  const barsToHighlight = ticks.reduce((acc, _, index) => (liveTick <= index ? [...acc, index] : acc), [] as number[])
-  const labelsToHighlight = liveTick !== -1 ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
+  const barsToHighlight = ticks.reduce((acc, _, index) => (hasLiveTick && liveTick <= index ? [...acc, index] : acc), [] as number[])
+  const labelsToHighlight = hasLiveTick ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
 
   const localStartOfDay = getTzStartOfDay(timezone, ticks[0]?.time)
   const sunriseOffset = sunrise ? ((sunrise.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
