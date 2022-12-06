@@ -41,10 +41,13 @@ export default function ForecastChart({
   className,
 }: ForecastChartProps) {
   const liveTick = findIndexOrNull(ticks, (tick) => isSameHour(tick.time, new Date()))
-  const hasLiveTick = liveTick !== null
+  const activeTick = hoveredTick ?? liveTick
 
-  const barsToHighlight = ticks.reduce((acc, _, index) => (hasLiveTick && liveTick <= index ? [...acc, index] : acc), [] as number[])
-  const labelsToHighlight = hasLiveTick ? [liveTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
+  const hasActiveTick = activeTick !== null
+  const hasHoveredTick = hoveredTick !== null
+
+  const barsToHighlight = hasHoveredTick ? [hoveredTick] : ticks.reduce((acc, _, index) => ((liveTick ?? 0) <= index ? [...acc, index] : acc), [] as number[])
+  const labelsToHighlight = hasActiveTick ? [activeTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
 
   const localStartOfDay = getTzStartOfDay(timezone, ticks[0]?.time)
   const sunriseOffset = sunrise ? ((sunrise.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
@@ -96,13 +99,13 @@ export default function ForecastChart({
                   className="w-full rounded"
                   transition={{ duration: 0 }}
                   style={{ height: tick.height, backgroundColor: tick.color }}
-                  animate={{ opacity: typeof hoveredTick === 'number' ? (hoveredTick === index ? 1 : 0.2) : barsToHighlight.includes(index) ? 1 : 0.2 }}
+                  animate={{ opacity: barsToHighlight.includes(index) ? 1 : 0.2 }}
                 />
               </div>
               <motion.div
                 transition={{ duration: 0 }}
                 className={`pointer-events-none mt-1 flex w-full flex-col whitespace-nowrap text-xs font-medium opacity-0 ${alignLabel}`}
-                animate={{ opacity: typeof hoveredTick === 'number' ? (hoveredTick === index ? 1 : 0) : labelsToHighlight.includes(index) ? 1 : 0 }}
+                animate={{ opacity: labelsToHighlight.includes(index) ? 1 : 0 }}
               >
                 {tick.label}
               </motion.div>
