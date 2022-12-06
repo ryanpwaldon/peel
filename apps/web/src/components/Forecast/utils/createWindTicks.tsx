@@ -6,12 +6,13 @@ import { degreesToCardinal, degreesToRelativeCardinalColor, degreesToRelativeCar
 const WIND_SPEED_UPPER_LIMIT = 4
 
 interface CreateWindTicksProps {
+  hideLabels?: boolean
   windSpeedUnit: WindSpeedUnit
   waveFaceDirection: Wave['faceDirection']
   weatherEvents: RouterOutputs['forecast']['findById']['weatherEvents']
 }
 
-export const createWindTicks = ({ weatherEvents, waveFaceDirection, windSpeedUnit }: CreateWindTicksProps) => {
+export const createWindTicks = ({ weatherEvents, waveFaceDirection, windSpeedUnit, hideLabels }: CreateWindTicksProps) => {
   return (
     weatherEvents.map(({ time, windSpeed, windDirection }) => {
       const windSpeedConverted = convertWindSpeed(windSpeed, windSpeedUnit)
@@ -19,7 +20,7 @@ export const createWindTicks = ({ weatherEvents, waveFaceDirection, windSpeedUni
       const windRelativeCardinalDirectionText = degreesToRelativeCardinalText(waveFaceDirection, windDirection)
       const tickColor = degreesToRelativeCardinalColor(waveFaceDirection, windDirection)
       const tickHeight = `${(windSpeed && Math.min((windSpeed / WIND_SPEED_UPPER_LIMIT) * 100, 100)) || 0}%`
-      const tickLabel = (
+      const tickLabel = hideLabels ? null : (
         <>
           <div className="w-3" style={{ color: tickColor }}><ArrowDown className="w-full" rotate={windDirection} /></div>
           <span>

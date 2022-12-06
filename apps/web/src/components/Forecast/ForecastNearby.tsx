@@ -56,6 +56,7 @@ const Charts = ({ day }: ChartsProps) => {
           weatherEvents: forecast.weatherEvents,
           waveFaceDirection: wave.faceDirection,
           windSpeedUnit: user.preferences.windSpeedUnit,
+          hideLabels: true,
         })
 
         const renderCustomTitle = (activeTick: number | null) => {
