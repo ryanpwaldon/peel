@@ -3,7 +3,7 @@ import { protectedProcedure, router, serverProcedure } from '../../trpc'
 
 export const userRouter = router({
   findMe: protectedProcedure.query(({ ctx }) => {
-    return ctx.prisma.user.findUnique({
+    return ctx.prisma.user.findUniqueOrThrow({
       where: { id: ctx.session.user.id },
       include: { preferences: true },
     })
