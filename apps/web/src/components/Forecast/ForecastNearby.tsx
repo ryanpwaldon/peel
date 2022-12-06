@@ -50,7 +50,13 @@ const Charts = ({ day }: ChartsProps) => {
         const [forecast] = trpc.forecast.findById.useSuspenseQuery({ id: wave.point.forecastId, timezone: wave.point.timezone, day })
         const sunrise = forecast.solarEvents.find((event) => event.type === 'SUNRISE')?.time || null
         const sunset = forecast.solarEvents.find((event) => event.type === 'SUNSET')?.time || null
-        const ticks = createWindTicks({ weatherEvents: forecast.weatherEvents, waveFaceDirection: wave.faceDirection, userPreferences: user.preferences })
+
+        const ticks = createWindTicks({
+          weatherEvents: forecast.weatherEvents,
+          waveFaceDirection: wave.faceDirection,
+          windSpeedUnit: user.preferences.windSpeedUnit,
+        })
+
         return (
           <ForecastChart
             key={wave.id}

@@ -1,18 +1,19 @@
 import { RouterOutputs } from '@/utils/trpc'
 import ArrowDown from '@/components/Icon/ArrowDown'
+import type { SwellHeightUnit } from '@prisma/client'
 import { degreesToCardinal, convertSwellHeight, swellPeriodToCardinalColor, swellPeriodToCardinalText } from '@peel/utils'
 
 const SWELL_HEIGHT_UPPER_LIMIT = 3
 
 interface CreateSwellTicksProps {
+  swellHeightUnit: SwellHeightUnit
   weatherEvents: RouterOutputs['forecast']['findById']['weatherEvents']
-  userPreferences: RouterOutputs['user']['findMe']['preferences']
 }
 
-export const createSwellTicks = ({ weatherEvents, userPreferences }: CreateSwellTicksProps) => {
+export const createSwellTicks = ({ weatherEvents, swellHeightUnit }: CreateSwellTicksProps) => {
   return (
     weatherEvents.map(({ time, waveHeight, waveDirection, wavePeriod }) => {
-      const swellHeightConverted = convertSwellHeight(waveHeight, userPreferences.swellHeightUnit)
+      const swellHeightConverted = convertSwellHeight(waveHeight, swellHeightUnit)
       const swellPeriodRounded = Math.round(wavePeriod || 0)
       const swellPeriodCardinalText = swellPeriodToCardinalText(swellPeriodRounded)
       const swellCardinalDirection = degreesToCardinal(waveDirection)

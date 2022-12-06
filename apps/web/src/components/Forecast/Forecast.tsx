@@ -50,13 +50,23 @@ interface ChartsProps {
 
 const Charts = ({ wave, day }: ChartsProps) => {
   const [user] = trpc.user.findMe.useSuspenseQuery()
+  const [hoveredTick, setHoveredTick] = useState<number | null>(null)
   const [forecast] = trpc.forecast.findById.useSuspenseQuery({ id: wave.point.forecastId, timezone: wave.point.timezone, day })
   const sunrise = forecast.solarEvents.find((event) => event.type === 'SUNRISE')?.time || null
   const sunset = forecast.solarEvents.find((event) => event.type === 'SUNSET')?.time || null
-  const [hoveredTick, setHoveredTick] = useState<number | null>(null)
-  const windTicks = createWindTicks({ weatherEvents: forecast.weatherEvents, waveFaceDirection: wave.faceDirection, userPreferences: user.preferences })
-  const swellTicks = createSwellTicks({ weatherEvents: forecast.weatherEvents, userPreferences: user.preferences })
-  const tideTicks = createTideTicks({ weatherEvents: forecast.weatherEvents })
+
+  const windTicks = createWindTicks({
+    weatherEvents: forecast.weatherEvents,
+    waveFaceDirection: wave.faceDirection,
+    windSpeedUnit: user.preferences.windSpeedUnit,
+  })
+  const swellTicks = createSwellTicks({
+    weatherEvents: forecast.weatherEvents,
+    swellHeightUnit: user.preferences.swellHeightUnit,
+  })
+  const tideTicks = createTideTicks({
+    weatherEvents: forecast.weatherEvents,
+  })
 
   return (
     <div className="divide-y-hairline divide-gray-200 border-y-hairline border-gray-200">

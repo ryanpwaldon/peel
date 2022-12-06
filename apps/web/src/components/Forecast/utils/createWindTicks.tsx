@@ -1,19 +1,20 @@
 import { RouterOutputs } from '@/utils/trpc'
 import ArrowDown from '@/components/Icon/ArrowDown'
+import type { WindSpeedUnit, Wave } from '@prisma/client'
 import { degreesToCardinal, degreesToRelativeCardinalColor, degreesToRelativeCardinalText, convertWindSpeed } from '@peel/utils'
 
 const WIND_SPEED_UPPER_LIMIT = 4
 
 interface CreateWindTicksProps {
-  waveFaceDirection: RouterOutputs['wave']['findById']['faceDirection']
+  windSpeedUnit: WindSpeedUnit
+  waveFaceDirection: Wave['faceDirection']
   weatherEvents: RouterOutputs['forecast']['findById']['weatherEvents']
-  userPreferences: RouterOutputs['user']['findMe']['preferences']
 }
 
-export const createWindTicks = ({ weatherEvents, waveFaceDirection, userPreferences }: CreateWindTicksProps) => {
+export const createWindTicks = ({ weatherEvents, waveFaceDirection, windSpeedUnit }: CreateWindTicksProps) => {
   return (
     weatherEvents.map(({ time, windSpeed, windDirection }) => {
-      const windSpeedConverted = convertWindSpeed(windSpeed, userPreferences.windSpeedUnit)
+      const windSpeedConverted = convertWindSpeed(windSpeed, windSpeedUnit)
       const windCardinalDirection = degreesToCardinal(windDirection)
       const windRelativeCardinalDirectionText = degreesToRelativeCardinalText(waveFaceDirection, windDirection)
       const tickColor = degreesToRelativeCardinalColor(waveFaceDirection, windDirection)
