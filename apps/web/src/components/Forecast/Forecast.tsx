@@ -55,7 +55,7 @@ const Charts = ({ wave, day }: ChartsProps) => {
   const sunset = forecast.solarEvents.find((event) => event.type === 'SUNSET')?.time || null
   const [hoveredTick, setHoveredTick] = useState<number | null>(null)
   const windTicks = createWindTicks({ weatherEvents: forecast.weatherEvents, waveFaceDirection: wave.faceDirection, userPreferences: user.preferences })
-  const swellTicks = createSwellTicks({ weatherEvents: forecast.weatherEvents })
+  const swellTicks = createSwellTicks({ weatherEvents: forecast.weatherEvents, userPreferences: user.preferences })
   const tideTicks = createTideTicks({ weatherEvents: forecast.weatherEvents })
 
   return (
