@@ -66,6 +66,7 @@ const Charts = ({ wave, day }: ChartsProps) => {
   })
   const tideTicks = createTideTicks({
     weatherEvents: forecast.weatherEvents,
+    tideHeightUnit: user.preferences.tideHeightUnit,
   })
 
   return (

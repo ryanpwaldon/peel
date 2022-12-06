@@ -1,10 +1,13 @@
 import { RouterOutputs } from '@/utils/trpc'
+import { TideHeightUnit } from '@prisma/client'
+import { convertTideHeight } from '@peel/utils'
 
 interface CreateTideTicksProps {
+  tideHeightUnit: TideHeightUnit
   weatherEvents: RouterOutputs['forecast']['findById']['weatherEvents']
 }
 
-export const createTideTicks = ({ weatherEvents }: CreateTideTicksProps) => {
+export const createTideTicks = ({ weatherEvents, tideHeightUnit }: CreateTideTicksProps) => {
   const tideUpperLimit = weatherEvents.reduce((acc, { seaLevel }) => Math.max(acc, seaLevel || 0), 0)
   return (
     weatherEvents.map(({ time, seaLevel }, index) => {
@@ -21,11 +24,11 @@ export const createTideTicks = ({ weatherEvents }: CreateTideTicksProps) => {
             : 'Falling'
           : 'Unknown'
         : 'Unknown'
-      const seaLevelRounded = Math.round((seaLevel || 0) * 100) / 100
-      const tickHeight = `${(seaLevelRounded && Math.min((seaLevelRounded / tideUpperLimit) * 100, 100)) || 0}%`
+      const tideHeightConverted = convertTideHeight(seaLevel, tideHeightUnit)
+      const tickHeight = `${(seaLevel && Math.min((seaLevel / tideUpperLimit) * 100, 100)) || 0}%`
       const tickLabel = (
         <>
-          <span>{seaLevelRounded}<span className="text-2xs">m</span></span>
+          <span>{tideHeightConverted.value}<span className="text-2xs">{tideHeightConverted.unit}</span></span>
           <span className="text-2xs text-gray-400">{tideDirection}</span>
         </>
       ) // prettier-ignore
