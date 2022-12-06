@@ -5,6 +5,7 @@ import Spinner from '@/components/Spinner/Spinner'
 import InputTabs from '@/components/Input/InputTabs'
 import ForecastChart from '@/components/Forecast/ForecastChart'
 import { createWindTicks } from '@/components/Forecast/utils/createWindTicks'
+import { convertSwellHeight, degreesToRelativeCardinalText } from '@peel/utils'
 
 export default function ForecastNearby() {
   const [day, setDay] = useState(0)
@@ -57,11 +58,38 @@ const Charts = ({ day }: ChartsProps) => {
           windSpeedUnit: user.preferences.windSpeedUnit,
         })
 
+        const renderCustomTitle = (activeTick: number | null) => {
+          if (activeTick === null) {
+            const { min: minSwellHeight, max: maxSwellHeight } = forecast.weatherEvents.reduce((acc, { waveHeight }) => ({ min: Math.min(acc.min, waveHeight ?? Infinity), max: Math.max(acc.max, waveHeight ?? -Infinity) }), { min: Infinity, max: -Infinity }) // prettier-ignore
+            const convertedMinSwellHeight = convertSwellHeight(minSwellHeight, user.preferences.swellHeightUnit)
+            const convertedMaxSwellHeight = convertSwellHeight(maxSwellHeight, user.preferences.swellHeightUnit)
+            const relativeCardinalWindDirections = forecast.weatherEvents.map(({ windDirection }) => degreesToRelativeCardinalText(wave.faceDirection, windDirection)) // prettier-ignore
+            const allOffshore = relativeCardinalWindDirections.every((direction) => direction === 'Offshore')
+            const allOnshore = relativeCardinalWindDirections.every((direction) => direction === 'Onshore')
+            const allCrosswind = relativeCardinalWindDirections.every((direction) => direction === 'Crosswind')
+            const relativeCardinalWindDirection = allOffshore ? 'Offshore' : allOnshore ? 'Onshore' : allCrosswind ? 'Crosswind' : 'Mixed wind'
+            return (
+              <div className="whitespace-nowrap text-gray-800">
+                <div className="text-sm font-medium">{wave.name}</div>
+                <div className="text-xs">{`${convertedMinSwellHeight.value}-${convertedMaxSwellHeight.value}${convertedMinSwellHeight.unit}, ${relativeCardinalWindDirection}`}</div>
+              </div>
+            )
+          } else {
+            const convertedSwellHeight = convertSwellHeight(forecast.weatherEvents[activeTick]?.waveHeight ?? null, user.preferences.swellHeightUnit)
+            const relativeCardinalWindDirection = degreesToRelativeCardinalText(wave.faceDirection, forecast.weatherEvents[activeTick]?.windDirection ?? null)
+            return (
+              <div className="whitespace-nowrap text-gray-800">
+                <div className="text-sm font-medium">{wave.name}</div>
+                <div className="text-xs">{`${convertedSwellHeight.value}${convertedSwellHeight.unit}, ${relativeCardinalWindDirection}`}</div>
+              </div>
+            )
+          }
+        }
+
         return (
           <ForecastChart
             key={wave.id}
-            title={wave.name}
-            symbol="air"
+            renderCustomTitle={renderCustomTitle}
             sunrise={sunrise}
             sunset={sunset}
             timezone={wave.point.timezone}
