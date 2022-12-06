@@ -11,7 +11,7 @@ const MILLISECONDS_IN_DAY = 86400000
 interface ForecastChartProps {
   title?: string
   symbol?: string
-  customTitle?: React.ReactNode
+  renderCustomTitle?: (activeTick: number | null) => React.ReactNode
   sunrise: Date | null
   sunset: Date | null
   timezone: string
@@ -31,7 +31,7 @@ interface Tick {
 export default function ForecastChart({
   title = 'Forecast',
   symbol = 'beach_access',
-  customTitle,
+  renderCustomTitle,
   ticks,
   timezone,
   sunrise,
@@ -45,6 +45,8 @@ export default function ForecastChart({
 
   const hasActiveTick = activeTick !== null
   const hasHoveredTick = hoveredTick !== null
+
+  const customTitle = renderCustomTitle ? renderCustomTitle(activeTick) : null
 
   const barsToHighlight = hasHoveredTick ? [hoveredTick] : ticks.reduce((acc, _, index) => ((liveTick ?? 0) <= index ? [...acc, index] : acc), [] as number[])
   const labelsToHighlight = hasActiveTick ? [activeTick] : ticks.reduce((acc, _, index) => (index % 6 === 0 ? [...acc, index] : acc), [] as number[])
