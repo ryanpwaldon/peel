@@ -49,10 +49,14 @@ interface ChartsProps {
 }
 
 const Charts = ({ wave, day }: ChartsProps) => {
+  const [user] = trpc.user.findMe.useSuspenseQuery()
   const [forecast] = trpc.forecast.findById.useSuspenseQuery({ id: wave.point.forecastId, timezone: wave.point.timezone, day })
   const sunrise = forecast.solarEvents.find((event) => event.type === 'SUNRISE')?.time || null
   const sunset = forecast.solarEvents.find((event) => event.type === 'SUNSET')?.time || null
   const [hoveredTick, setHoveredTick] = useState<number | null>(null)
+  const windTicks = createWindTicks({ weatherEvents: forecast.weatherEvents, waveFaceDirection: wave.faceDirection, userPreferences: user.preferences })
+  const swellTicks = createSwellTicks({ weatherEvents: forecast.weatherEvents })
+  const tideTicks = createTideTicks({ weatherEvents: forecast.weatherEvents })
 
   return (
     <div className="divide-y-hairline divide-gray-200 border-y-hairline border-gray-200">
@@ -62,7 +66,7 @@ const Charts = ({ wave, day }: ChartsProps) => {
         sunrise={sunrise}
         sunset={sunset}
         timezone={wave.point.timezone}
-        ticks={createWindTicks({ weatherEvents: forecast.weatherEvents, waveFaceDirection: wave.faceDirection })}
+        ticks={windTicks}
         hoveredTick={hoveredTick}
         setHoveredTick={setHoveredTick}
       />
@@ -72,7 +76,7 @@ const Charts = ({ wave, day }: ChartsProps) => {
         sunrise={sunrise}
         sunset={sunset}
         timezone={wave.point.timezone}
-        ticks={createSwellTicks({ weatherEvents: forecast.weatherEvents })}
+        ticks={swellTicks}
         hoveredTick={hoveredTick}
         setHoveredTick={setHoveredTick}
       />
@@ -82,7 +86,7 @@ const Charts = ({ wave, day }: ChartsProps) => {
         sunrise={sunrise}
         sunset={sunset}
         timezone={wave.point.timezone}
-        ticks={createTideTicks({ weatherEvents: forecast.weatherEvents })}
+        ticks={tideTicks}
         hoveredTick={hoveredTick}
         setHoveredTick={setHoveredTick}
       />

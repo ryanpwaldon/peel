@@ -1,6 +1,6 @@
-export { mpsToKmh } from './utils/mpsToKmh'
 export { metersToFeet } from './utils/metersToFeet'
 export { getTzStartOfDay } from './utils/getTzStartOfDay'
+export { convertWindSpeed } from './utils/convertWindSpeed'
 export { degreesToCardinal } from './utils/degreesToCardinal'
 export { swellHeightToCardinal } from './utils/swellHeightToCardinal'
 export { swellPeriodToCardinalText, swellPeriodToCardinalColor } from './utils/swellPeriodToCardinal'

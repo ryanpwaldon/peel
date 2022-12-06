@@ -40,6 +40,7 @@ interface ChartsProps {
 }
 
 const Charts = ({ day }: ChartsProps) => {
+  const [user] = trpc.user.findMe.useSuspenseQuery()
   const [waves] = trpc.wave.findByNames.useSuspenseQuery([`Soldiers Beach`, `Lakes Beach`, 'Pellows', 'Little Bommie', 'Rocky Point'])
   const [hoveredTick, setHoveredTick] = useState<number | null>(null)
 
@@ -49,6 +50,7 @@ const Charts = ({ day }: ChartsProps) => {
         const [forecast] = trpc.forecast.findById.useSuspenseQuery({ id: wave.point.forecastId, timezone: wave.point.timezone, day })
         const sunrise = forecast.solarEvents.find((event) => event.type === 'SUNRISE')?.time || null
         const sunset = forecast.solarEvents.find((event) => event.type === 'SUNSET')?.time || null
+        const ticks = createWindTicks({ weatherEvents: forecast.weatherEvents, waveFaceDirection: wave.faceDirection, userPreferences: user.preferences })
         return (
           <ForecastChart
             key={wave.id}
@@ -57,7 +59,7 @@ const Charts = ({ day }: ChartsProps) => {
             sunrise={sunrise}
             sunset={sunset}
             timezone={wave.point.timezone}
-            ticks={createWindTicks({ weatherEvents: forecast.weatherEvents, waveFaceDirection: wave.faceDirection })}
+            ticks={ticks}
             hoveredTick={hoveredTick}
             setHoveredTick={setHoveredTick}
           />

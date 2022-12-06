@@ -1,18 +1,19 @@
 import { RouterOutputs } from '@/utils/trpc'
 import ArrowDown from '@/components/Icon/ArrowDown'
-import { degreesToCardinal, degreesToRelativeCardinalColor, degreesToRelativeCardinalText, mpsToKmh } from '@peel/utils'
+import { degreesToCardinal, degreesToRelativeCardinalColor, degreesToRelativeCardinalText, convertWindSpeed } from '@peel/utils'
 
 const WIND_SPEED_UPPER_LIMIT = 4
 
 interface CreateWindTicksProps {
   waveFaceDirection: RouterOutputs['wave']['findById']['faceDirection']
   weatherEvents: RouterOutputs['forecast']['findById']['weatherEvents']
+  userPreferences: RouterOutputs['user']['findMe']['preferences']
 }
 
-export const createWindTicks = ({ weatherEvents, waveFaceDirection }: CreateWindTicksProps) => {
+export const createWindTicks = ({ weatherEvents, waveFaceDirection, userPreferences }: CreateWindTicksProps) => {
   return (
     weatherEvents.map(({ time, windSpeed, windDirection }) => {
-      const windSpeedConverted = mpsToKmh(windSpeed)
+      const windSpeedConverted = convertWindSpeed(windSpeed, userPreferences.windSpeedUnit)
       const windCardinalDirection = degreesToCardinal(windDirection)
       const windRelativeCardinalDirectionText = degreesToRelativeCardinalText(waveFaceDirection, windDirection)
       const tickColor = degreesToRelativeCardinalColor(waveFaceDirection, windDirection)
@@ -21,8 +22,8 @@ export const createWindTicks = ({ weatherEvents, waveFaceDirection }: CreateWind
         <>
           <div className="w-3" style={{ color: tickColor }}><ArrowDown className="w-full" rotate={windDirection} /></div>
           <span>
-            <span>{windSpeedConverted}</span>
-            <span className="text-2xs">kmh</span>
+            <span>{windSpeedConverted.value}</span>
+            <span className="text-2xs">{windSpeedConverted.unit}</span>
           </span>
           <span className="text-2xs text-gray-400">{windRelativeCardinalDirectionText}, {windCardinalDirection}</span>
         </>

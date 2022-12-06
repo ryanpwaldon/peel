@@ -241,9 +241,11 @@ importers:
 
   packages/utils:
     specifiers:
+      '@peel/db': '*'
       date-fns: ^2.29.3
       date-fns-tz: ^1.3.7
     dependencies:
+      '@peel/db': link:../db
       date-fns: 2.29.3
       date-fns-tz: 1.3.7_date-fns@2.29.3
 
