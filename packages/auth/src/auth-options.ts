@@ -8,7 +8,11 @@ const postmark = new ServerClient(process.env.POSTMARK_SECRET as string)
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
-  adapter: PrismaAdapter(prisma),
+  adapter: {
+    ...PrismaAdapter(prisma),
+    // Override the `createUser` method to create and connect default preferences
+    createUser: (data) => prisma.user.create({ data: { ...data, preferences: { create: {} } } }),
+  },
   providers: [
     EmailProvider({
       async sendVerificationRequest({ identifier, url }) {

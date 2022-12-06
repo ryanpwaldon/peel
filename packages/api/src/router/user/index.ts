@@ -1,7 +1,13 @@
 import { z } from 'zod'
-import { router, serverProcedure } from '../../trpc'
+import { protectedProcedure, router, serverProcedure } from '../../trpc'
 
 export const userRouter = router({
+  findMe: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.user.findUnique({
+      where: { id: ctx.session.user.id },
+      include: { preferences: true },
+    })
+  }),
   create: serverProcedure
     .input(
       z.object({
@@ -13,6 +19,7 @@ export const userRouter = router({
         data: {
           email: input.email,
           emailVerified: new Date(),
+          preferences: { create: {} },
         },
       })
       return result
