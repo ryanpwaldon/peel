@@ -26,10 +26,12 @@ const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { s
   return (
     <SessionProvider session={session}>
       <div id="app" className={`${interFont.variable} ${symbolsFont.variable}`}>
-        <DeepLink />
-        <AuthGuard>
-          <Component {...pageProps} />
-        </AuthGuard>
+        <div id="content">
+          <DeepLink />
+          <AuthGuard>
+            <Component {...pageProps} />
+          </AuthGuard>
+        </div>
       </div>
     </SessionProvider>
   )

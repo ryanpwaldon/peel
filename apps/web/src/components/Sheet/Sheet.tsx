@@ -50,7 +50,7 @@ export function Sheet({ trigger, children }: BottomSheetProps) {
             </Motion.div>
           </div>
         </div>,
-        document.body,
+        document.querySelector('#app') as Element,
       )}
     </div>
   )
