@@ -25,7 +25,7 @@ export function Sheet({ trigger, children }: BottomSheetProps) {
         {trigger}
       </div>
       {createPortal(
-        <div className="w-full h-full fixed top-0 left-0 pointer-events-none">
+        <div className="w-full h-full fixed top-0 left-0 pointer-events-none z-10">
           <Motion.div
             initial="hidden"
             animate={animation}
@@ -50,7 +50,7 @@ export function Sheet({ trigger, children }: BottomSheetProps) {
             </Motion.div>
           </div>
         </div>,
-        document.querySelector('#app')!,
+        document.body,
       )}
     </div>
   )
