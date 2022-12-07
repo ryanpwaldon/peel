@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { trpc } from '@/utils/trpc'
 import { Suspense, useState } from 'react'
 import { add, format, startOfDay } from 'date-fns'
@@ -78,10 +79,12 @@ const Charts = ({ day }: ChartsProps) => {
             }
           })()
           return (
-            <div className="whitespace-nowrap text-gray-800">
-              <div className="text-sm font-medium">{wave.name}</div>
-              <div className="text-xs">{subtext}</div>
-            </div>
+            <Link href={`/wave/${wave.id}`} className="pointer-events-auto">
+              <div className="whitespace-nowrap text-gray-800">
+                <div className="text-sm font-medium">{wave.name}</div>
+                <div className="text-xs">{subtext}</div>
+              </div>
+            </Link>
           )
         }
 
