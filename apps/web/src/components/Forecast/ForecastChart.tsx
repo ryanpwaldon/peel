@@ -74,7 +74,7 @@ export default function ForecastChart({
 
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
-      <motion.div className="relative z-10 flex w-full touch-none" onPointerMove={onPointerMove} onPointerOut={onPointerOut}>
+      <motion.div className="relative z-10 flex w-full touch-none" onPointerMove={onPointerMove} onPointerDown={onPointerMove} onPointerOut={onPointerOut}>
         {ticks.map((tick, index) => {
           const isFirst = index === 0
           const isLast = index === ticks.length - 1
