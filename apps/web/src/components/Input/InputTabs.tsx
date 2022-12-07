@@ -1,3 +1,4 @@
+import { vibrate } from '@/utils/vibrate'
 import { RadioGroup } from '@headlessui/react'
 import { Dispatch, SetStateAction } from 'react'
 
@@ -14,8 +15,13 @@ export interface Tab {
 }
 
 export default function InputTabs({ tabs, selected, setSelected, className }: InputTabsProps) {
+  const onChange = (value: number) => {
+    vibrate()
+    setSelected(value)
+  }
+
   return (
-    <RadioGroup value={selected} onChange={setSelected} className={`flex space-x-1 ${className}`}>
+    <RadioGroup value={selected} onChange={onChange} className={`flex space-x-1 ${className}`}>
       {tabs.map((tab) => (
         <RadioGroup.Option key={tab.value} value={tab.value}>
           {({ checked }) => (
