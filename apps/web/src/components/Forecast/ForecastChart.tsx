@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import { isSameHour } from 'date-fns'
-import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
 import { vibrate } from '@/utils/vibrate'
 import { getTzStartOfDay } from '@peel/utils'
 import Symbol from '@/components/Symbol/Symbol'
+import { motion, PanHandlers } from 'framer-motion'
 import { findIndexOrNull } from '@/utils/findIndexOrNull'
 
 const MILLISECONDS_IN_DAY = 86400000
@@ -55,11 +55,14 @@ export default function ForecastChart({
   const sunriseOffset = sunrise ? ((sunrise.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
   const sunsetOffset = sunset ? ((sunset.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
 
+  const isLongPressTimer = useRef<NodeJS.Timeout | null>(null)
+  const [isLongPressed, setIsLongPressed] = useState(false)
   const [initialY, setInitialY] = useState<number | null>(null)
 
-  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (initialY === null) setInitialY(event.clientY)
-    const element = document.elementFromPoint(event.clientX, initialY || event.clientY)
+  const onPan = (isLongPressed: boolean, x: number, y: number) => {
+    if (!isLongPressed) return isLongPressTimer.current && clearTimeout(isLongPressTimer.current)
+    if (initialY === null) setInitialY(y)
+    const element = document.elementFromPoint(x, initialY || y)
     const elementIndex = parseInt(element?.getAttribute('data-index') || '')
     if (Number.isInteger(elementIndex) && elementIndex !== hoveredTick) {
       setHoveredTick(elementIndex)
@@ -67,14 +70,30 @@ export default function ForecastChart({
     }
   }
 
-  const onPointerOut = () => {
-    setInitialY(null)
+  const onPanSessionStart: PanHandlers['onPanSessionStart'] = (event, info) => {
+    isLongPressTimer.current = setTimeout(() => {
+      setIsLongPressed(true)
+      onPan(true, info.point.x, info.point.y)
+    }, 400)
+  }
+
+  const cancel = () => {
+    setIsLongPressed(false)
     setHoveredTick(null)
+    setInitialY(null)
+    isLongPressTimer.current && clearTimeout(isLongPressTimer.current)
   }
 
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
-      <motion.div className="relative z-10 flex w-full touch-none" onPointerMove={onPointerMove} onPointerDown={onPointerMove} onPointerOut={onPointerOut}>
+      <motion.div
+        className={`relative z-10 flex w-full touch-pan-y`}
+        onTap={cancel}
+        onPanEnd={cancel}
+        onTapCancel={cancel}
+        onPanSessionStart={onPanSessionStart}
+        onPan={(_, info) => onPan(isLongPressed, info.point.x, info.point.y)}
+      >
         {ticks.map((tick, index) => {
           const isFirst = index === 0
           const isLast = index === ticks.length - 1
