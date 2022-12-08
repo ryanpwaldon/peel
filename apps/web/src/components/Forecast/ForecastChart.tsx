@@ -66,7 +66,7 @@ export default function ForecastChart({
       container.current?.releasePointerCapture(event.pointerId)
       container.current?.classList.add('touch-none')
       container.current?.classList.remove('touch-pan-y')
-      container.current?.setPointerCapture(event.pointerId)
+      // container.current?.setPointerCapture(event.pointerId)
       setIsLongPressed(true)
       onPan(true, event.clientX, event.clientY)
     }, 200)
