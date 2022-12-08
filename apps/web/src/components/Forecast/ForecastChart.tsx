@@ -1,5 +1,5 @@
 import { isSameHour } from 'date-fns'
-import { useRef, useState } from 'react'
+import { PointerEvent, TouchEvent, TouchEventHandler, useRef, useState } from 'react'
 import { vibrate } from '@/utils/vibrate'
 import { getTzStartOfDay } from '@peel/utils'
 import Symbol from '@/components/Symbol/Symbol'
@@ -55,12 +55,25 @@ export default function ForecastChart({
   const sunriseOffset = sunrise ? ((sunrise.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
   const sunsetOffset = sunset ? ((sunset.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
 
+  const container = useRef<HTMLDivElement>(null)
   const isLongPressTimer = useRef<NodeJS.Timeout | null>(null)
   const [isLongPressed, setIsLongPressed] = useState(false)
   const [initialY, setInitialY] = useState<number | null>(null)
 
+  const onTouchStart = (event: PointerEvent<HTMLDivElement>) => {
+    isLongPressTimer.current = setTimeout(() => {
+      console.log('long press')
+      container.current?.releasePointerCapture(event.pointerId)
+      container.current?.classList.add('touch-none')
+      container.current?.classList.remove('touch-pan-y')
+      container.current?.setPointerCapture(event.pointerId)
+      setIsLongPressed(true)
+      onPan(true, event.clientX, event.clientY)
+    }, 200)
+  }
+
   const onPan = (isLongPressed: boolean, x: number, y: number) => {
-    if (!isLongPressed) return isLongPressTimer.current && clearTimeout(isLongPressTimer.current)
+    if (!isLongPressed) return cancel()
     if (initialY === null) setInitialY(y)
     const element = document.elementFromPoint(x, initialY || y)
     const elementIndex = parseInt(element?.getAttribute('data-index') || '')
@@ -70,28 +83,24 @@ export default function ForecastChart({
     }
   }
 
-  const onPanSessionStart: PanHandlers['onPanSessionStart'] = (event, info) => {
-    isLongPressTimer.current = setTimeout(() => {
-      setIsLongPressed(true)
-      onPan(true, info.point.x, info.point.y)
-    }, 400)
-  }
-
   const cancel = () => {
+    console.log('cancelled')
     setIsLongPressed(false)
     setHoveredTick(null)
     setInitialY(null)
+    container.current?.classList.add('touch-pan-y')
+    container.current?.classList.remove('touch-none')
     isLongPressTimer.current && clearTimeout(isLongPressTimer.current)
   }
 
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
       <motion.div
-        className={`relative z-10 flex w-full ${isLongPressed ? 'touch-none' : 'touch-pan-y'}`}
+        ref={container}
+        className={`relative z-10 flex w-full`}
+        onPointerDown={onTouchStart}
         onTap={cancel}
-        onPanEnd={cancel}
         onTapCancel={cancel}
-        onPanSessionStart={onPanSessionStart}
         onPan={(_, info) => onPan(isLongPressed, info.point.x, info.point.y)}
       >
         {ticks.map((tick, index) => {
