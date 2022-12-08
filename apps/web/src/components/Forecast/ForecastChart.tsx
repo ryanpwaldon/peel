@@ -87,7 +87,7 @@ export default function ForecastChart({
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
       <motion.div
-        className={`relative z-10 flex w-full touch-pan-y`}
+        className={`relative z-10 flex w-full ${isLongPressed ? 'touch-none' : 'touch-pan-y'}`}
         onTap={cancel}
         onPanEnd={cancel}
         onTapCancel={cancel}
