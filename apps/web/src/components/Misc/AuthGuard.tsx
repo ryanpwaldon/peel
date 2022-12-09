@@ -5,7 +5,7 @@ interface AuthGuardProps {
   children: React.ReactNode
 }
 
-const publicRoutes = ['/login']
+const publicRoutes = ['/login', '/verify']
 
 export default function AuthGuard({ children }: AuthGuardProps) {
   const router = useRouter()

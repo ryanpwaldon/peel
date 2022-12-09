@@ -67,6 +67,7 @@ importers:
   apps/web:
     specifiers:
       '@headlessui/react': ^1.7.4
+      '@hookform/resolvers': ^2.9.10
       '@next/font': ^13.0.4
       '@peel/api': '*'
       '@peel/auth': '*'
@@ -94,11 +95,13 @@ importers:
       postcss: ^8.4.19
       react: 18.2.0
       react-dom: 18.2.0
+      react-hook-form: ^7.40.0
       tailwindcss: ^3.2.4
       typescript: ^4.9.3
       zod: ^3.18.0
     dependencies:
       '@headlessui/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
+      '@hookform/resolvers': 2.9.10_react-hook-form@7.40.0
       '@next/font': 13.0.4
       '@peel/api': link:../../packages/api
       '@peel/auth': link:../../packages/auth
@@ -118,6 +121,7 @@ importers:
       next-auth: 4.17.0_dcors23iqtgxrhrwosgnnc4xji
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.40.0_react@18.2.0
       zod: 3.19.1
     devDependencies:
       '@types/mapbox-gl': 2.7.8
@@ -175,6 +179,7 @@ importers:
       '@next-auth/prisma-adapter': ^1.0.5
       '@peel/db': '*'
       eslint: ^8.28.0
+      nanoid: ^4.0.0
       next: 13.0.4
       next-auth: ^4.17.0
       nodemailer: ^6.8.0
@@ -185,6 +190,7 @@ importers:
     dependencies:
       '@next-auth/prisma-adapter': 1.0.5_next-auth@4.17.0
       '@peel/db': link:../db
+      nanoid: 4.0.0
       next: 13.0.4_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.17.0_icxl3uciip5l2ulzmmrvkhve3i
       nodemailer: 6.8.0
@@ -450,6 +456,14 @@ packages:
       client-only: 0.0.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@hookform/resolvers/2.9.10_react-hook-form@7.40.0:
+    resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.40.0_react@18.2.0
     dev: false
 
   /@humanwhocodes/config-array/0.11.7:
@@ -4046,6 +4060,12 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  /nanoid/4.0.0:
+    resolution: {integrity: sha512-IgBP8piMxe/gf73RTQx7hmnhwz0aaEXYakvqZyE302IXW3HyVNhdNGC+O2MwMAVhLEnvXlvKtGbtJf6wvHihCg==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
+
   /napi-build-utils/1.0.2:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
     dev: true
@@ -4853,6 +4873,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.40.0_react@18.2.0:
+    resolution: {integrity: sha512-0rokdxMPJs0k9bvFtY6dbcSydyNhnZNXCR49jgDr/aR03FDHFOK6gfh8ccqB3fl696Mk7lqh04xdm+agqWXKSw==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
