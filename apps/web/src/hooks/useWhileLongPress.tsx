@@ -28,7 +28,7 @@ export const useWhileLongPress = ({ elementRef, onLongPressMove, onLongPressCanc
   }
 
   const onPressStart = (event: Event) => {
-    if (isTouchEvent(event)) longPressTimer.current = setTimeout(() => onLongPress(event), 100)
+    if (isTouchEvent(event)) longPressTimer.current = setTimeout(() => onLongPress(event), 200)
   }
 
   const onPressEnd = () => {
