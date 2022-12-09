@@ -10,6 +10,9 @@ const config: CapacitorConfig = {
       launchShowDuration: 2000,
     },
   },
+  ios: {
+    allowsLinkPreview: false,
+  },
 }
 
 export default config
