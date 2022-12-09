@@ -1,10 +1,11 @@
 import { isSameHour } from 'date-fns'
-import { PointerEvent, TouchEvent, TouchEventHandler, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
 import { vibrate } from '@/utils/vibrate'
 import { getTzStartOfDay } from '@peel/utils'
 import Symbol from '@/components/Symbol/Symbol'
-import { motion, PanHandlers } from 'framer-motion'
 import { findIndexOrNull } from '@/utils/findIndexOrNull'
+import { useWhileLongPress } from '@/hooks/useWhileLongPress'
 
 const MILLISECONDS_IN_DAY = 86400000
 
@@ -55,54 +56,29 @@ export default function ForecastChart({
   const sunriseOffset = sunrise ? ((sunrise.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
   const sunsetOffset = sunset ? ((sunset.getTime() - localStartOfDay.getTime()) / MILLISECONDS_IN_DAY) * 100 : null
 
-  const container = useRef<HTMLDivElement>(null)
-  const isLongPressTimer = useRef<NodeJS.Timeout | null>(null)
-  const [isLongPressed, setIsLongPressed] = useState(false)
+  const interactiveElement = useRef<HTMLDivElement>(null)
   const [initialY, setInitialY] = useState<number | null>(null)
 
-  const onTouchStart = (event: PointerEvent<HTMLDivElement>) => {
-    isLongPressTimer.current = setTimeout(() => {
-      console.log('long press')
-      container.current?.releasePointerCapture(event.pointerId)
-      container.current?.classList.add('touch-none')
-      container.current?.classList.remove('touch-pan-y')
-      // container.current?.setPointerCapture(event.pointerId)
-      setIsLongPressed(true)
-      onPan(true, event.clientX, event.clientY)
-    }, 200)
-  }
-
-  const onPan = (isLongPressed: boolean, x: number, y: number) => {
-    if (!isLongPressed) return cancel()
-    if (initialY === null) setInitialY(y)
-    const element = document.elementFromPoint(x, initialY || y)
-    const elementIndex = parseInt(element?.getAttribute('data-index') || '')
-    if (Number.isInteger(elementIndex) && elementIndex !== hoveredTick) {
-      setHoveredTick(elementIndex)
-      vibrate()
-    }
-  }
-
-  const cancel = () => {
-    console.log('cancelled')
-    setIsLongPressed(false)
-    setHoveredTick(null)
-    setInitialY(null)
-    container.current?.classList.add('touch-pan-y')
-    container.current?.classList.remove('touch-none')
-    isLongPressTimer.current && clearTimeout(isLongPressTimer.current)
-  }
+  useWhileLongPress({
+    elementRef: interactiveElement,
+    onLongPressMove: (x, y) => {
+      if (initialY === null) setInitialY(y)
+      const element = document.elementFromPoint(x, initialY || y)
+      const elementIndex = parseInt(element?.getAttribute('data-index') || '')
+      if (Number.isInteger(elementIndex) && elementIndex !== hoveredTick) {
+        setHoveredTick(elementIndex)
+        vibrate()
+      }
+    },
+    onLongPressCancel: () => {
+      setHoveredTick(null)
+      setInitialY(null)
+    },
+  })
 
   return (
     <div className={`relative w-full overflow-hidden bg-white ${className}`}>
-      <motion.div
-        ref={container}
-        className={`relative z-10 flex w-full`}
-        onPointerDown={onTouchStart}
-        onTap={cancel}
-        onTapCancel={cancel}
-        onPan={(_, info) => onPan(isLongPressed, info.point.x, info.point.y)}
-      >
+      <div ref={interactiveElement} className={`relative z-10 flex w-full`}>
         {ticks.map((tick, index) => {
           const isFirst = index === 0
           const isLast = index === ticks.length - 1
@@ -142,7 +118,7 @@ export default function ForecastChart({
             </div>
           )
         })}
-      </motion.div>
+      </div>
       {sunriseOffset && sunsetOffset && (
         <div className="pointer-events-none absolute left-0 top-0 z-0 h-full w-full px-5">
           <div className="h-full w-full px-[calc(((100%_-_(4px_*_(24_-_1)))_/_24)_/_2)]">
