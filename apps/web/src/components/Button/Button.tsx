@@ -3,7 +3,7 @@ import Spinner from '@/components/Spinner/Spinner'
 const themes = {
   naked: 'text-gray-800 bg-none',
   black: 'text-white bg-gray-800 active:bg-gray-800',
-  white: 'text-gray-800 bg-white !border-[0.5px] !border-gray-200 active:bg-gray-50',
+  white: 'text-gray-800 bg-white !border-hairline !border-gray-200 active:bg-gray-50',
 }
 
 interface ButtonProps {
