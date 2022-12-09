@@ -79,7 +79,7 @@ const Charts = ({ day }: ChartsProps) => {
             }
           })()
           return (
-            <Link href={`/wave/${wave.id}`} className="pointer-events-auto block">
+            <Link href={`/wave/${wave.id}`} className="pointer-events-auto block" draggable="false">
               <div className="whitespace-nowrap text-gray-800">
                 <div className="text-sm font-medium">{wave.name}</div>
                 <div className="text-xs">{subtext}</div>
