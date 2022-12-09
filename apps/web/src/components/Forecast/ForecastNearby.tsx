@@ -79,25 +79,26 @@ const Charts = ({ day }: ChartsProps) => {
             }
           })()
           return (
-            <div className="whitespace-nowrap text-gray-800">
-              <div className="text-sm font-medium">{wave.name}</div>
-              <div className="text-xs">{subtext}</div>
-            </div>
+            <Link href={`/wave/${wave.id}`} className="pointer-events-auto block">
+              <div className="whitespace-nowrap text-gray-800">
+                <div className="text-sm font-medium">{wave.name}</div>
+                <div className="text-xs">{subtext}</div>
+              </div>
+            </Link>
           )
         }
 
         return (
-          <Link key={wave.id} href={`/wave/${wave.id}`} className="block">
-            <ForecastChart
-              renderCustomTitle={renderCustomTitle}
-              sunrise={sunrise}
-              sunset={sunset}
-              timezone={wave.point.timezone}
-              ticks={ticks}
-              hoveredTick={hoveredTick}
-              setHoveredTick={setHoveredTick}
-            />
-          </Link>
+          <ForecastChart
+            key={wave.id}
+            renderCustomTitle={renderCustomTitle}
+            sunrise={sunrise}
+            sunset={sunset}
+            timezone={wave.point.timezone}
+            ticks={ticks}
+            hoveredTick={hoveredTick}
+            setHoveredTick={setHoveredTick}
+          />
         )
       })}
     </div>

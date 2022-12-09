@@ -87,7 +87,12 @@ export default function ForecastChart({
             <div
               key={index}
               data-index={index}
-              className={`relative flex w-full min-w-0 flex-col justify-end px-0.5 py-3 ${isFirst ? 'pl-5' : ''} ${isLast ? 'pr-5' : ''}`}
+              className={`
+                relative flex w-full min-w-0 flex-col justify-end px-0.5 py-3
+                ${isFirst ? 'pl-5' : ''}
+                ${isLast ? 'pr-5' : ''}
+                ${index === 0 ? 'z-10' : ''}
+              `}
             >
               {index === 0 && (
                 <div className="pointer-events-none mb-2 flex text-xs text-gray-500">
