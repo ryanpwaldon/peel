@@ -87,7 +87,7 @@ const Charts = ({ day }: ChartsProps) => {
         }
 
         return (
-          <Link key={wave.id} href={`/wave/${wave.id}`}>
+          <Link key={wave.id} href={`/wave/${wave.id}`} className="block">
             <ForecastChart
               renderCustomTitle={renderCustomTitle}
               sunrise={sunrise}
