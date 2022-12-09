@@ -26,7 +26,7 @@ module.exports = {
         'content-bottom': '96px',
       },
       borderWidth: {
-        hairline: '0.5px',
+        hairline: '0.8px',
       },
       fontSize: {
         '2xs': ['0.625rem', '0.75rem'],
