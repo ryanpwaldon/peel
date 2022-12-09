@@ -32,7 +32,6 @@ export const useWhileLongPress = ({ elementRef, onLongPressMove, onLongPressCanc
   }
 
   const onPressEnd = () => {
-    console.log('onPressEnd')
     cancelLongPress()
   }
 
