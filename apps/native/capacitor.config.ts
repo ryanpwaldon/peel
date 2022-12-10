@@ -4,7 +4,7 @@ const config: CapacitorConfig = {
   appId: 'surf.peel',
   appName: 'Peel',
   backgroundColor: '#f5f5f5',
-  server: { url: 'http://192.168.1.7:3000' },
+  server: { url: 'http://192.168.1.2:3000' },
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
