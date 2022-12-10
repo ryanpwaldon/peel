@@ -3,6 +3,7 @@ import { trpc } from '@/utils/trpc'
 import { type AppType } from 'next/app'
 import { type Session } from 'next-auth'
 import localFont from '@next/font/local'
+import { AnimatePresence } from 'framer-motion'
 import { SessionProvider } from 'next-auth/react'
 import AuthGuard from '@/components/Misc/AuthGuard'
 import DeepLink from '@/components/Misc/DeepLink'
@@ -22,14 +23,16 @@ const symbolsFont = localFont({
   display: 'block',
 })
 
-const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
+const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps }, router }) => {
   return (
     <SessionProvider session={session}>
       <div id="app" className={`${interFont.variable} ${symbolsFont.variable}`}>
         <div id="content">
           <DeepLink />
           <AuthGuard>
-            <Component {...pageProps} />
+            <AnimatePresence initial={false}>
+              <Component {...pageProps} key={router.asPath} />
+            </AnimatePresence>
           </AuthGuard>
         </div>
       </div>
