@@ -1,6 +1,6 @@
-import { Suspense } from 'react'
 import { trpc } from '@/utils/trpc'
 import { useRouter } from 'next/router'
+import { Suspense, useRef } from 'react'
 import Back from '@/components/Back/Back'
 import Symbol from '@/components/Symbol/Symbol'
 import Button from '@/components/Button/Button'
@@ -28,7 +28,8 @@ export default function Wave() {
 
 const Content = () => {
   const router = useRouter()
-  const [wave] = trpc.wave.findById.useSuspenseQuery(router.query.id as string)
+  const waveId = useRef(router.query.id as string)
+  const [wave] = trpc.wave.findById.useSuspenseQuery(waveId.current)
 
   return (
     <Page header={<Header left={<Back />} right={<Symbol symbol="more_horiz" className="text-2xl font-extrabold text-blue-600" />} />}>
