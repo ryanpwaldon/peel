@@ -5,15 +5,16 @@ interface PreviousRouteProps {
   children: React.ReactNode
 }
 
-export const PreviousRouteContext = createContext('/')
+export const PreviousRouteContext = createContext<string | undefined>(undefined)
 
-export default function PreviousRoute({ children }: PreviousRouteProps) {
+export default function PreviousRouteProvider({ children }: PreviousRouteProps) {
   const { asPath } = useRouter()
-
-  const previousRoute = useRef('/')
+  const firstRender = useRef(true)
+  const previousRoute = useRef<string | undefined>()
 
   useEffect(() => {
-    previousRoute.current = asPath
+    if (firstRender.current) previousRoute.current = '/'
+    else previousRoute.current = asPath
   }, [asPath])
 
   return <PreviousRouteContext.Provider value={previousRoute.current}>{children}</PreviousRouteContext.Provider>
