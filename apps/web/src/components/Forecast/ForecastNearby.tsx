@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { trpc } from '@/utils/trpc'
+import Link from '@/components/Link/Link'
 import { Suspense, useState } from 'react'
 import { add, format, startOfDay } from 'date-fns'
 import Spinner from '@/components/Spinner/Spinner'
@@ -79,7 +79,7 @@ const Charts = ({ day }: ChartsProps) => {
             }
           })()
           return (
-            <Link href={`/wave/${wave.id}`} className="pointer-events-auto block" draggable="false">
+            <Link href={`/wave/${wave.id}`} className="pointer-events-auto block" pageTransition="forward">
               <div className="whitespace-nowrap text-gray-800">
                 <div className="text-sm font-medium">{wave.name}</div>
                 <div className="text-xs">{subtext}</div>

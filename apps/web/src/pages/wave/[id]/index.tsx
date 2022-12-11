@@ -9,20 +9,23 @@ import Spinner from '@/components/Spinner/Spinner'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
 import Forecast from '@/components/Forecast/Forecast'
+import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
 
 export default function Wave() {
   return (
-    <Suspense
-      fallback={
-        <Page header={<Header left={<Back />} />}>
-          <div className="flex h-full w-full items-center justify-center">
-            <Spinner />
-          </div>
-        </Page>
-      }
-    >
-      <Content />
-    </Suspense>
+    <PageTransitionConsumer>
+      <Suspense
+        fallback={
+          <Page header={<Header left={<Back />} />}>
+            <div className="flex h-full w-full items-center justify-center">
+              <Spinner />
+            </div>
+          </Page>
+        }
+      >
+        <Content />
+      </Suspense>
+    </PageTransitionConsumer>
   )
 }
 
