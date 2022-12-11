@@ -11,7 +11,7 @@ export default function PageTransitionConsumer({ children }: PageProps) {
 
   const initial: Record<PageTransition, AnimationProps['initial']> = {
     forward: { x: '100%' },
-    back: { x: '-100%' },
+    back: { x: '-25%', zIndex: 0 },
     none: {},
   }
 
@@ -23,7 +23,7 @@ export default function PageTransitionConsumer({ children }: PageProps) {
 
   const exit: Record<PageTransition, AnimationProps['exit']> = {
     forward: { x: '-25%' },
-    back: { x: '25%' },
+    back: { x: '100%', zIndex: 10 },
     none: {},
   }
 
