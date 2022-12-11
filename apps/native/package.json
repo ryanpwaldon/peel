@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "sync": "cap sync",
+    "update-icons": "capacitor-assets generate --ios --assetPath app-icons && pnpm sync",
     "clean": "rm -rf .turbo node_modules"
   },
   "dependencies": {
