@@ -13,7 +13,7 @@ export default function Page({ children, header, showNavigation = true }: PagePr
       initial={{ x: '100%' }}
       animate={{ x: 0 }}
       exit={{ x: '-25%' }}
-      transition={{ ease: [0.23, 0.71, 0.36, 1], duration: 0.512 }}
+      transition={{ ease: [0.23, 0.71, 0.36, 1], duration: 0.448 }}
       className="absolute top-0 left-0 flex h-full w-full flex-col bg-gray-100"
     >
       {header && header}
