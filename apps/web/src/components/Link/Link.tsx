@@ -1,4 +1,6 @@
+import { UrlObject } from 'url'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 import { useContextOrThrow } from '@/utils/useContextOrThrow'
 import { PageTransition, PageTransitionContext } from '@/components/PageTransition/PageTransitionProvider'
 
@@ -15,4 +17,20 @@ export default function Link({ pageTransition, children, ...nextLinkProps }: Lin
       {children}
     </NextLink>
   )
+}
+
+type PushProps = UrlObject & {
+  pageTransition: PageTransition
+}
+
+export const useLink = () => {
+  const router = useRouter()
+  const { setPageTransition } = useContextOrThrow(PageTransitionContext)
+
+  return {
+    push: ({ pageTransition, ...pushProps }: PushProps) => {
+      setPageTransition(pageTransition)
+      return router.push(pushProps)
+    },
+  }
 }

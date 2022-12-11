@@ -1,20 +1,20 @@
 import { z } from 'zod'
-import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 import { useForm } from '@/hooks/useForm'
 import Button from '@/components/Button/Button'
+import { useLink } from '@/components/Link/Link'
 import Page from '@/components/Scaffolding/Page'
 import InputText from '@/components/Input/InputText'
 import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
 
 export default function LoginPage() {
-  const router = useRouter()
+  const link = useLink()
   const { register, handleSubmit, formState } = useForm(z.object({ email: z.string().email() }))
 
   const onSubmit = handleSubmit(async ({ email }) => {
     const signInResponse = await signIn('email', { email, callbackUrl: '/', redirect: false })
     if (signInResponse?.error) alert(signInResponse.error)
-    else await router.push({ pathname: '/verify', query: { email } })
+    else await link.push({ pathname: '/verify', query: { email }, pageTransition: 'forward' })
   })
 
   return (
