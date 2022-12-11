@@ -33,7 +33,7 @@ export default function PageTransitionConsumer({ children }: PageProps) {
       animate={animate[pageTransition]}
       exit={exit[pageTransition]}
       transition={{ ease: [0.23, 0.71, 0.36, 1], duration: 0.448 }}
-      className="absolute top-0 left-0 h-full w-full bg-gray-100"
+      className="absolute top-0 left-0 h-full w-full border-x-hairline border-gray-200 bg-gray-100"
     >
       {children}
     </motion.div>
