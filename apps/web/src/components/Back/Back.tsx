@@ -1,8 +1,7 @@
-import Link from '@/components/Link/Link'
+import { useRouter } from 'next/router'
 import Symbol from '@/components/Symbol/Symbol'
 import { useContextOrThrow } from '@/utils/useContextOrThrow'
-import { PageTransition } from '@/components/PageTransition/PageTransitionProvider'
-import { PreviousRouteContext } from '@/components/PreviousRoute/PreviousRouteProvider'
+import { PageTransition, PageTransitionContext } from '@/components/PageTransition/PageTransitionProvider'
 
 interface BackProps {
   children?: React.ReactNode
@@ -10,16 +9,22 @@ interface BackProps {
 }
 
 export default function Back({ children, pageTransition = 'slideBack' }: BackProps) {
-  const previousRoute = useContextOrThrow(PreviousRouteContext)
+  const router = useRouter()
+  const { setPageTransition } = useContextOrThrow(PageTransitionContext)
+
+  const onClick = () => {
+    setPageTransition(pageTransition)
+    router.back()
+  }
 
   return (
-    <Link href={previousRoute} pageTransition={pageTransition}>
+    <button type="button" onClick={onClick}>
       {children ?? (
         <div className="flex items-center text-base text-blue-600">
           <Symbol className="font-bold" symbol="arrow_back_ios" />
           <span>Back</span>
         </div>
       )}
-    </Link>
+    </button>
   )
 }
