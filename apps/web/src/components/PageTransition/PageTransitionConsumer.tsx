@@ -26,6 +26,16 @@ export default function PageTransitionConsumer({ children }: PageProps) {
       animate: { x: 0, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
       exit: { x: '100%', zIndex: 10, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
     },
+    slideUp: {
+      initial: { y: '100%', zIndex: 10 },
+      animate: { y: 0, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
+      exit: { y: 0, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
+    },
+    slideDown: {
+      initial: { y: 0, zIndex: 0 },
+      animate: { y: 0, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
+      exit: { y: '100%', zIndex: 10, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
+    },
     none: {
       initial: {},
       animate: {},
