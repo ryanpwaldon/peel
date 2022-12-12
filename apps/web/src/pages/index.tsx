@@ -1,6 +1,7 @@
 import Symbol from '@/components/Symbol/Symbol'
 import { Sheet } from '@/components/Sheet/Sheet'
 import Page from '@/components/Scaffolding/Page'
+import InfoLink from '@/components/Block/InfoLink'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
 import InputSearch from '@/components/Input/InputSearch'
@@ -17,6 +18,12 @@ export default function Home() {
           <PageTitle title="Home" className="px-5" />
           <InputSearch prompt="Waves, places, people..." className="mt-3 px-5" />
           <ForecastNearby />
+          <InfoLink
+            className="mt-5 px-5"
+            linkText="Add a wave"
+            linkPath="/wave/create"
+            message="Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
+          />
         </div>
       </Page>
     </PageTransitionConsumer>
