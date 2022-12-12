@@ -10,11 +10,10 @@ export const PreviousRouteContext = createContext<string | undefined>(undefined)
 export default function PreviousRouteProvider({ children }: PreviousRouteProps) {
   const { asPath } = useRouter()
   const firstRender = useRef(true)
-  const previousRoute = useRef<string | undefined>()
+  const previousRoute = useRef('/')
 
   useEffect(() => {
-    if (firstRender.current) previousRoute.current = '/'
-    else previousRoute.current = asPath
+    if (!firstRender.current) previousRoute.current = asPath
   }, [asPath])
 
   return <PreviousRouteContext.Provider value={previousRoute.current}>{children}</PreviousRouteContext.Provider>
