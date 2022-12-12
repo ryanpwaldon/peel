@@ -22,6 +22,7 @@ export default function Home() {
             className="mt-5 px-5"
             linkText="Add a wave"
             linkPath="/wave/create"
+            linkTransition="slideUp"
             message="Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
           />
         </div>

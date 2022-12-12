@@ -1,16 +1,18 @@
 import Button from '@/components/Button/Button'
 import { useLink } from '@/components/Link/Link'
+import { PageTransition } from '../PageTransition/PageTransitionProvider'
 
 interface InfoLinkProps {
   message: string
   linkText: string
   linkPath: string
+  linkTransition: PageTransition
   className?: string
 }
 
-export default function InfoLink({ message, linkText, linkPath, className }: InfoLinkProps) {
+export default function InfoLink({ message, linkText, linkPath, linkTransition, className }: InfoLinkProps) {
   const link = useLink()
-  const onClick = () => link.push({ pageTransition: 'slideUp', pathname: linkPath })
+  const onClick = () => link.push({ pageTransition: linkTransition, pathname: linkPath })
 
   return (
     <div className={className}>
