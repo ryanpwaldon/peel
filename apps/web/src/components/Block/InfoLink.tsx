@@ -10,7 +10,7 @@ interface InfoLinkProps {
 
 export default function InfoLink({ message, linkText, linkPath, className }: InfoLinkProps) {
   const link = useLink()
-  const onClick = () => link.push({ pageTransition: 'forward', pathname: linkPath })
+  const onClick = () => link.push({ pageTransition: 'slideForward', pathname: linkPath })
 
   return (
     <div className={className}>

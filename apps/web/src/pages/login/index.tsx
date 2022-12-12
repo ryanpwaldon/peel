@@ -14,7 +14,7 @@ export default function LoginPage() {
   const onSubmit = handleSubmit(async ({ email }) => {
     const signInResponse = await signIn('email', { email, callbackUrl: '/', redirect: false })
     if (signInResponse?.error) alert(signInResponse.error)
-    else await link.push({ pathname: '/verify', query: { email }, pageTransition: 'forward' })
+    else await link.push({ pathname: '/verify', query: { email }, pageTransition: 'slideForward' })
   })
 
   return (

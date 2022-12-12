@@ -11,7 +11,7 @@ export default function Back({ children }: BackProps) {
   const previousRoute = useContextOrThrow(PreviousRouteContext)
 
   return (
-    <Link href={previousRoute} pageTransition="back">
+    <Link href={previousRoute} pageTransition="slideBack">
       {children ?? (
         <div className="flex items-center text-base text-blue-600">
           <Symbol className="font-bold" symbol="arrow_back_ios" />

@@ -16,12 +16,12 @@ export default function PageTransitionConsumer({ children }: PageProps) {
   const { pageTransition } = useContextOrThrow(PageTransitionContext)
 
   const transitions: Record<PageTransition, PageTransitionSettings> = {
-    forward: {
+    slideForward: {
       initial: { x: '100%' },
       animate: { x: 0, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
       exit: { x: '-25%', transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
     },
-    back: {
+    slideBack: {
       initial: { x: '-25%', zIndex: 0 },
       animate: { x: 0, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
       exit: { x: '100%', zIndex: 10, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },

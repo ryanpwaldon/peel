@@ -4,7 +4,7 @@ interface PageTransitionProps {
   children: React.ReactNode
 }
 
-export type PageTransition = 'forward' | 'back' | 'none'
+export type PageTransition = 'slideForward' | 'slideBack' | 'none'
 
 interface PageTransitionContext {
   pageTransition: PageTransition
