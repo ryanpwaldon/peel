@@ -17,7 +17,7 @@ export default function PageTransitionConsumer({ children }: PageProps) {
 
   const transitions: Record<PageTransition, PageTransitionSettings> = {
     slideForward: {
-      initial: { x: '100%' },
+      initial: { x: '100%', zIndex: 10 },
       animate: { x: 0, transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
       exit: { x: '-25%', transition: { ease: [0.23, 0.71, 0.36, 1], duration: 0.448 } },
     },
