@@ -10,7 +10,7 @@ import PageTransitionConsumer from '@/components/PageTransition/PageTransitionCo
 export default function WaveCreatePage() {
   return (
     <PageTransitionConsumer>
-      <Page header={<CreateWaveHeader />} showNavigation={false}>
+      <Page header={<WaveCreateHeader />} showNavigation={false}>
         <div className="px-5">
           <PageTitle title="Create a wave" />
           <TitleMd title="Enter details" className="mt-5" />
@@ -21,7 +21,7 @@ export default function WaveCreatePage() {
   )
 }
 
-const CreateWaveHeader = () => (
+const WaveCreateHeader = () => (
   <Header
     left={
       <Back pageTransition="slideDown">
