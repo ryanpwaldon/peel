@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 interface ButtonBaseProps {
   type: 'button' | 'submit'
   isDisabled: boolean
-  onClick: () => void
+  onClick?: () => void
   defaultClasses: string
   initialClasses: string
   pressedClasses: string

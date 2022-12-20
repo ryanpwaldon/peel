@@ -2,8 +2,8 @@ import { z } from 'zod'
 import { useRouter } from 'next/router'
 import Page from '@/components/Page/Page'
 import { useForm } from '@/hooks/useForm'
-import Button from '@/components/Button/Button'
 import InputText from '@/components/Input/InputText'
+import ButtonRect from '@/components/Button/ButtonRect'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function LoginPage() {
@@ -28,7 +28,7 @@ export default function LoginPage() {
           </div>
           <form className="grid gap-3" onSubmit={onSubmit}>
             <InputText label="Code" field={register('token')} />
-            <Button theme="white" loading={formState.isSubmitting} text="Continue" type="submit" />
+            <ButtonRect theme="blackOnWhite" loading={formState.isSubmitting} text="Continue" type="submit" className="!h-12" />
           </form>
         </div>
       </Page>
