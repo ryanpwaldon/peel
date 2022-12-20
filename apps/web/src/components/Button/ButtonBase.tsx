@@ -1,47 +1,31 @@
-import { useRef } from 'react'
 import { useButton } from 'react-aria'
-import { motion, useAnimation, TargetAndTransition, AnimatePresence } from 'framer-motion'
+import { useRef, useState } from 'react'
 
 interface ButtonBaseProps {
   type: 'button' | 'submit'
   isDisabled: boolean
-  onPress: () => void
-  defaultStyles: string
-  initialStyles: TargetAndTransition
-  pressedStyles: TargetAndTransition
+  onClick: () => void
+  defaultClasses: string
+  initialClasses: string
+  pressedClasses: string
   children: React.ReactNode
 }
 
-export default function ButtonBase({ type, isDisabled, onPress, defaultStyles, initialStyles, pressedStyles, children }: ButtonBaseProps) {
+export default function ButtonBase({ type, isDisabled, onClick, defaultClasses, initialClasses, pressedClasses, children }: ButtonBaseProps) {
   const ref = useRef<HTMLButtonElement>(null)
+  const [isPressed, setIsPressed] = useState(false)
 
-  const controls = useAnimation()
-  const variants = { initial: initialStyles, pressed: pressedStyles }
-
-  const useButtonValue = useButton({
+  const { buttonProps } = useButton({
     type,
     isDisabled,
-    onPress,
-    onPressEnd: () => controls.start('initial'),
-    onPressStart: () => controls.start('pressed'),
+    onPress: onClick,
+    onPressEnd: () => setIsPressed(false),
+    onPressStart: () => setIsPressed(true),
   }, ref) // prettier-ignore
 
-  // Remove incompatible props (incompatible with framer-motion)
-  const { onDrag, onDragEnd, onDragStart, onAnimationStart, ...buttonProps } = useButtonValue.buttonProps
-
   return (
-    <AnimatePresence>
-      <motion.button
-        {...buttonProps}
-        ref={ref}
-        initial="initial"
-        animate={controls}
-        variants={variants}
-        className={`outline-none ${defaultStyles}`}
-        transition={{ ease: 'easeOut', duration: 0.256 }}
-      >
-        {children}
-      </motion.button>
-    </AnimatePresence>
+    <button {...buttonProps} ref={ref} className={`outline-none transition-all ${defaultClasses} ${isPressed ? pressedClasses : initialClasses}`}>
+      {children}
+    </button>
   ) // prettier-ignore
 }

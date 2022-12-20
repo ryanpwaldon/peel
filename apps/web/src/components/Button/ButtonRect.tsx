@@ -3,25 +3,24 @@ import ButtonBase from '@/components/Button/ButtonBase'
 
 const themes = {
   black: {
-    default: `text-white`,
-    initial: { backgroundColor: 'rgb(38, 38, 38)' },
-    pressed: { backgroundColor: 'rgb(23, 23, 23)' },
+    default: 'text-white',
+    initial: 'bg-gray-800',
+    pressed: 'bg-gray-900',
   },
-  white: {
-    default: `text-blue-600 border-hairline border-gray-200`,
-    initial: { backgroundColor: 'rgb(255, 255, 255)' },
-    pressed: { backgroundColor: 'rgb(245, 245, 245)' },
+  blueOnWhite: {
+    default: 'text-blue-600 border-hairline border-gray-200',
+    initial: 'bg-white',
+    pressed: 'bg-gray-100',
   },
 }
 
 interface ButtonRectProps {
-  text?: string
-  icon?: string
+  text: string
   loading?: boolean
   isDisabled?: boolean
-  onPress: () => void
   type?: 'button' | 'submit'
   theme?: keyof typeof themes
+  onClick: () => void
   children?: React.ReactNode
   className?: string
 }
@@ -29,7 +28,7 @@ interface ButtonRectProps {
 // prettier-ignore
 export default function ButtonRect({
   text,
-  onPress,
+  onClick,
   type = 'button',
   theme = 'black',
   loading = false,
@@ -39,11 +38,11 @@ export default function ButtonRect({
   return (
     <ButtonBase
       type={type}
-      onPress={onPress}
+      onClick={onClick}
       isDisabled={isDisabled}
-      initialStyles={themes[theme].initial}
-      pressedStyles={themes[theme].pressed}
-      defaultStyles={`flex h-12 w-full items-center justify-center rounded-md font-medium ${themes[theme].default} ${className ?? ''}`}
+      initialClasses={themes[theme].initial}
+      pressedClasses={themes[theme].pressed}
+      defaultClasses={`flex h-12 w-full items-center justify-center rounded-md font-medium ${themes[theme].default} ${className ?? ''}`}
     >
       {loading ? <Spinner /> : text}
     </ButtonBase>
