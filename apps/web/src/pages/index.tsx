@@ -1,12 +1,12 @@
+import Page from '@/components/Page/Page'
 import Symbol from '@/components/Symbol/Symbol'
 import { Sheet } from '@/components/Sheet/Sheet'
-import Page from '@/components/Scaffolding/Page'
 import InfoLink from '@/components/Block/InfoLink'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
 import InputSearch from '@/components/Input/InputSearch'
 import ForecastNearby from '@/components/Forecast/ForecastNearby'
-import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
+import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 const ProfileSheet = () => <Sheet trigger={<Symbol symbol="account_circle" className="text-[28px] font-medium leading-8 text-blue-600" />}>Olá</Sheet>
 

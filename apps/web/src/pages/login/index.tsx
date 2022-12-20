@@ -1,11 +1,11 @@
 import { z } from 'zod'
 import { signIn } from 'next-auth/react'
+import Page from '@/components/Page/Page'
 import { useForm } from '@/hooks/useForm'
 import Button from '@/components/Button/Button'
 import { useLink } from '@/components/Link/Link'
-import Page from '@/components/Scaffolding/Page'
 import InputText from '@/components/Input/InputText'
-import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
+import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function LoginPage() {
   const link = useLink()

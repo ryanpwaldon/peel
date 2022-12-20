@@ -1,10 +1,10 @@
 import Back from '@/components/Back/Back'
+import Page from '@/components/Page/Page'
 import Symbol from '@/components/Symbol/Symbol'
 import TitleMd from '@/components/Title/TitleMd'
-import Page from '@/components/Scaffolding/Page'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
-import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
+import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function WaveCreatePage() {
   return (

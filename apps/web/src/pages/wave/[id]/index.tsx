@@ -1,15 +1,15 @@
 import { trpc } from '@/utils/trpc'
 import { useRouter } from 'next/router'
 import { Suspense, useRef } from 'react'
+import Page from '@/components/Page/Page'
 import Back from '@/components/Back/Back'
 import Symbol from '@/components/Symbol/Symbol'
 import Button from '@/components/Button/Button'
-import Page from '@/components/Scaffolding/Page'
 import Spinner from '@/components/Spinner/Spinner'
 import Header from '@/components/Scaffolding/Header'
 import PageTitle from '@/components/Title/PageTitle'
 import Forecast from '@/components/Forecast/Forecast'
-import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
+import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function Wave() {
   return (

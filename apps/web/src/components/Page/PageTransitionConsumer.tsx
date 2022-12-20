@@ -1,6 +1,6 @@
 import { AnimationProps, motion } from 'framer-motion'
 import { useContextOrThrow } from '@/utils/useContextOrThrow'
-import { PageTransition, PageTransitionContext } from '@/components/PageTransition/PageTransitionProvider'
+import { PageTransition, PageTransitionContext } from '@/components/Page/PageTransitionProvider'
 
 interface PageProps {
   children: React.ReactNode

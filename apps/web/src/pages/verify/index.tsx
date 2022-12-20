@@ -1,10 +1,10 @@
 import { z } from 'zod'
 import { useRouter } from 'next/router'
+import Page from '@/components/Page/Page'
 import { useForm } from '@/hooks/useForm'
 import Button from '@/components/Button/Button'
-import Page from '@/components/Scaffolding/Page'
 import InputText from '@/components/Input/InputText'
-import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
+import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function LoginPage() {
   const router = useRouter()

@@ -1,7 +1,7 @@
-import Page from '@/components/Scaffolding/Page'
+import Page from '@/components/Page/Page'
 import PageTitle from '@/components/Title/PageTitle'
 import Header from '@/components/Scaffolding/Header'
-import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
+import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function CreateSessionPage() {
   return (

@@ -1,10 +1,10 @@
 import Back from '@/components/Back/Back'
-import Page from '@/components/Scaffolding/Page'
+import Page from '@/components/Page/Page'
 import TitleMd from '@/components/Title/TitleMd'
 import InputText from '@/components/Input/InputText'
 import Header from '@/components/Scaffolding/Header'
 import { UseFormRegisterReturn } from 'react-hook-form'
-import PageTransitionConsumer from '@/components/PageTransition/PageTransitionConsumer'
+import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 interface CreateWaveNameProps {
   field: UseFormRegisterReturn
