@@ -1,6 +1,6 @@
 import Page from '@/components/Page/Page'
+import Header from '@/components/Header/Header'
 import PageTitle from '@/components/Title/PageTitle'
-import Header from '@/components/Scaffolding/Header'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function SessionsPage() {

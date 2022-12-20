@@ -1,8 +1,8 @@
 import Back from '@/components/Back/Back'
 import Page from '@/components/Page/Page'
+import Header from '@/components/Header/Header'
 import TitleMd from '@/components/Title/TitleMd'
 import InputText from '@/components/Input/InputText'
-import Header from '@/components/Scaffolding/Header'
 import { UseFormRegisterReturn } from 'react-hook-form'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
