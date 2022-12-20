@@ -2,7 +2,7 @@ import { UrlObject } from 'url'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useContextOrThrow } from '@/utils/useContextOrThrow'
-import { PageTransition, PageTransitionContext } from '@/components/PageTransition/PageTransitionProvider'
+import { PageTransition, PageTransitionContext } from '@/components/Page/PageTransitionProvider'
 
 type LinkProps = Parameters<typeof NextLink>[0] & {
   pageTransition: PageTransition

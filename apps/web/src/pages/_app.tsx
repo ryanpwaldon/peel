@@ -7,7 +7,7 @@ import { AnimatePresence } from 'framer-motion'
 import { SessionProvider } from 'next-auth/react'
 import DeepLink from '@/components/Misc/DeepLink'
 import AuthGuard from '@/components/Misc/AuthGuard'
-import PageTransitionProvider from '@/components/PageTransition/PageTransitionProvider'
+import PageTransitionProvider from '@/components/Page/PageTransitionProvider'
 
 const interFont = localFont({
   weight: '100 900',

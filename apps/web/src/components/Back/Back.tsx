@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Symbol from '@/components/Symbol/Symbol'
 import { useContextOrThrow } from '@/utils/useContextOrThrow'
-import { PageTransition, PageTransitionContext } from '@/components/PageTransition/PageTransitionProvider'
+import { PageTransition, PageTransitionContext } from '@/components/Page/PageTransitionProvider'
 
 interface BackProps {
   children?: React.ReactNode
