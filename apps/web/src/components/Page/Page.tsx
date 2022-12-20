@@ -1,4 +1,4 @@
-import Navigation from '@/components/Scaffolding/Navigation'
+import Navigation from '@/components/Navigation/Navigation'
 
 interface PageProps {
   children: React.ReactNode

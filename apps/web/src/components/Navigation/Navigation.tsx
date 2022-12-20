@@ -1,4 +1,4 @@
-import NavigationLink, { type NavigationLinkProps } from '@/components/Scaffolding/NavigationLink'
+import NavigationLink, { type NavigationLinkProps } from '@/components/Navigation/NavigationLink'
 
 const navigationLinks: NavigationLinkProps[] = [
   { symbol: 'home', path: '/' },
@@ -9,7 +9,7 @@ const navigationLinks: NavigationLinkProps[] = [
 
 export default function Navigation() {
   return (
-    <div className="w-full border-t-hairline border-gray-200 bg-white flex justify-center flex-shrink-0">
+    <div className="flex w-full flex-shrink-0 justify-center border-t-hairline border-gray-200 bg-white">
       {navigationLinks.map((item, i) => (
         <NavigationLink symbol={item.symbol} path={item.path} key={i} />
       ))}
