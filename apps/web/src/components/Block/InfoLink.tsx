@@ -1,6 +1,6 @@
 import Button from '@/components/Button/Button'
 import { useLink } from '@/components/Link/Link'
-import { PageTransition } from '../PageTransition/PageTransitionProvider'
+import { PageTransition } from '@/components/Page/PageTransitionProvider'
 
 interface InfoLinkProps {
   message: string
