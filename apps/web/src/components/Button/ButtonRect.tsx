@@ -42,7 +42,7 @@ export default function ButtonRect({
       isDisabled={isDisabled}
       initialClasses={themes[theme].initial}
       pressedClasses={themes[theme].pressed}
-      defaultClasses={`flex h-12 w-full items-center justify-center rounded-md font-medium ${themes[theme].default} ${className ?? ''}`}
+      defaultClasses={`flex h-11 w-full items-center justify-center rounded-md font-medium ${themes[theme].default} ${className ?? ''}`}
     >
       {loading ? <Spinner /> : text}
     </ButtonBase>
