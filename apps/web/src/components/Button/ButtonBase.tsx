@@ -2,16 +2,24 @@ import { useButton } from 'react-aria'
 import { useRef, useState } from 'react'
 
 interface ButtonBaseProps {
-  type: 'button' | 'submit'
-  isDisabled: boolean
-  onClick?: () => void
+  type?: 'button' | 'submit'
+  isDisabled?: boolean
   defaultClasses: string
   initialClasses: string
   pressedClasses: string
+  onClick?: () => void
   children: React.ReactNode
 }
 
-export default function ButtonBase({ type, isDisabled, onClick, defaultClasses, initialClasses, pressedClasses, children }: ButtonBaseProps) {
+export default function ButtonBase({
+  type = 'button',
+  isDisabled = false,
+  defaultClasses,
+  initialClasses,
+  pressedClasses,
+  onClick,
+  children,
+}: ButtonBaseProps) {
   const ref = useRef<HTMLButtonElement>(null)
   const [isPressed, setIsPressed] = useState(false)
 
