@@ -1,9 +1,9 @@
 import Page from '@/components/Page/Page'
 import Symbol from '@/components/Symbol/Symbol'
-import Header from '@/components/Header/Header'
 import { Sheet } from '@/components/Sheet/Sheet'
 import InfoLink from '@/components/Block/InfoLink'
 import PageTitle from '@/components/Title/PageTitle'
+import HeaderTitle from '@/components/Title/HeaderTitle'
 import InputSearch from '@/components/Input/InputSearch'
 import ForecastNearby from '@/components/Forecast/ForecastNearby'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
@@ -13,7 +13,7 @@ const ProfileSheet = () => <Sheet trigger={<Symbol symbol="account_circle" class
 export default function Home() {
   return (
     <PageTransitionConsumer>
-      <Page header={<Header right={<ProfileSheet />} />}>
+      <Page headerRight={<ProfileSheet />} headerCenter={<HeaderTitle title="Home" />}>
         <div className="pb-content-bottom">
           <PageTitle title="Home" className="px-5" />
           <InputSearch prompt="Waves, places, people..." className="mt-3 px-5" />

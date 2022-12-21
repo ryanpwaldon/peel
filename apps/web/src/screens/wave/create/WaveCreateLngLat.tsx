@@ -2,7 +2,6 @@ import { z } from 'zod'
 import Map from '@/components/Map/Map'
 import Page from '@/components/Page/Page'
 import { useForm } from '@/hooks/useForm'
-import Header from '@/components/Header/Header'
 import TitleMd from '@/components/Title/TitleMd'
 import ButtonText from '@/components/Button/ButtonText'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
@@ -23,7 +22,7 @@ export default function WaveCreateName({ onDone, defaultValues }: WaveCreateName
 
   return (
     <PageTransitionConsumer>
-      <Page showNavigation={false} header={<Header left={<ButtonText text="Back" />} right={<ButtonText text="Done" />} />}>
+      <Page showNavigation={false} headerLeft={<ButtonText text="Back" />} headerRight={<ButtonText text="Done" />}>
         <div className="flex h-full flex-col">
           <div className="px-5 py-5">
             <TitleMd title="Wave location" />

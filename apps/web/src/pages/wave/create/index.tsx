@@ -1,6 +1,5 @@
 import Back from '@/components/Back/Back'
 import Page from '@/components/Page/Page'
-import Header from '@/components/Header/Header'
 import Symbol from '@/components/Symbol/Symbol'
 import TitleMd from '@/components/Title/TitleMd'
 import PageTitle from '@/components/Title/PageTitle'
@@ -11,14 +10,10 @@ export default function WaveCreatePage() {
   return (
     <PageTransitionConsumer>
       <Page
-        header={
-          <Header
-            left={
-              <Back pageTransition="slideDown">
-                <Symbol symbol="expand_more" className="text-3xl font-semibold" />
-              </Back>
-            }
-          />
+        headerLeft={
+          <Back pageTransition="slideDown">
+            <Symbol symbol="expand_more" className="text-3xl font-semibold" />
+          </Back>
         }
         showNavigation={false}
       >
