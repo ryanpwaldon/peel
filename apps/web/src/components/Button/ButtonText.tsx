@@ -36,7 +36,7 @@ export default function ButtonText({
       isDisabled={isDisabled}
       initialClasses={themes[theme].initial}
       pressedClasses={themes[theme].pressed}
-      defaultClasses={`font-medium text-sm ${className ?? ''}`}
+      defaultClasses={`text-sm ${className ?? ''}`}
     >
       {text}
     </ButtonBase>
