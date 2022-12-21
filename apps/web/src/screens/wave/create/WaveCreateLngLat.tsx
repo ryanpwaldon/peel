@@ -4,6 +4,7 @@ import Page from '@/components/Page/Page'
 import { useForm } from '@/hooks/useForm'
 import TitleMd from '@/components/Title/TitleMd'
 import ButtonText from '@/components/Button/ButtonText'
+import HeaderTitle from '@/components/Title/HeaderTitle'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 const schema = z.object({
@@ -22,7 +23,13 @@ export default function WaveCreateName({ onDone, defaultValues }: WaveCreateName
 
   return (
     <PageTransitionConsumer>
-      <Page showNavigation={false} headerLeft={<ButtonText text="Back" />} headerRight={<ButtonText text="Done" />}>
+      <Page
+        headerFill
+        showNavigation={false}
+        headerLeft={<ButtonText text="Back" />}
+        headerRight={<ButtonText text="Done" />}
+        headerCenter={<HeaderTitle title="Wave location" />}
+      >
         <div className="flex h-full flex-col">
           <div className="px-5 py-5">
             <TitleMd title="Wave location" />
