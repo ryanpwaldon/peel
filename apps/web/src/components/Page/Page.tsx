@@ -7,16 +7,17 @@ interface PageProps {
   headerLeft?: React.ReactNode
   headerCenter?: React.ReactNode
   headerRight?: React.ReactNode
+  headerFill?: boolean
   showNavigation?: boolean
 }
 
-export default function Page({ children, headerLeft, headerCenter, headerRight, showNavigation = true }: PageProps) {
+export default function Page({ children, headerLeft, headerCenter, headerRight, headerFill = false, showNavigation = true }: PageProps) {
   const [pageScrollY, setPageScrollY] = useState(0)
   const showHeader = headerLeft || headerCenter || headerRight
 
   return (
     <div className="flex h-full w-full flex-col">
-      {showHeader && <Header left={headerLeft} center={headerCenter} right={headerRight} isScrolled={pageScrollY !== 0} />}
+      {showHeader && <Header left={headerLeft} center={headerCenter} right={headerRight} fill={headerFill || pageScrollY !== 0} />}
       <div className="flex-1 overflow-auto" onScroll={(event) => setPageScrollY(event.currentTarget.scrollTop)}>
         {showHeader && <div className="mt-1" />}
         {children}
