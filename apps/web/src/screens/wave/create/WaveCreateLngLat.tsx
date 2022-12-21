@@ -29,6 +29,7 @@ export default function WaveCreateName({ onDone, defaultValues }: WaveCreateName
         headerLeft={<ButtonText text="Back" />}
         headerRight={<ButtonText text="Done" />}
         headerCenter={<HeaderTitle title="Wave location" />}
+        className="bg-white"
       >
         <div className="flex h-full flex-col">
           <div className="px-5 py-5">
