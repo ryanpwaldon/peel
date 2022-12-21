@@ -6,7 +6,7 @@ export default function MapPage() {
   return (
     <PageTransitionConsumer>
       <Page>
-        <Map />
+        <Map reuseMaps />
       </Page>
     </PageTransitionConsumer>
   )
