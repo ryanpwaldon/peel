@@ -97,6 +97,7 @@ importers:
       react-aria: ^3.22.0
       react-dom: 18.2.0
       react-hook-form: ^7.40.0
+      react-map-gl: ^7.0.20
       tailwindcss: ^3.2.4
       typescript: ^4.9.3
       zod: ^3.18.0
@@ -124,6 +125,7 @@ importers:
       react-aria: 3.22.0_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
       react-hook-form: 7.40.0_react@18.2.0
+      react-map-gl: 7.0.20_wncmjf7gwcz6cg7gkzeel3s2iq
       zod: 3.19.1
     devDependencies:
       '@types/mapbox-gl': 2.7.8
@@ -2430,7 +2432,6 @@ packages:
 
   /@types/geojson/7946.0.10:
     resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
-    dev: true
 
   /@types/http-cache-semantics/4.0.1:
     resolution: {integrity: sha512-SZs7ekbP8CN0txVG2xVRH6EgKmEm31BOxA07vkFaETzZz1xh+cbt8BcI0slpymvwhx5dlFnQG2rTlPVQn+iRPQ==}
@@ -2469,7 +2470,6 @@ packages:
     resolution: {integrity: sha512-dqjHeYcUquenNOUMjhlZtbxrPJAE0+UwFq/KhAG5VWO2tX0ZxagSOmMPTruySf3sn7RFHMDd2kQKYmJlPC33xA==}
     dependencies:
       '@types/geojson': 7946.0.10
-    dev: true
 
   /@types/mapbox__mapbox-sdk/0.13.4:
     resolution: {integrity: sha512-J4/7uKNo1uc4+xgjbOKFkZxNmlPbpsITcvhn3nXncTZtdGDOmJENfcDEpiRJRBIlnKMGeXy4fxVuEg+i0I3YWA==}
@@ -6192,6 +6192,17 @@ packages:
   /react-is/17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: true
+
+  /react-map-gl/7.0.20_wncmjf7gwcz6cg7gkzeel3s2iq:
+    resolution: {integrity: sha512-Q1formrWEdt9vY5DyW2vgdmAPuSMH2TFn8xKMlA+cmBlyS8veQvVTGoq4lAm8p3Hb/90ZpNmMtI4s107r931vQ==}
+    peerDependencies:
+      mapbox-gl: '*'
+      react: '>=16.3.0'
+    dependencies:
+      '@types/mapbox-gl': 2.7.8
+      mapbox-gl: 2.11.0
+      react: 18.2.0
+    dev: false
 
   /react-ssr-prepass/1.5.0_react@18.2.0:
     resolution: {integrity: sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ==}

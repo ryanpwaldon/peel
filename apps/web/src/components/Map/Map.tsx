@@ -1,22 +1,21 @@
-import mapboxgl from 'mapbox-gl'
+import Mapbox from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { env } from '@/env/client.mjs'
-import { useEffect, useRef } from 'react'
+import { ComponentProps } from 'react'
 
-export default function Map() {
-  const map = useRef<mapboxgl.Map>()
-  const mapContainer = useRef<HTMLDivElement>(null)
+type MapProps = Omit<ComponentProps<typeof Mapbox>, 'mapboxAccessToken' | 'mapStyle'> & {
+  className?: string
+}
 
-  useEffect(() => {
-    if (!mapContainer.current) return
-    map.current = new mapboxgl.Map({
-      accessToken: env.NEXT_PUBLIC_MAPBOX_TOKEN,
-      container: mapContainer.current,
-      style: env.NEXT_PUBLIC_MAPBOX_STYLE,
-      center: [-9.3624, 39.3351],
-      zoom: 12,
-    })
-  }, [])
-
-  return <div ref={mapContainer} className="h-full w-full" />
+export default function Map({ className, ...props }: MapProps) {
+  return (
+    <div className={`h-full w-full ${className}`}>
+      <Mapbox
+        {...props}
+        mapStyle={env.NEXT_PUBLIC_MAPBOX_STYLE}
+        mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_TOKEN}
+        initialViewState={{ latitude: 39.3351, longitude: -9.3624, zoom: 12 }}
+      />
+    </div>
+  )
 }
