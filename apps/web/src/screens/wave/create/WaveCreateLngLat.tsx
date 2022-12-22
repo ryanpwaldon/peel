@@ -5,7 +5,6 @@ import { useForm } from '@/hooks/useForm'
 import TitleMd from '@/components/Title/TitleMd'
 import ButtonText from '@/components/Button/ButtonText'
 import HeaderTitle from '@/components/Title/HeaderTitle'
-import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 const schema = z.object({
   lng: z
@@ -22,44 +21,43 @@ const schema = z.object({
     .transform((val) => parseFloat(val)),
 })
 
-interface WaveCreateNameProps {
-  defaultValues: z.infer<typeof schema>
-  onDone: (values: z.infer<typeof schema>) => void
+interface WaveCreateLngLatProps {
+  // defaultValues: z.infer<typeof schema>
+  // onDone: (values: z.infer<typeof schema>) => void
+  onClose: () => void
 }
 
-export default function WaveCreateName({ onDone, defaultValues }: WaveCreateNameProps) {
+export default function WaveCreateLngLat({ onClose }: WaveCreateLngLatProps) {
   const { handleSubmit, setValue } = useForm(schema)
   const onSubmit = handleSubmit((values) => console.log(values))
 
   return (
-    <PageTransitionConsumer>
-      <Page
-        headerFill
-        showNavigation={false}
-        headerLeft={<ButtonText text="Back" />}
-        headerRight={<ButtonText text="Done" onClick={onSubmit} />}
-        headerCenter={<HeaderTitle title="Wave location" />}
-        className="bg-white"
-      >
-        <div className="flex h-full flex-col">
-          <div className="px-5 py-5">
-            <TitleMd title="Wave location" />
-            <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur. Massa consectetur neque a at viverra nisi arcu.</span>
-          </div>
-          <Map
-            initialViewState={{
-              longitude: -122.4,
-              latitude: 37.8,
-              zoom: 14,
-            }}
-            onMove={(event) => {
-              setValue('lng', event.viewState.longitude, { shouldValidate: true })
-              setValue('lat', event.viewState.latitude, { shouldValidate: true })
-            }}
-            className="border-t-hairline border-gray-200"
-          />
+    <Page
+      headerFill
+      showNavigation={false}
+      headerLeft={<ButtonText text="Back" onClick={onClose} />}
+      headerRight={<ButtonText text="Done" onClick={onSubmit} />}
+      headerCenter={<HeaderTitle title="Wave location" />}
+      className="bg-white"
+    >
+      <div className="flex h-full flex-col">
+        <div className="px-5 py-5">
+          <TitleMd title="Wave location" />
+          <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur. Massa consectetur neque a at viverra nisi arcu.</span>
         </div>
-      </Page>
-    </PageTransitionConsumer>
+        <Map
+          initialViewState={{
+            longitude: -122.4,
+            latitude: 37.8,
+            zoom: 14,
+          }}
+          onMove={(event) => {
+            setValue('lng', event.viewState.longitude, { shouldValidate: true })
+            setValue('lat', event.viewState.latitude, { shouldValidate: true })
+          }}
+          className="border-t-hairline border-gray-200"
+        />
+      </div>
+    </Page>
   )
 }
