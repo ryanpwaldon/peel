@@ -8,21 +8,23 @@ import HeaderTitle from '@/components/Title/HeaderTitle'
 import { validateLat, validateLng } from '@peel/validators'
 import ButtonBaseText from '@/components/ButtonBase/ButtonBaseText'
 
+const schema = z.object({
+  lng: validateLng,
+  lat: validateLat,
+})
+
 interface WaveCreateLngLatProps {
-  // defaultValues: z.infer<typeof schema>
-  // onDone: (values: z.infer<typeof schema>) => void
   onClose: () => void
+  onDone: (values: z.infer<typeof schema>) => void
+  initial: z.infer<typeof schema>
 }
 
-export default function WaveCreateLngLat({ onClose }: WaveCreateLngLatProps) {
-  const { handleSubmit, setValue } = useForm(
-    z.object({
-      lng: validateLng,
-      lat: validateLat,
-    }),
-  )
-
-  const onSubmit = handleSubmit((values) => console.log(values))
+export default function WaveCreateLngLat({ onClose, onDone, initial }: WaveCreateLngLatProps) {
+  const { handleSubmit, setValue } = useForm(schema, { defaultValues: initial })
+  const onSubmit = handleSubmit((values) => {
+    onDone(values)
+    onClose()
+  })
 
   return (
     <Page
@@ -40,9 +42,9 @@ export default function WaveCreateLngLat({ onClose }: WaveCreateLngLatProps) {
         </div>
         <Map
           initialViewState={{
-            longitude: -122.4,
-            latitude: 37.8,
-            zoom: 14,
+            longitude: initial.lng ?? -9.3624,
+            latitude: initial.lat ?? 39.3351,
+            zoom: 10,
           }}
           onMove={(event) => {
             setValue('lng', event.viewState.longitude, { shouldValidate: true })

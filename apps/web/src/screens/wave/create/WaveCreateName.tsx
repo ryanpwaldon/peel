@@ -1,26 +1,41 @@
-import Back from '@/components/Back/Back'
+import { z } from 'zod'
 import Page from '@/components/Page/Page'
+import { useForm } from '@/hooks/useForm'
 import TitleMd from '@/components/Title/TitleMd'
+import { validateWaveName } from '@peel/validators'
 import InputText from '@/components/Input/InputText'
-import { UseFormRegisterReturn } from 'react-hook-form'
 import ButtonBack from '@/components/Button/ButtonBack'
-import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
+import HeaderTitle from '@/components/Title/HeaderTitle'
+import ButtonBaseText from '@/components/ButtonBase/ButtonBaseText'
+
+const schema = z.object({ name: validateWaveName })
 
 interface WaveCreateNameProps {
-  field: UseFormRegisterReturn
   onClose: () => void
+  onDone: (values: z.infer<typeof schema>) => void
+  initial: z.infer<typeof schema>
 }
 
-export default function WaveCreateName({ field }: WaveCreateNameProps) {
+export default function WaveCreateName({ onClose, onDone, initial }: WaveCreateNameProps) {
+  const { handleSubmit, register } = useForm(schema, { defaultValues: initial })
+  const onSubmit = handleSubmit((values) => {
+    onDone(values)
+    onClose()
+  })
+
   return (
-    <PageTransitionConsumer>
-      <Page showNavigation={false} headerLeft={<Back content={(onClick) => <ButtonBack onClick={onClick} />} />} headerRight={<span></span>}>
-        <div className="px-5">
-          <TitleMd title="Wave name" />
-          <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur. Massa consectetur neque a at viverra nisi arcu.</span>
-          <InputText field={field} className="mt-3" />
-        </div>
-      </Page>
-    </PageTransitionConsumer>
+    <Page
+      headerFill
+      showNavigation={false}
+      headerLeft={<ButtonBack onClick={onClose} />}
+      headerRight={<ButtonBaseText text="Done" onClick={onSubmit} />}
+      headerCenter={<HeaderTitle title="Wave name" />}
+    >
+      <div className="mt-5 px-5">
+        <TitleMd title="Wave name" />
+        <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur. Massa consectetur neque a at viverra nisi arcu.</span>
+        <InputText field={register('name')} className="mt-3" />
+      </div>
+    </Page>
   )
 }
