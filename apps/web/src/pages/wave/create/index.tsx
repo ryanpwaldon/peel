@@ -7,8 +7,8 @@ import { Screen } from '@/components/Screen/Screen'
 import PageTitle from '@/components/Title/PageTitle'
 import WaveCreateName from '@/screens/wave/create/WaveCreateName'
 import ButtonChevronDown from '@/components/Button/ButtonChevronDown'
-import WaveCreateLngLat from '@/screens/wave/create/WaveCreateLngLat'
 import InputPromptText from '@/components/InputPrompt/InputPromptText'
+import WaveCreateLocation from '@/screens/wave/create/WaveCreateLocation'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 import { validateAngulation, validateLat, validateLng, validateWaveName, validateWaveRideDirection } from '@peel/validators'
 
@@ -45,7 +45,7 @@ export default function WaveCreatePage() {
               />
             )}
             content={(close) => (
-              <WaveCreateLngLat
+              <WaveCreateLocation
                 onClose={close}
                 onDone={(values) => {
                   setValue('lng', values.lng)

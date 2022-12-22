@@ -13,13 +13,13 @@ const schema = z.object({
   lat: validateLat,
 })
 
-interface WaveCreateLngLatProps {
+interface WaveCreateLocationProps {
   onClose: () => void
   onDone: (values: z.infer<typeof schema>) => void
   initial: z.infer<typeof schema>
 }
 
-export default function WaveCreateLngLat({ onClose, onDone, initial }: WaveCreateLngLatProps) {
+export default function WaveCreateLocation({ onClose, onDone, initial }: WaveCreateLocationProps) {
   const { handleSubmit, setValue } = useForm(schema, { defaultValues: initial })
   const onSubmit = handleSubmit((values) => {
     onDone(values)
