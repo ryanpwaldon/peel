@@ -6,12 +6,12 @@ import { UseFormRegisterReturn } from 'react-hook-form'
 import ButtonBack from '@/components/Button/ButtonBack'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
-interface CreateWaveNameProps {
+interface WaveCreateNameProps {
   field: UseFormRegisterReturn
   onClose: () => void
 }
 
-export default function CreateWaveName({ field }: CreateWaveNameProps) {
+export default function WaveCreateName({ field }: WaveCreateNameProps) {
   return (
     <PageTransitionConsumer>
       <Page showNavigation={false} headerLeft={<Back content={(onClick) => <ButtonBack onClick={onClick} />} />} headerRight={<span></span>}>
