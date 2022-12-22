@@ -8,8 +8,18 @@ import HeaderTitle from '@/components/Title/HeaderTitle'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 const schema = z.object({
-  lng: z.number().min(-180).max(180),
-  lat: z.number().min(-90).max(90),
+  lng: z
+    .number()
+    .min(-180)
+    .max(180)
+    .transform((val) => val.toFixed(6))
+    .transform((val) => parseFloat(val)),
+  lat: z
+    .number()
+    .min(-90)
+    .max(90)
+    .transform((val) => val.toFixed(6))
+    .transform((val) => parseFloat(val)),
 })
 
 interface WaveCreateNameProps {
@@ -18,8 +28,8 @@ interface WaveCreateNameProps {
 }
 
 export default function WaveCreateName({ onDone, defaultValues }: WaveCreateNameProps) {
-  const { register, handleSubmit, formState } = useForm(schema)
-  const onSubmit = handleSubmit(onDone)
+  const { handleSubmit, setValue } = useForm(schema)
+  const onSubmit = handleSubmit((values) => console.log(values))
 
   return (
     <PageTransitionConsumer>
@@ -27,7 +37,7 @@ export default function WaveCreateName({ onDone, defaultValues }: WaveCreateName
         headerFill
         showNavigation={false}
         headerLeft={<ButtonText text="Back" />}
-        headerRight={<ButtonText text="Done" />}
+        headerRight={<ButtonText text="Done" onClick={onSubmit} />}
         headerCenter={<HeaderTitle title="Wave location" />}
         className="bg-white"
       >
@@ -41,6 +51,10 @@ export default function WaveCreateName({ onDone, defaultValues }: WaveCreateName
               longitude: -122.4,
               latitude: 37.8,
               zoom: 14,
+            }}
+            onMove={(event) => {
+              setValue('lng', event.viewState.longitude, { shouldValidate: true })
+              setValue('lat', event.viewState.latitude, { shouldValidate: true })
             }}
             className="border-t-hairline border-gray-200"
           />
