@@ -7,6 +7,7 @@ import Symbol from '@/components/Symbol/Symbol'
 import Spinner from '@/components/Spinner/Spinner'
 import PageTitle from '@/components/Title/PageTitle'
 import Forecast from '@/components/Forecast/Forecast'
+import ButtonBack from '@/components/Button/ButtonBack'
 import ButtonBaseRect from '@/components/ButtonBase/ButtonBaseRect'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
@@ -15,7 +16,7 @@ export default function Wave() {
     <PageTransitionConsumer>
       <Suspense
         fallback={
-          <Page headerLeft={<Back />}>
+          <Page headerLeft={<Back content={(onClick) => <ButtonBack onClick={onClick} />} />}>
             <div className="flex h-full w-full items-center justify-center">
               <Spinner />
             </div>
@@ -34,7 +35,10 @@ const Content = () => {
   const [wave] = trpc.wave.findById.useSuspenseQuery(waveId.current)
 
   return (
-    <Page headerLeft={<Back />} headerRight={<Symbol symbol="more_horiz" className="text-2xl font-extrabold text-blue-600" />}>
+    <Page
+      headerLeft={<Back content={(onClick) => <ButtonBack onClick={onClick} />} />}
+      headerRight={<Symbol symbol="more_horiz" className="text-2xl font-extrabold text-blue-600" />}
+    >
       <div className="pb-content-bottom">
         <PageTitle title={wave.name} className="px-5" />
         <div className="px-5 text-base text-gray-500">{`${wave.point.location.region}, ${wave.point.location.country}`}</div>
