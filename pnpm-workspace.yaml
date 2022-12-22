@@ -7,4 +7,5 @@ packages:
   - packages/db
   - packages/seed
   - packages/utils
+  - packages/validators
   - packages/config/*

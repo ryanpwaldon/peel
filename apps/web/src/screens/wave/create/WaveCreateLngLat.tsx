@@ -5,22 +5,8 @@ import { useForm } from '@/hooks/useForm'
 import TitleMd from '@/components/Title/TitleMd'
 import ButtonBack from '@/components/Button/ButtonBack'
 import HeaderTitle from '@/components/Title/HeaderTitle'
+import { validateLat, validateLng } from '@peel/validators'
 import ButtonBaseText from '@/components/ButtonBase/ButtonBaseText'
-
-const schema = z.object({
-  lng: z
-    .number()
-    .min(-180)
-    .max(180)
-    .transform((val) => val.toFixed(6))
-    .transform((val) => parseFloat(val)),
-  lat: z
-    .number()
-    .min(-90)
-    .max(90)
-    .transform((val) => val.toFixed(6))
-    .transform((val) => parseFloat(val)),
-})
 
 interface WaveCreateLngLatProps {
   // defaultValues: z.infer<typeof schema>
@@ -29,7 +15,13 @@ interface WaveCreateLngLatProps {
 }
 
 export default function WaveCreateLngLat({ onClose }: WaveCreateLngLatProps) {
-  const { handleSubmit, setValue } = useForm(schema)
+  const { handleSubmit, setValue } = useForm(
+    z.object({
+      lng: validateLng,
+      lat: validateLat,
+    }),
+  )
+
   const onSubmit = handleSubmit((values) => console.log(values))
 
   return (

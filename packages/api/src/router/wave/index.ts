@@ -3,6 +3,7 @@ import { latLngToCell } from 'h3-js'
 import { locationRouter } from '../location'
 import { FORECAST_HEX_RESOLUTION } from '../../constants'
 import { router, publicProcedure, protectedProcedure } from '../../trpc'
+import { validateAngulation, validateLat, validateLng, validateWaveName, validateWaveRideDirection } from '@peel/validators'
 
 export const waveRouter = router({
   findMany: publicProcedure.query(({ ctx }) => {
@@ -36,11 +37,11 @@ export const waveRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        name: z.string(),
-        faceDirection: z.number(),
-        rideDirection: z.enum(['LEFT', 'RIGHT', 'BOTH']),
-        lng: z.number(),
-        lat: z.number(),
+        name: validateWaveName,
+        faceDirection: validateAngulation,
+        rideDirection: validateWaveRideDirection,
+        lng: validateLng,
+        lat: validateLat,
       }),
     )
     .mutation(async ({ ctx, input }) => {

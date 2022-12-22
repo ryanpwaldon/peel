@@ -16,7 +16,7 @@ const config = {
   swcMinify: true,
   experimental: {
     // Enables hot-reload and easy integration for local packages
-    transpilePackages: ['@peel/api', '@peel/auth', '@peel/db'],
+    transpilePackages: ['@peel/api', '@peel/auth', '@peel/db', '@peel/validators'],
   },
   // We already do linting on GH actions
   eslint: {

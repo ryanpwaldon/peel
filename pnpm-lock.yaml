@@ -75,6 +75,7 @@ importers:
       '@peel/native': '*'
       '@peel/tailwind-config': '*'
       '@peel/utils': '*'
+      '@peel/validators': '*'
       '@tanstack/react-query': ^4.18.0
       '@trpc/client': 10.4.2
       '@trpc/next': 10.4.2
@@ -111,6 +112,7 @@ importers:
       '@peel/native': link:../native
       '@peel/tailwind-config': link:../../packages/config/tailwind
       '@peel/utils': link:../../packages/utils
+      '@peel/validators': link:../../packages/validators
       '@tanstack/react-query': 4.18.0_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 10.4.2_@trpc+server@10.4.2
       '@trpc/next': 10.4.2_qb7pzif2jt52rplpnjd4tbgzzy
@@ -145,6 +147,7 @@ importers:
       '@peel/auth': '*'
       '@peel/db': '*'
       '@peel/utils': '*'
+      '@peel/validators': '*'
       '@trpc/client': 10.4.2
       '@trpc/server': 10.4.2
       '@types/mapbox__mapbox-sdk': ^0.13.4
@@ -163,6 +166,7 @@ importers:
       '@peel/auth': link:../auth
       '@peel/db': link:../db
       '@peel/utils': link:../utils
+      '@peel/validators': link:../validators
       '@trpc/client': 10.4.2_@trpc+server@10.4.2
       '@trpc/server': 10.4.2
       axios: 1.2.0
@@ -260,6 +264,12 @@ importers:
       '@peel/db': link:../db
       date-fns: 2.29.3
       date-fns-tz: 1.3.7_date-fns@2.29.3
+
+  packages/validators:
+    specifiers:
+      zod: ^3.18.0
+    dependencies:
+      zod: 3.19.1
 
 packages:
 
