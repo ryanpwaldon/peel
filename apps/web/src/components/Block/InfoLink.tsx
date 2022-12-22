@@ -1,5 +1,5 @@
 import { useLink } from '@/components/Link/Link'
-import ButtonRect from '@/components/Button/ButtonRect'
+import ButtonBaseRect from '@/components/ButtonBase/ButtonBaseRect'
 import { PageTransition } from '@/components/Page/PageTransitionProvider'
 
 interface InfoLinkProps {
@@ -18,7 +18,7 @@ export default function InfoLink({ message, linkText, linkPath, linkTransition, 
     <div className={className}>
       <div className="w-full space-y-3 rounded-lg border-hairline border-gray-200 bg-gray-50 p-4 pt-6 text-center">
         <div>{message}</div>
-        <ButtonRect text={linkText} onClick={onClick} theme="blueOnWhite" />
+        <ButtonBaseRect text={linkText} onClick={onClick} theme="blueOnWhite" />
       </div>
     </div>
   )

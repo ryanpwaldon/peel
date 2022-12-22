@@ -1,5 +1,5 @@
 import Symbol from '@/components/Symbol/Symbol'
-import ButtonBase from '@/components/Button/ButtonBase'
+import ButtonBase from '@/components/ButtonBase/ButtonBase'
 
 const themes = {
   black: {
@@ -24,7 +24,7 @@ interface ButtonTextProps {
 }
 
 // prettier-ignore
-export default function ButtonText({
+export default function ButtonBaseText({
   onClick,
   text,
   symbol,

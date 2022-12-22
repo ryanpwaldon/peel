@@ -1,5 +1,5 @@
 import Spinner from '@/components/Spinner/Spinner'
-import ButtonBase from '@/components/Button/ButtonBase'
+import ButtonBase from '@/components/ButtonBase/ButtonBase'
 
 const themes = {
   black: {
@@ -31,7 +31,7 @@ interface ButtonRectProps {
 }
 
 // prettier-ignore
-export default function ButtonRect({
+export default function ButtonBaseRect({
   onClick,
   text = 'Text',
   type = 'button',

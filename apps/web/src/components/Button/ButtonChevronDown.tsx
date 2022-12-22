@@ -1,5 +1,5 @@
 import Symbol from '@/components/Symbol/Symbol'
-import ButtonBase from '@/components/Button/ButtonBase'
+import ButtonBase from '@/components/ButtonBase/ButtonBase'
 
 interface ButtonChevronDownProps {
   onClick?: () => void

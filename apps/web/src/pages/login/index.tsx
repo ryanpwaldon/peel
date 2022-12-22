@@ -4,7 +4,7 @@ import Page from '@/components/Page/Page'
 import { useForm } from '@/hooks/useForm'
 import { useLink } from '@/components/Link/Link'
 import InputText from '@/components/Input/InputText'
-import ButtonRect from '@/components/Button/ButtonRect'
+import ButtonBaseRect from '@/components/ButtonBase/ButtonBaseRect'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function LoginPage() {
@@ -27,7 +27,7 @@ export default function LoginPage() {
           </div>
           <form className="grid gap-3" onSubmit={onSubmit}>
             <InputText label="Email" field={register('email')} />
-            <ButtonRect theme="blackOnWhite" loading={formState.isSubmitting} text="Log in" type="submit" className="!h-12" />
+            <ButtonBaseRect theme="blackOnWhite" loading={formState.isSubmitting} text="Log in" type="submit" className="!h-12" />
             <p className="text-center text-xs text-gray-500">By logging in you accept our terms of use and privacy policy.</p>
           </form>
         </div>

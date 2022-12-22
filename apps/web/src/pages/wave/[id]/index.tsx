@@ -7,7 +7,7 @@ import Symbol from '@/components/Symbol/Symbol'
 import Spinner from '@/components/Spinner/Spinner'
 import PageTitle from '@/components/Title/PageTitle'
 import Forecast from '@/components/Forecast/Forecast'
-import ButtonRect from '@/components/Button/ButtonRect'
+import ButtonBaseRect from '@/components/ButtonBase/ButtonBaseRect'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function Wave() {
@@ -39,13 +39,13 @@ const Content = () => {
         <PageTitle title={wave.name} className="px-5" />
         <div className="px-5 text-base text-gray-500">{`${wave.point.location.region}, ${wave.point.location.country}`}</div>
         <div className="mt-4 flex space-x-3 px-5">
-          <ButtonRect theme="blackOnWhite" className="w-full flex-1">
+          <ButtonBaseRect theme="blackOnWhite" className="w-full flex-1">
             <Symbol symbol="play_arrow" className="text-2xl" />
             <span>Start session</span>
-          </ButtonRect>
-          <ButtonRect theme="blackOnWhite" className="h-11 w-11">
+          </ButtonBaseRect>
+          <ButtonBaseRect theme="blackOnWhite" className="h-11 w-11">
             <Symbol symbol="star" className="text-2xl" />
-          </ButtonRect>
+          </ButtonBaseRect>
         </div>
         <Forecast wave={wave} />
       </div>
