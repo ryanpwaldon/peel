@@ -3,6 +3,7 @@ import Map from '@/components/Map/Map'
 import Page from '@/components/Page/Page'
 import { useForm } from '@/hooks/useForm'
 import TitleMd from '@/components/Title/TitleMd'
+import ButtonBack from '@/components/Button/ButtonBack'
 import ButtonText from '@/components/Button/ButtonText'
 import HeaderTitle from '@/components/Title/HeaderTitle'
 
@@ -35,7 +36,7 @@ export default function WaveCreateLngLat({ onClose }: WaveCreateLngLatProps) {
     <Page
       headerFill
       showNavigation={false}
-      headerLeft={<ButtonText text="Back" onClick={onClose} />}
+      headerLeft={<ButtonBack onClick={onClose} />}
       headerRight={<ButtonText text="Done" onClick={onSubmit} />}
       headerCenter={<HeaderTitle title="Wave location" />}
       className="bg-white"

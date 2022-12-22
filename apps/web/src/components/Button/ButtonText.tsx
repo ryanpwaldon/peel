@@ -1,3 +1,4 @@
+import Symbol from '@/components/Symbol/Symbol'
 import ButtonBase from '@/components/Button/ButtonBase'
 
 const themes = {
@@ -13,6 +14,8 @@ const themes = {
 
 interface ButtonTextProps {
   text: string
+  symbol?: string
+  symbolClassName?: string
   isDisabled?: boolean
   type?: 'button' | 'submit'
   theme?: keyof typeof themes
@@ -24,6 +27,8 @@ interface ButtonTextProps {
 export default function ButtonText({
   onClick,
   text,
+  symbol,
+  symbolClassName,
   type = 'button',
   theme = 'blue',
   isDisabled = false,
@@ -36,9 +41,10 @@ export default function ButtonText({
       isDisabled={isDisabled}
       initialClasses={themes[theme].initial}
       pressedClasses={themes[theme].pressed}
-      defaultClasses={`text-sm ${className ?? ''}`}
+      defaultClasses={`text-sm flex items-center ${className ?? ''}`}
     >
-      {text}
+      {symbol && <Symbol symbol={symbol} className={symbolClassName}/>}
+      <span>{text}</span>
     </ButtonBase>
   )
 }

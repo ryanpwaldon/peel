@@ -4,9 +4,9 @@ import { useRef, useState } from 'react'
 interface ButtonBaseProps {
   type?: 'button' | 'submit'
   isDisabled?: boolean
-  defaultClasses: string
-  initialClasses: string
-  pressedClasses: string
+  defaultClasses?: string
+  initialClasses?: string
+  pressedClasses?: string
   onClick?: () => void
   children: React.ReactNode
 }
@@ -14,9 +14,9 @@ interface ButtonBaseProps {
 export default function ButtonBase({
   type = 'button',
   isDisabled = false,
-  defaultClasses,
-  initialClasses,
-  pressedClasses,
+  defaultClasses = '',
+  initialClasses = '',
+  pressedClasses = '',
   onClick,
   children,
 }: ButtonBaseProps) {
