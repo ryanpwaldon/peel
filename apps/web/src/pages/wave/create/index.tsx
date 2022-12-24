@@ -10,6 +10,7 @@ import ButtonChevronDown from '@/components/Button/ButtonChevronDown'
 import InputPromptText from '@/components/InputPrompt/InputPromptText'
 import WaveCreateLocation from '@/screens/wave/create/WaveCreateLocation'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
+import WaveCreateFaceDirection from '@/screens/wave/create/WaveCreateFaceDirection'
 import { validateAngulation, validateLat, validateLng, validateWaveName, validateWaveRideDirection } from '@peel/validators'
 
 export default function WaveCreatePage() {
@@ -33,7 +34,13 @@ export default function WaveCreatePage() {
           <TitleMd title="Enter details" className="mt-5" />
           <Screen
             trigger={(open) => <InputPromptText title="Name" placeholder={getValues('name') ?? 'Enter a name'} onClick={open} className="mt-3" />}
-            content={(close) => <WaveCreateName onClose={close} onDone={(values) => setValue('name', values.name)} initial={{ name: getValues('name') }} />}
+            content={(close) => (
+              <WaveCreateName
+                onClose={close}
+                onDone={(values) => setValue('name', values.name, { shouldValidate: true })}
+                initial={{ name: getValues('name') }}
+              />
+            )}
           />
           <Screen
             trigger={(open) => (
@@ -48,10 +55,29 @@ export default function WaveCreatePage() {
               <WaveCreateLocation
                 onClose={close}
                 onDone={(values) => {
-                  setValue('lng', values.lng)
-                  setValue('lat', values.lat)
+                  setValue('lng', values.lng, { shouldValidate: true })
+                  setValue('lat', values.lat, { shouldValidate: true })
                 }}
                 initial={{ lng: getValues('lng'), lat: getValues('lat') }}
+              />
+            )}
+          />
+          <Screen
+            trigger={(open) => (
+              <InputPromptText
+                title="Face direction"
+                onClick={open}
+                placeholder={getValues('faceDirection')?.toString() ?? 'Add face direction'}
+                className="mt-3"
+              />
+            )}
+            content={(close) => (
+              <WaveCreateFaceDirection
+                onClose={close}
+                onDone={(values) => setValue('faceDirection', values.faceDirection, { shouldValidate: true })}
+                initial={{ faceDirection: getValues('faceDirection') }}
+                lng={getValues('lng')}
+                lat={getValues('lat')}
               />
             )}
           />
