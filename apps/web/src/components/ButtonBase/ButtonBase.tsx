@@ -1,7 +1,12 @@
-import { useButton } from 'react-aria'
-import { useRef, useState } from 'react'
+import Link from 'next/link'
+import { useState } from 'react'
+import { usePress } from 'react-aria'
+import { useContextOrThrow } from '@/utils/useContextOrThrow'
+import { PageTransition, PageTransitionContext } from '@/components/Page/PageTransitionProvider'
 
 interface ButtonBaseProps {
+  href?: string
+  pageTransition?: PageTransition
   type?: 'button' | 'submit'
   isDisabled?: boolean
   defaultClasses?: string
@@ -12,6 +17,8 @@ interface ButtonBaseProps {
 }
 
 export default function ButtonBase({
+  href,
+  pageTransition = 'slideForward',
   type = 'button',
   isDisabled = false,
   defaultClasses = '',
@@ -20,20 +27,26 @@ export default function ButtonBase({
   onClick,
   children,
 }: ButtonBaseProps) {
-  const ref = useRef<HTMLButtonElement>(null)
   const [isPressed, setIsPressed] = useState(false)
+  const { setPageTransition } = useContextOrThrow(PageTransitionContext)
+  const classList = `block outline-none transition-all ${defaultClasses} ${isPressed ? pressedClasses : initialClasses}`
 
-  const { buttonProps } = useButton({
-    type,
-    isDisabled,
-    onPress: onClick,
+  const { pressProps } = usePress({
     onPressEnd: () => setIsPressed(false),
     onPressStart: () => setIsPressed(true),
-  }, ref) // prettier-ignore
+    onPress: () => {
+      href && setPageTransition(pageTransition)
+      onClick && onClick()
+    },
+  })
 
-  return (
-    <button {...buttonProps} ref={ref} className={`outline-none transition-all ${defaultClasses} ${isPressed ? pressedClasses : initialClasses}`}>
+  return href ? (
+    <Link {...pressProps} href={href} draggable={false} className={classList}>
+      {children}
+    </Link>
+  ) : (
+    <button {...pressProps} type={type} disabled={isDisabled} className={classList}>
       {children}
     </button>
-  ) // prettier-ignore
+  )
 }
