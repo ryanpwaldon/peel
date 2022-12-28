@@ -1,7 +1,7 @@
+import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import useMeasure from 'react-use-measure'
 import { motion, AnimatePresence, DragHandlers, useMotionValue, useTransform, animate } from 'framer-motion'
-import { useState } from 'react'
 
 interface BottomSheetProps {
   trigger: React.ReactNode
@@ -33,7 +33,7 @@ export function Sheet({ trigger, children }: BottomSheetProps) {
           <div className="pointer-events-none fixed top-0 left-0 z-10 h-full w-full">
             <motion.div
               onClick={close}
-              style={{ opacity }}
+              style={{ opacity: bounds.height ? opacity : 0 }}
               className={`absolute top-0 left-0 z-0 h-full w-full bg-black bg-opacity-60 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
             />
             <div className="relative z-10 h-full w-full pt-device-bar-top">
@@ -47,7 +47,6 @@ export function Sheet({ trigger, children }: BottomSheetProps) {
                 className="pointer-events-auto absolute top-full left-0 w-full rounded-t-2xl bg-gray-100 pb-content-bottom shadow-lg"
                 ref={sheet}
               >
-                <div className="h-96"></div>
                 {children}
                 <div className="absolute top-1/2 h-full w-full bg-gray-100" />
               </motion.div>
