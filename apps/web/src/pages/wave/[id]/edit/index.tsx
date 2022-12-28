@@ -3,11 +3,11 @@ import { trpc } from '@/utils/trpc'
 import { useRouter } from 'next/router'
 import Page from '@/components/Page/Page'
 import Back from '@/components/Back/Back'
-import PageTitle from '@/components/Title/PageTitle'
 import ButtonBack from '@/components/Button/ButtonBack'
+import HeaderTitle from '@/components/Title/HeaderTitle'
 import PageLoader from '@/components/Templates/PageLoader'
-import HeaderTitleSubtitle from '@/components/Title/HeaderTitleSubtitle'
 import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
+import ListButtonGroup from '@/components/ListButton/ListButtonGroup'
 
 export default function WaveEditPage() {
   return (
@@ -29,11 +29,17 @@ const Content = () => {
       headerFill
       showNavigation={false}
       headerLeft={<Back content={(onClick) => <ButtonBack onClick={onClick} />} />}
-      headerCenter={<HeaderTitleSubtitle title="Edit wave" subtitle={`${wave.name}`} />}
+      headerCenter={<HeaderTitle title="Edit wave" />}
     >
-      <div className="pb-content-bottom">
-        <PageTitle title={wave.name} className="px-5" />
-        <div className="px-5 text-base text-gray-500">{`${wave.point.location.region}, ${wave.point.location.country}`}</div>
+      <div className="px-5 pb-content-bottom pt-8">
+        <ListButtonGroup
+          items={[
+            { label: 'Name', value: wave.name, url: { pathname: '/wave/[id]/edit/name', query: { id: wave.id } } },
+            { label: 'Location', url: { pathname: '/wave/[id]/edit/name', query: { id: wave.id } } },
+            { label: 'Ride direction', value: wave.rideDirection, url: { pathname: '/wave/[id]/edit/name', query: { id: wave.id } } },
+            { label: 'Face direction', value: wave.faceDirection.toString(), url: { pathname: '/wave/[id]/edit/name', query: { id: wave.id } } },
+          ]}
+        />
       </div>
     </Page>
   )

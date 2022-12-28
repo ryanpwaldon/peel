@@ -1,11 +1,12 @@
 import Link from 'next/link'
+import { UrlObject } from 'url'
 import { useState } from 'react'
 import { usePress } from 'react-aria'
 import { useContextOrThrow } from '@/utils/useContextOrThrow'
 import { PageTransition, PageTransitionContext } from '@/components/Page/PageTransitionProvider'
 
 interface ButtonBaseProps {
-  href?: string
+  url?: UrlObject
   pageTransition?: PageTransition
   type?: 'button' | 'submit'
   isDisabled?: boolean
@@ -17,7 +18,7 @@ interface ButtonBaseProps {
 }
 
 export default function ButtonBase({
-  href,
+  url,
   pageTransition = 'slideForward',
   type = 'button',
   isDisabled = false,
@@ -35,13 +36,13 @@ export default function ButtonBase({
     onPressEnd: () => setIsPressed(false),
     onPressStart: () => setIsPressed(true),
     onPress: () => {
-      href && setPageTransition(pageTransition)
+      url && setPageTransition(pageTransition)
       onClick && onClick()
     },
   })
 
-  return href ? (
-    <Link {...pressProps} href={href} draggable={false} className={classList}>
+  return url ? (
+    <Link {...pressProps} href={url} draggable={false} className={classList}>
       {children}
     </Link>
   ) : (
