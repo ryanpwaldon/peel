@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { motion, type PanInfo, useAnimation, AnimatePresence } from 'framer-motion'
+import { motion, useAnimation, AnimatePresence, DragHandlers } from 'framer-motion'
 
 interface BottomSheetProps {
   trigger: React.ReactNode
@@ -14,7 +14,7 @@ export function Sheet({ trigger, children }: BottomSheetProps) {
     close: () => animation.start('hidden'),
   }
 
-  function onDragEnd(_: any, info: PanInfo) {
+  const onDragEnd: DragHandlers['onDragEnd'] = (_, info) => {
     const shouldClose = info.velocity.y > 200 || (info.velocity.y >= 0 && info.point.y > 400)
     shouldClose ? controls.close() : controls.open()
   }
