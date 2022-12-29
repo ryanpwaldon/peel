@@ -18,3 +18,15 @@ export default function Back({ pageTransition = 'slideBack', content }: BackProp
 
   return <>{content(onClick)}</>
 }
+
+export const useBack = () => {
+  const router = useRouter()
+  const { setPageTransition } = useContextOrThrow(PageTransitionContext)
+
+  return {
+    go: (pageTransition: PageTransition = 'slideBack') => {
+      setPageTransition(pageTransition)
+      return router.back()
+    },
+  }
+}

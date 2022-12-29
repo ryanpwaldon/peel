@@ -6,8 +6,8 @@ import Back from '@/components/Back/Back'
 import ButtonBack from '@/components/Button/ButtonBack'
 import HeaderTitle from '@/components/Title/HeaderTitle'
 import PageLoader from '@/components/Templates/PageLoader'
-import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 import ListButtonGroup from '@/components/ListButton/ListButtonGroup'
+import PageTransitionConsumer from '@/components/Page/PageTransitionConsumer'
 
 export default function WaveEditPage() {
   return (

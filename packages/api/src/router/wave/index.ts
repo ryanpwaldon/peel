@@ -86,4 +86,22 @@ export const waveRouter = router({
       })
       return result
     }),
+  update: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        name: validateWaveName.optional(),
+        faceDirection: validateAngulation.optional(),
+        rideDirection: validateWaveRideDirection.optional(),
+        lng: validateLng.optional(),
+        lat: validateLat.optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id, ...data } = input
+      return await ctx.prisma.wave.update({
+        where: { id },
+        data,
+      })
+    }),
 })

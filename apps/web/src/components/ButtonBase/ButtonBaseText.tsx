@@ -41,7 +41,7 @@ export default function ButtonBaseText({
       isDisabled={isDisabled}
       initialClasses={themes[theme].initial}
       pressedClasses={themes[theme].pressed}
-      defaultClasses={`text-sm flex items-center ${className ?? ''}`}
+      defaultClasses={`text-base flex items-center ${className ?? ''}`}
     >
       {symbol && <Symbol symbol={symbol} className={symbolClassName}/>}
       <span>{text}</span>
